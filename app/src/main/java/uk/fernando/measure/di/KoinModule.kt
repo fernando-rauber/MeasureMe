@@ -9,6 +9,8 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import uk.fernando.measure.database.MyDatabase
+import uk.fernando.measure.datastore.PrefsStore
+import uk.fernando.measure.datastore.PrefsStoreImpl
 import uk.fernando.measure.viewmodel.HomeViewModel
 
 object KoinModule {
