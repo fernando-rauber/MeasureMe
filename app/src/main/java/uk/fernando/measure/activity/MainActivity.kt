@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     Box(modifier = Modifier.padding(padding)) {
                         NavHost(
                             navController = controller,
-                            startDestination = Directions.splash.name
+                            startDestination = Directions.home.name
                         ) {
                             buildGraph(controller)
                         }

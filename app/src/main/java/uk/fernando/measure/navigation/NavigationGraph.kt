@@ -16,6 +16,8 @@ fun NavGraphBuilder.buildGraph(navController: NavController) {
     }
     composable(Directions.settings.name) {
     }
+    composable(Directions.measureList.name) {
+    }
 }
 
 

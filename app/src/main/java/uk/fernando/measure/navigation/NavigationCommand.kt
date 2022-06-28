@@ -23,6 +23,13 @@ object Directions {
             get() = emptyList()
     }
 
+    val measureList = object : NavigationCommand {
+        override val name: String
+            get() = "measure_list"
+        override val arguments: List<NamedNavArgument>
+            get() = emptyList()
+    }
+
     val settings = object : NavigationCommand {
         override val name: String
             get() = "settings"
