@@ -11,7 +11,9 @@ import org.koin.dsl.module
 import uk.fernando.measure.database.MyDatabase
 import uk.fernando.measure.datastore.PrefsStore
 import uk.fernando.measure.datastore.PrefsStoreImpl
+import uk.fernando.measure.repository.FirstTimeRepository
 import uk.fernando.measure.viewmodel.HomeViewModel
+import uk.fernando.measure.viewmodel.SplashViewModel
 
 object KoinModule {
 
@@ -43,13 +45,14 @@ object KoinModule {
 
     private val repositoryModule: Module
         get() = module {
-//            factory { GameRepository(get()) }
+            factory { FirstTimeRepository(get()) }
         }
 
     private val viewModelModule: Module
         get() = module {
 
             viewModel { HomeViewModel() }
+            viewModel { SplashViewModel(get(), get()) }
         }
 
     private const val DB_NAME = "measure_me_fun.db"

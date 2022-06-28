@@ -7,7 +7,6 @@ import java.io.Serializable
 data class LengthUnitEntity(
     val id: Int = 0,
     val name: String = "",
-    val abbreviation: String = "",
     val multiple: Double = 0.0,
     var amount: Double = 0.0
 ) : Serializable {
