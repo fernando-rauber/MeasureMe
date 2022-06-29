@@ -16,4 +16,10 @@ class UnitRepository(private val dao: UnitDao) {
             dao.updateAll(list)
         }
     }
+
+    suspend fun deleteUnit(unit: LengthUnitEntity) {
+        withContext(Dispatchers.IO) {
+            dao.deleteUnit(unit)
+        }
+    }
 }

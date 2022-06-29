@@ -8,12 +8,15 @@ import uk.fernando.measure.database.entity.LengthUnitEntity
 interface UnitDao {
 
     @Query("SELECT * FROM ${LengthUnitEntity.NAME} ")
-    fun getUnitList(): Flow<List<LengthUnitEntity>>
+    fun getUnitList(): List<LengthUnitEntity>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateAll(list: List<LengthUnitEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(list: List<LengthUnitEntity>)
+
+    @Delete
+    fun deleteUnit(unit: LengthUnitEntity)
 
 }

@@ -13,12 +13,9 @@ class HomeViewModel(private val rep: UnitRepository) : BaseViewModel() {
 
     init {
         launchDefault {
-            rep.getUnitList().collect() { unitList ->
-                lengthUnit.value = unitList
-            }
+            lengthUnit.value = rep.getUnitList()
         }
     }
-
 
     fun updateUnit(unit: LengthUnitEntity) {
         val km = unit.amount / unit.multiple
@@ -38,6 +35,10 @@ class HomeViewModel(private val rep: UnitRepository) : BaseViewModel() {
             lengthUnit.value = emptyList()
             lengthUnit.value = backupList
         }
+    }
+
+    fun deleteUnit(unit: LengthUnitEntity) {
+        launchIO { rep.deleteUnit(unit) }
     }
 
     private fun roundOffDecimal(number: Double): Double {
