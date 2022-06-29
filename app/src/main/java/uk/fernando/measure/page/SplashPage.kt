@@ -51,7 +51,7 @@ fun SplashPage(
 
     val isDarkMode = isSystemInDarkTheme()
     val currentOnTimeout by rememberUpdatedState {
-        navController.navigate(Directions.home.name) {
+        navController.navigate(Directions.length.name) {
             popUpTo(Directions.splash.name) { inclusive = true }
         }
     }

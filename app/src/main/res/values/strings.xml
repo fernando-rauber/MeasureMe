@@ -2,6 +2,9 @@
     <string name="app_name">MeasureMe</string>
 
     <string name="length_title">Length</string>
+    <string name="weight_title">Weight</string>
+    <string name="volume_title">Volume</string>
+    <string name="temperature_title">Temperature</string>
 
 
     // Settings

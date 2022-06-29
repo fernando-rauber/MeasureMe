@@ -15,7 +15,7 @@ fun NavGraphBuilder.buildGraph(navController: NavController) {
     composable(Directions.splash.name) {
         SplashPage(navController)
     }
-    composable(Directions.home.name) {
+    composable(Directions.length.name) {
         HomePage(navController)
     }
     composable(Directions.settings.name) {

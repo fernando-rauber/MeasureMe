@@ -16,9 +16,30 @@ object Directions {
             get() = emptyList()
     }
 
-    val home = object : NavigationCommand {
+    val length = object : NavigationCommand {
         override val name: String
-            get() = "home"
+            get() = "length"
+        override val arguments: List<NamedNavArgument>
+            get() = emptyList()
+    }
+
+    val weight = object : NavigationCommand {
+        override val name: String
+            get() = "weight"
+        override val arguments: List<NamedNavArgument>
+            get() = emptyList()
+    }
+
+    val temperature = object : NavigationCommand {
+        override val name: String
+            get() = "temperature"
+        override val arguments: List<NamedNavArgument>
+            get() = emptyList()
+    }
+
+    val volume = object : NavigationCommand {
+        override val name: String
+            get() = "volume"
         override val arguments: List<NamedNavArgument>
             get() = emptyList()
     }
