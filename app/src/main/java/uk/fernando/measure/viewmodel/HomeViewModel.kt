@@ -2,16 +2,16 @@ package uk.fernando.measure.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
 import uk.fernando.measure.database.entity.LengthUnitEntity
+import uk.fernando.measure.datastore.PrefsStore
+import uk.fernando.measure.ext.roundOffDecimal
 import uk.fernando.measure.repository.UnitRepository
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 
-class HomeViewModel(private val rep: UnitRepository) : BaseViewModel() {
+class HomeViewModel(private val rep: UnitRepository, private val prefs: PrefsStore) : BaseViewModel() {
 
     val lengthUnit = mutableStateOf(emptyList<LengthUnitEntity>())
 
-    init {
+    fun fetchLengthUnits(){
         launchDefault {
             lengthUnit.value = rep.getUnitList()
         }
@@ -27,8 +27,11 @@ class HomeViewModel(private val rep: UnitRepository) : BaseViewModel() {
             val backupList = lengthUnit.value
 
             backupList.forEach { unit ->
-                unit.amount = roundOffDecimal(unit.multiple * baseUnit)
+                unit.amount = (unit.multiple * baseUnit).roundOffDecimal()
             }
+
+            // Store so can use when add a new unit
+            prefs.storeLength(baseUnit)
 
             rep.updateAll(backupList)
 
@@ -41,11 +44,6 @@ class HomeViewModel(private val rep: UnitRepository) : BaseViewModel() {
         launchIO { rep.deleteUnit(unit) }
     }
 
-    private fun roundOffDecimal(number: Double): Double {
-        val df = DecimalFormat("#.###")
-        df.roundingMode = RoundingMode.CEILING
-        return df.format(number).toDouble()
-    }
 }
 
 

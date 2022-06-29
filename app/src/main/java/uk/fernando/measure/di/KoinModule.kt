@@ -51,13 +51,13 @@ object KoinModule {
         get() = module {
             factory { FirstTimeRepository(get()) }
             factory { UnitRepository(get()) }
-            factory { AddUnitRepository(get()) }
+            factory { AddUnitRepository(get(), get()) }
         }
 
     private val viewModelModule: Module
         get() = module {
 
-            viewModel { HomeViewModel(get()) }
+            viewModel { HomeViewModel(get(),get()) }
             viewModel { AddUnitViewModel(get()) }
             viewModel { SettingsViewModel(get(),get()) }
             viewModel { SplashViewModel(get(), get()) }

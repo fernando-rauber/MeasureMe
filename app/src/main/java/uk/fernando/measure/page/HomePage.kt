@@ -11,6 +11,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,6 +38,10 @@ fun HomePage(
     navController: NavController = NavController(LocalContext.current),
     viewModel: HomeViewModel = getViewModel()
 ) {
+    LaunchedEffect(Unit) {
+        viewModel.fetchLengthUnits()
+    }
+
     Column {
         NavigationBar(navController)
 
@@ -83,7 +88,7 @@ private fun MeasureList(modifier: Modifier, viewModel: HomeViewModel) {
     ) {
 
         items(viewModel.lengthUnit.value) { unit ->
-            key(unit.id) {
+            key(unit.id, unit.date.time) {
                 MySwipeDelete(
                     item = unit,
                     background = {

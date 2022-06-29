@@ -1,6 +1,8 @@
 package uk.fernando.measure.ext
 
 import androidx.navigation.NavController
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 val Any.TAG: String
     get() {
@@ -13,4 +15,10 @@ fun NavController.safeNav(direction: String) {
         this.navigate(direction)
     } catch (e: Exception) {
     }
+}
+
+fun Double.roundOffDecimal(): Double {
+    val df = DecimalFormat("#.####")
+    df.roundingMode = RoundingMode.CEILING
+    return df.format(this).toDouble()
 }

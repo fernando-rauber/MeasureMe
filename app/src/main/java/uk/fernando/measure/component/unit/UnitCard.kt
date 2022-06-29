@@ -15,6 +15,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
@@ -123,7 +124,7 @@ private fun MyTextField(
         mutableStateOf(
             TextFieldValue(
                 text = value,
-                selection = TextRange(value.length)
+                selection = TextRange(0, value.length)
             )
         )
     }
@@ -137,7 +138,7 @@ private fun MyTextField(
 
     BasicTextField(modifier = modifier
         .focusRequester(focusRequester)
-        .onFocusEvent {
+        .onFocusChanged {
             if (it.isFocused)
                 isFocusActive = true
             else if (isFocusActive && !it.isFocused)
@@ -146,7 +147,7 @@ private fun MyTextField(
         value = textField,
         onValueChange = { textField = it },
         keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Decimal,
+            keyboardType = KeyboardType.Number,
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(

@@ -3,6 +3,7 @@ package uk.fernando.measure.viewmodel
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import uk.fernando.measure.database.entity.LengthUnitEntity
+import uk.fernando.measure.datastore.PrefsStore
 import uk.fernando.measure.repository.AddUnitRepository
 
 
@@ -20,7 +21,7 @@ class AddUnitViewModel(private val rep: AddUnitRepository) : BaseViewModel() {
         launchDefault {
             unitList.remove(unit)
 
-            rep.addUnit(unit)
+            rep.addUnitLength(unit)
         }
     }
 }
