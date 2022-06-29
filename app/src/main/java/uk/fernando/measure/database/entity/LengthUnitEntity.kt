@@ -1,10 +1,12 @@
 package uk.fernando.measure.database.entity
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity(tableName = LengthUnitEntity.NAME)
 data class LengthUnitEntity(
+    @PrimaryKey
     val id: Int = 0,
     val name: String = "",
     val multiple: Double = 0.0,

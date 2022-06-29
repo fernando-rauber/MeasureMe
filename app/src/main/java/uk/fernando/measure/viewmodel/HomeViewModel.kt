@@ -1,48 +1,49 @@
 package uk.fernando.measure.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
-import uk.fernando.measure.model.MeasureUnitModel
+import uk.fernando.measure.database.entity.LengthUnitEntity
+import uk.fernando.measure.repository.UnitRepository
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 
-class HomeViewModel : BaseViewModel() {
+class HomeViewModel(private val rep: UnitRepository) : BaseViewModel() {
 
-    val measures = mutableStateOf(emptyList<MeasureUnitModel>())
-
+    val lengthUnit = mutableStateOf(emptyList<LengthUnitEntity>())
 
     init {
-        val list = mutableListOf<MeasureUnitModel>()
-
-        list.add(MeasureUnitModel("Kilometer", "km", 1.0, 1, 1.0))
-        list.add(MeasureUnitModel("Meter", "m", 1000.0, 2))
-        list.add(MeasureUnitModel("Centimeter", "", 100000.0, 3))
-        list.add(MeasureUnitModel("Millimeter", "", 10.0, 4))
-        list.add(MeasureUnitModel("Micrometer", "", 10.0, 5))
-        list.add(MeasureUnitModel("Nanometer", "", 10.0, 6))
-        list.add(MeasureUnitModel("Mile", "", 1.609, 7))
-        list.add(MeasureUnitModel("Yard", "", 1094.0, 8))
-        list.add(MeasureUnitModel("Foot", "", 3281.0, 9))
-        list.add(MeasureUnitModel("Inch", "", 39370.0, 10))
-        list.add(MeasureUnitModel("Nautical mile", "", 1.852, 11))
-
-        measures.value = list
-
+        launchDefault {
+            rep.getUnitList().collect() { unitList ->
+                lengthUnit.value = unitList
+            }
+        }
     }
 
 
-    fun updateUnit(unit: MeasureUnitModel) {
-        measures.value.find { it.name == unit.name }?.apply {
-            this.amount = unit.amount
-        }
-
+    fun updateUnit(unit: LengthUnitEntity) {
         val km = unit.amount / unit.multiple
         updateAmount(km)
     }
 
     private fun updateAmount(baseUnit: Double) {
+        launchIO {
+            val backupList = lengthUnit.value
 
-        measures.value.forEach { unit ->
-            unit.amount = unit.multiple * baseUnit
+            backupList.forEach { unit ->
+                unit.amount = roundOffDecimal(unit.multiple * baseUnit)
+            }
+
+            rep.updateAll(backupList)
+
+            lengthUnit.value = emptyList()
+            lengthUnit.value = backupList
         }
+    }
+
+    private fun roundOffDecimal(number: Double): Double {
+        val df = DecimalFormat("#.###")
+        df.roundingMode = RoundingMode.CEILING
+        return df.format(number).toDouble()
     }
 }
 

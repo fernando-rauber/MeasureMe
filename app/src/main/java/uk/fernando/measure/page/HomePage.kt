@@ -15,6 +15,7 @@ import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
 import uk.fernando.measure.R
 import uk.fernando.measure.component.NavigationBarTop
+import uk.fernando.measure.component.unit.UnitCard
 import uk.fernando.measure.ext.safeNav
 import uk.fernando.measure.navigation.Directions
 import uk.fernando.measure.viewmodel.HomeViewModel
@@ -63,13 +64,18 @@ private fun NavigationBar(navController: NavController) {
 
 @Composable
 private fun MeasureList(modifier: Modifier, viewModel: HomeViewModel) {
-    LazyColumn(
-        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 32.dp),
-        modifier = modifier
-    ) {
+    if (viewModel.lengthUnit.value.isNotEmpty()) {
+        LazyColumn(
+            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 32.dp),
+            modifier = modifier
+        ) {
 
-        items(viewModel.measures.value) { measure ->
-
+            items(viewModel.lengthUnit.value) { unit ->
+                UnitCard(unit = unit) { newAmount ->
+                    unit.amount = newAmount
+                    viewModel.updateUnit(unit)
+                }
+            }
         }
     }
 }

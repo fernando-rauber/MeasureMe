@@ -12,6 +12,7 @@ import uk.fernando.measure.database.MyDatabase
 import uk.fernando.measure.datastore.PrefsStore
 import uk.fernando.measure.datastore.PrefsStoreImpl
 import uk.fernando.measure.repository.FirstTimeRepository
+import uk.fernando.measure.repository.UnitRepository
 import uk.fernando.measure.viewmodel.HomeViewModel
 import uk.fernando.measure.viewmodel.SplashViewModel
 
@@ -46,12 +47,13 @@ object KoinModule {
     private val repositoryModule: Module
         get() = module {
             factory { FirstTimeRepository(get()) }
+            factory { UnitRepository(get()) }
         }
 
     private val viewModelModule: Module
         get() = module {
 
-            viewModel { HomeViewModel() }
+            viewModel { HomeViewModel(get()) }
             viewModel { SplashViewModel(get(), get()) }
         }
 
