@@ -2,10 +2,7 @@ package uk.fernando.measure.component.unit
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -25,10 +22,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,7 +45,7 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
     Surface(
         modifier = Modifier
             .padding(top = 10.dp)
-            .border(2.dp, if (canEdit) green else Color.Transparent, MaterialTheme.shapes.small)
+            .border(2.dp, if (canEdit) MaterialTheme.colorScheme.primary else Color.Transparent, MaterialTheme.shapes.small)
             .fillMaxWidth(),
         shadowElevation = 5.dp,
         tonalElevation = 5.dp,
@@ -60,8 +59,9 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
 
             Icon(
                 modifier = Modifier
-                    .background(red, CircleShape)
-                    .padding(7.dp),
+                    .background(MaterialTheme.colorScheme.onBackground.copy(0.1f), CircleShape)
+                    .padding(7.dp)
+                    .size(36.dp),
                 painter = painterResource(id = R.drawable.ic_ruler),
                 contentDescription = null
             )
@@ -79,7 +79,8 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
             MyAnimation(!canEdit) {
                 Text(
                     modifier = Modifier.noRippleClickable { canEdit = true },
-                    text = "${unit.amount}"
+                    text = "${unit.amount}",
+                    fontWeight = FontWeight.Bold
                 )
             }
 
@@ -105,7 +106,14 @@ private fun MyTextField(
     onDone: (Double) -> Unit,
     lostFocus: () -> Unit
 ) {
-    var textField by remember { mutableStateOf(value) }
+    var textField by remember {
+        mutableStateOf(
+            TextFieldValue(
+                text = value,
+                selection = TextRange(value.length )
+            )
+        )
+    }
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = remember { FocusRequester() }
     var isFocusActive = false
@@ -130,8 +138,8 @@ private fun MyTextField(
         ),
         keyboardActions = KeyboardActions(
             onDone = {
-                if (textField.isNotEmpty()) {
-                    onDone(textField.toDouble())
+                if (textField.text.isNotEmpty()) {
+                    onDone(textField.text.toDouble())
                     keyboardController?.hide()
                 }
             }

@@ -2,14 +2,6 @@ package uk.fernando.measure.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
-
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
-
 val greySuperLight = Color(0xFFEAEAEA)
 val greyLight = Color(0xFFD7D7D7)
 val greyLight2 = Color(0xFFBDBCBC)
@@ -21,3 +13,6 @@ val green = Color(0xFF5eb14f)
 val orange = Color(0xFFef9536)
 val red = Color(0xFFf93c54)
 val whiteBackGround = Color(0xFFEEEEEE)
+
+val lightDark = Color(0xFF1C2939)
+val dark = Color(0xFF141C28)

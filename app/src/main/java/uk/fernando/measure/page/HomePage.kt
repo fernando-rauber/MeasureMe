@@ -50,7 +50,7 @@ fun HomePage(
 
 @Composable
 private fun NavigationBar(navController: NavController) {
-    NavigationBarTop(title = R.string.home_title,
+    NavigationBarTop(title = R.string.length_title,
         rightIcon = {
             Row {
                 // add more measures units
