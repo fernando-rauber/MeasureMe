@@ -4,6 +4,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import uk.fernando.measure.page.AddUnitPage
 import uk.fernando.measure.page.HomePage
 import uk.fernando.measure.page.SplashPage
 
@@ -18,7 +19,8 @@ fun NavGraphBuilder.buildGraph(navController: NavController) {
     }
     composable(Directions.settings.name) {
     }
-    composable(Directions.measureList.name) {
+    composable(Directions.addUnit.name) {
+        AddUnitPage(navController)
     }
 }
 

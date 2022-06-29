@@ -23,9 +23,9 @@ object Directions {
             get() = emptyList()
     }
 
-    val measureList = object : NavigationCommand {
+    val addUnit = object : NavigationCommand {
         override val name: String
-            get() = "measure_list"
+            get() = "add_unit"
         override val arguments: List<NamedNavArgument>
             get() = emptyList()
     }

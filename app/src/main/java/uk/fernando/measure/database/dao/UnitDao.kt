@@ -16,6 +16,9 @@ interface UnitDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(list: List<LengthUnitEntity>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertUnit(unit: LengthUnitEntity)
+
     @Delete
     fun deleteUnit(unit: LengthUnitEntity)
 

@@ -53,8 +53,8 @@ private fun NavigationBar(navController: NavController) {
     NavigationBarTop(title = R.string.home_title,
         rightIcon = {
             Row {
-                // add more measures
-                IconButton(onClick = { navController.safeNav(Directions.measureList.name) }) {
+                // add more measures units
+                IconButton(onClick = { navController.safeNav(Directions.addUnit.name) }) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_add),
                         contentDescription = null,

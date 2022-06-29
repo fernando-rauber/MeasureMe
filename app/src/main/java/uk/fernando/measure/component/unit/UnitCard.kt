@@ -1,22 +1,27 @@
 package uk.fernando.measure.component.unit
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.focus.onFocusEvent
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
@@ -31,6 +36,7 @@ import uk.fernando.measure.R
 import uk.fernando.measure.component.MyAnimation
 import uk.fernando.measure.database.entity.LengthUnitEntity
 import uk.fernando.measure.ext.noRippleClickable
+import uk.fernando.measure.theme.green
 import uk.fernando.measure.theme.red
 
 @Composable
@@ -40,19 +46,25 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
     Surface(
         modifier = Modifier
             .padding(top = 10.dp)
+            .border(2.dp, if (canEdit) green else Color.Transparent, MaterialTheme.shapes.small)
             .fillMaxWidth(),
         shadowElevation = 5.dp,
         tonalElevation = 5.dp,
         shape = MaterialTheme.shapes.small
     ) {
 
-        Row(Modifier.padding(10.dp),
-        verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            Modifier.padding(10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
 
             Icon(
-                modifier = Modifier.background(red, CircleShape).padding(7.dp),
+                modifier = Modifier
+                    .background(red, CircleShape)
+                    .padding(7.dp),
                 painter = painterResource(id = R.drawable.ic_ruler),
-                contentDescription = null)
+                contentDescription = null
+            )
 
 
             Text(
