@@ -66,7 +66,6 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
                 contentDescription = null
             )
 
-
             Text(
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
@@ -80,7 +79,8 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
                 Text(
                     modifier = Modifier.noRippleClickable { canEdit = true },
                     text = "${unit.amount}",
-                    fontWeight = FontWeight.Bold
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium
                 )
             }
 
@@ -147,7 +147,8 @@ private fun MyTextField(
         cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
         textStyle = TextStyle.Default.copy(
             color = MaterialTheme.colorScheme.onSurface,
-            fontSize = 18.sp,
+            fontSize = MaterialTheme.typography.bodyMedium.fontSize,
+            fontStyle = MaterialTheme.typography.bodyMedium.fontStyle,
             textAlign = TextAlign.End
         ),
         decorationBox = { innerTextField ->

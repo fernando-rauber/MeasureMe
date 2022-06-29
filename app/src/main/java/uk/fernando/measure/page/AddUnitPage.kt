@@ -25,7 +25,7 @@ fun AddUnitPage(
     viewModel: AddUnitViewModel = getViewModel()
 ) {
     Column {
-        NavigationBarTop(title = R.string.home_title,
+        NavigationBarTop(title = R.string.length_title,
             leftIcon = R.drawable.ic_arrow_back,
             onLeftIconClick = { navController.popBackStack() }
         )
