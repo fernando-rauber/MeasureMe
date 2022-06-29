@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.material3.Icon
@@ -41,7 +42,7 @@ fun HomePage(
 
         MeasureList(
             modifier = Modifier
-                .padding(top = 30.dp)
+                .padding(top = 20.dp)
                 .fillMaxSize(),
             viewModel = viewModel
         )
@@ -92,19 +93,17 @@ private fun MeasureList(modifier: Modifier, viewModel: HomeViewModel) {
                                 .padding(top = 10.dp)
                                 .background(
                                     color = red,
-                                    shape = MaterialTheme.shapes.small
+                                    shape = RoundedCornerShape(50)
                                 )
 
                         ) {
-
-                            Text(
-                                text = stringResource(id = R.string.remove_action),
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White,
-                                fontSize = 14.sp,
+                            Icon(
                                 modifier = Modifier
                                     .align(Alignment.CenterEnd)
-                                    .padding(end = 15.dp)
+                                    .padding(end = 15.dp),
+                                painter = painterResource(id = R.drawable.ic_trash_bin),
+                                tint = Color.White,
+                                contentDescription = null
                             )
                         }
                     },

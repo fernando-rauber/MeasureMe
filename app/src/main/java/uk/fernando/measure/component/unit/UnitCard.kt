@@ -4,13 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -45,20 +43,22 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
     Surface(
         modifier = Modifier
             .padding(top = 10.dp)
-            .border(2.dp, if (canEdit) MaterialTheme.colorScheme.primary else Color.Transparent, MaterialTheme.shapes.small)
+            .height(IntrinsicSize.Min)
+            .border(2.dp, if (canEdit) MaterialTheme.colorScheme.primary else Color.Transparent, RoundedCornerShape(50))
             .fillMaxWidth(),
         shadowElevation = 5.dp,
         tonalElevation = 5.dp,
-        shape = MaterialTheme.shapes.small
+        shape = RoundedCornerShape(50)
     ) {
 
         Row(
-            Modifier.padding(10.dp),
+            Modifier.padding(horizontal = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
             Icon(
                 modifier = Modifier
+                    .padding(vertical = 10.dp)
                     .background(MaterialTheme.colorScheme.onBackground.copy(0.1f), CircleShape)
                     .padding(7.dp)
                     .size(36.dp),
@@ -94,6 +94,19 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
                     lostFocus = { canEdit = false }
                 )
             }
+
+//            Divider(
+//                Modifier
+//                    .padding(horizontal = 5.dp)
+//                    .fillMaxHeight()
+//                    .width(1.dp)
+//            )
+//
+//            Text(
+//                text = "km",
+//                color = MaterialTheme.colorScheme.onSurface,
+//                style = MaterialTheme.typography.bodyMedium
+//            )
         }
     }
 }
@@ -110,7 +123,7 @@ private fun MyTextField(
         mutableStateOf(
             TextFieldValue(
                 text = value,
-                selection = TextRange(value.length )
+                selection = TextRange(value.length)
             )
         )
     }

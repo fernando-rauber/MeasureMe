@@ -6,6 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import uk.fernando.measure.page.AddUnitPage
 import uk.fernando.measure.page.HomePage
+import uk.fernando.measure.page.SettingsPage
 import uk.fernando.measure.page.SplashPage
 
 
@@ -18,6 +19,7 @@ fun NavGraphBuilder.buildGraph(navController: NavController) {
         HomePage(navController)
     }
     composable(Directions.settings.name) {
+        SettingsPage(navController)
     }
     composable(Directions.addUnit.name) {
         AddUnitPage(navController)

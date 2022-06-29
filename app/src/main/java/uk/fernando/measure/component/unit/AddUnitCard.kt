@@ -41,12 +41,12 @@ fun AddUnitCard(unit: LengthUnitEntity, onClick: () -> Unit) {
 
                 Icon(
                     modifier = Modifier
-                        .background(red, CircleShape)
-                        .padding(7.dp),
+                        .background(MaterialTheme.colorScheme.onBackground.copy(0.1f), CircleShape)
+                        .padding(7.dp)
+                        .size(36.dp),
                     painter = painterResource(id = R.drawable.ic_ruler),
                     contentDescription = null
                 )
-
 
                 Text(
                     modifier = Modifier
@@ -67,7 +67,8 @@ fun AddUnitCard(unit: LengthUnitEntity, onClick: () -> Unit) {
                     modifier = Modifier
                         .padding(horizontal = 15.dp)
                         .align(Alignment.Center),
-                    text = "ADD"
+                    text = "ADD",
+                    fontWeight = FontWeight.Medium
                 )
             }
         }

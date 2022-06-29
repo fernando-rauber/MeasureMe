@@ -16,6 +16,7 @@ import uk.fernando.measure.repository.FirstTimeRepository
 import uk.fernando.measure.repository.UnitRepository
 import uk.fernando.measure.viewmodel.AddUnitViewModel
 import uk.fernando.measure.viewmodel.HomeViewModel
+import uk.fernando.measure.viewmodel.SettingsViewModel
 import uk.fernando.measure.viewmodel.SplashViewModel
 
 object KoinModule {
@@ -58,6 +59,7 @@ object KoinModule {
 
             viewModel { HomeViewModel(get()) }
             viewModel { AddUnitViewModel(get()) }
+            viewModel { SettingsViewModel(get(),get()) }
             viewModel { SplashViewModel(get(), get()) }
         }
 
