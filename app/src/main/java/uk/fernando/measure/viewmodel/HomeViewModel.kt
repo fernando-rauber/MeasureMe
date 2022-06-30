@@ -1,7 +1,6 @@
 package uk.fernando.measure.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
-import uk.fernando.measure.R
 import uk.fernando.measure.database.entity.LengthUnitEntity
 import uk.fernando.measure.datastore.PrefsStore
 import uk.fernando.measure.enum.UnitType

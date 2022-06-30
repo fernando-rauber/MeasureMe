@@ -20,10 +20,10 @@ class AddUnitRepository(private val dao: UnitDao, private val prefs: PrefsStore)
             LengthUnitEntity(4, MILLIMETER.value, unitType, 1000000.0, 1000000.0),
             LengthUnitEntity(5, MICROMETER.value, unitType, 1000000000.0, 1000000000.0),
             LengthUnitEntity(6, NANOMETER.value, unitType, 1000000000000.0, 1000000000000.0),
-            LengthUnitEntity(7, MILE.value, unitType, 1.609, 1.609),
-            LengthUnitEntity(8, YARD.value, unitType, 1094.0, 1094.0),
-            LengthUnitEntity(9, FOOT.value, unitType, 3281.0, 3281.0),
-            LengthUnitEntity(10, INCH.value, unitType, 39370.0, 39370.0),
+            LengthUnitEntity(7, MILE.value, unitType, 0.6213688756, 0.6213688756),
+            LengthUnitEntity(8, YARD.value, unitType, 1093.6132983, 1093.6132983),
+            LengthUnitEntity(9, FOOT.value, unitType, 3280.839895, 3280.839895),
+            LengthUnitEntity(10, INCH.value, unitType, 39370.07874, 39370.07874),
             LengthUnitEntity(11, NAUTICAL_MILE.value, unitType, 1.852, 1.852)
         )
     }
@@ -49,12 +49,11 @@ class AddUnitRepository(private val dao: UnitDao, private val prefs: PrefsStore)
             LengthUnitEntity(206, STONE.value, unitType, 0.157473, 0.157473),
             LengthUnitEntity(207, POUND.value, unitType, 2.2046244202, 2.2046244202),
             LengthUnitEntity(208, OUNCE.value, unitType, 35.273990723, 35.273990723),
-            LengthUnitEntity(209, TONNE.value, unitType, 0.001, 0.001),
-            LengthUnitEntity(2100, CARAT.value, unitType, 5000.0, 5000.0)
+            LengthUnitEntity(209, CARAT.value, unitType, 5000.0, 5000.0)
         )
     }
 
-    suspend fun getLengthUnitList(type: Int) = withContext(Dispatchers.IO) {
+    suspend fun getUnitList(type: Int) = withContext(Dispatchers.IO) {
         val dbUnitIDList = dao.getUnitIDList(type)
         when (UnitType.getByValue(type)) {
             UnitType.LENGTH -> lengthUnits.filter { !dbUnitIDList.contains(it.id) }
@@ -64,7 +63,7 @@ class AddUnitRepository(private val dao: UnitDao, private val prefs: PrefsStore)
         }
     }
 
-    suspend fun addUnitLength(unit: LengthUnitEntity) {
+    suspend fun insertUnit(unit: LengthUnitEntity) {
         withContext(Dispatchers.IO) {
             val storedValue = when (UnitType.getByValue(unit.type)) {
                 UnitType.LENGTH -> prefs.getLength()

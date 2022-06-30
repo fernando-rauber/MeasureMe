@@ -20,9 +20,9 @@ class FirstTimeRepository(private val dao: UnitDao) {
         listOf(
             LengthUnitEntity(1, UnitMeasure.KILOMETER.value, unitType, 1.0, 1.0),
             LengthUnitEntity(2, UnitMeasure.METER.value, unitType, 1000.0, 1000.0),
-            LengthUnitEntity(7, UnitMeasure.MILE.value, unitType, 1.609, 1.609),
-            LengthUnitEntity(9, UnitMeasure.FOOT.value, unitType, 3281.0, 3281.0),
-            LengthUnitEntity(10, UnitMeasure.INCH.value, unitType, 39370.0, 39370.0)
+            LengthUnitEntity(7, UnitMeasure.MILE.value, unitType, 0.6213688756, 0.6213688756),
+            LengthUnitEntity(9, UnitMeasure.FOOT.value, unitType, 3280.839895, 3280.839895),
+            LengthUnitEntity(10, UnitMeasure.INCH.value, unitType, 39370.07874, 39370.07874),
         )
     }
 

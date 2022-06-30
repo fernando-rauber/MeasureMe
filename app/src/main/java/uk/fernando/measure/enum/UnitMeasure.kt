@@ -26,7 +26,6 @@ enum class UnitMeasure(val value: Int) {
     STONE(21),
     POUND(22),
     OUNCE(23),
-    TONNE(24),
     CARAT(25);
 
     companion object {

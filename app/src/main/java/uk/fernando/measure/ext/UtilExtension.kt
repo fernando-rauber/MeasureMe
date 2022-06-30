@@ -22,7 +22,7 @@ fun NavController.safeNav(direction: String) {
 }
 
 fun Double.roundOffDecimal(): Double {
-    val df = DecimalFormat("#.####")
+    val df = DecimalFormat("#.###")
     df.roundingMode = RoundingMode.CEILING
     return df.format(this).toDouble()
 }
@@ -63,7 +63,6 @@ fun Int.getUnitName(): Int {
         STONE -> R.string.stone
         POUND -> R.string.pound
         OUNCE -> R.string.ounce
-        TONNE -> R.string.tonne
         CARAT -> R.string.carat
 
         else -> R.string.kilometer
