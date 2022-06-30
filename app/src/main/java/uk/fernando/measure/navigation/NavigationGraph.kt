@@ -6,10 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import uk.fernando.measure.enum.UnitType
 import uk.fernando.measure.navigation.Directions.UNIT_TYPE
-import uk.fernando.measure.page.AddUnitPage
-import uk.fernando.measure.page.HomePage
-import uk.fernando.measure.page.SettingsPage
-import uk.fernando.measure.page.SplashPage
+import uk.fernando.measure.page.*
 
 
 @ExperimentalAnimationApi
@@ -18,16 +15,16 @@ fun NavGraphBuilder.buildGraph(navController: NavController) {
         SplashPage(navController)
     }
     composable(Directions.length.name) {
-        HomePage(navController, UnitType.LENGTH)
+        UnitPage(navController, UnitType.LENGTH)
     }
     composable(Directions.weight.name) {
-        HomePage(navController, UnitType.WEIGHT)
+        UnitPage(navController, UnitType.WEIGHT)
     }
     composable(Directions.temperature.name) {
-        HomePage(navController, UnitType.TEMPERATURE)
+        TemperaturePage(navController)
     }
     composable(Directions.volume.name) {
-        HomePage(navController, UnitType.VOLUME)
+        UnitPage(navController, UnitType.VOLUME)
     }
     composable(Directions.settings.name) {
         SettingsPage(navController)

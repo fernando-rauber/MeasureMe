@@ -1,6 +1,5 @@
 package uk.fernando.measure.viewmodel
 
-import androidx.compose.runtime.mutableStateOf
 import uk.fernando.measure.database.entity.LengthUnitEntity
 import uk.fernando.measure.datastore.PrefsStore
 import uk.fernando.measure.enum.UnitType
@@ -8,17 +7,15 @@ import uk.fernando.measure.ext.roundOffDecimal
 import uk.fernando.measure.repository.UnitRepository
 
 
-class HomeViewModel(private val rep: UnitRepository, private val prefs: PrefsStore) : BaseViewModel() {
+class UnitViewModel(private val rep: UnitRepository, private val prefs: PrefsStore) : BaseUnitViewModel() {
 
-    val unitList = mutableStateOf(emptyList<LengthUnitEntity>())
-
-    fun fetchUnitsByType(type: UnitType) {
+    override fun fetchUnitsByType(type: UnitType) {
         launchDefault {
             unitList.value = rep.getUnitList(type)
         }
     }
 
-    fun updateUnit(unit: LengthUnitEntity) {
+    override fun updateUnit(unit: LengthUnitEntity) {
         val km = unit.amount / unit.multiple
         updateAmount(km)
     }
@@ -41,14 +38,13 @@ class HomeViewModel(private val rep: UnitRepository, private val prefs: PrefsSto
         }
     }
 
-    fun deleteUnit(unit: LengthUnitEntity) {
+    override fun deleteUnit(unit: LengthUnitEntity) {
         launchIO { rep.deleteUnit(unit) }
     }
 
     private suspend fun storeAmount(unitType: Int, baseUnit: Double) {
         when (UnitType.getByValue(unitType)) {
             UnitType.LENGTH -> prefs.storeLength(baseUnit)
-            UnitType.TEMPERATURE -> prefs.storeLength(baseUnit)
             UnitType.WEIGHT -> prefs.storeWeight(baseUnit)
             else -> prefs.storeVolume(baseUnit)
         }

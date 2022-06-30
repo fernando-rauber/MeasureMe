@@ -40,6 +40,10 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         return dataStore.data.map { prefs -> prefs[PreferencesKeys.VOLUME] ?: 1.0 }.first()
     }
 
+    override suspend fun getTemperature(): Double {
+        return dataStore.data.map { prefs -> prefs[PreferencesKeys.TEMPERATURE] ?: 1.0 }.first()
+    }
+
     override suspend fun storeFirstTime(value: Boolean) {
         dataStore.edit { prefs -> prefs[PreferencesKeys.FIRST_TIME] = value }
     }
@@ -64,6 +68,10 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         dataStore.edit { prefs -> prefs[PreferencesKeys.VOLUME] = value }
     }
 
+    override suspend fun storeTemperature(value: Double) {
+        dataStore.edit { prefs -> prefs[PreferencesKeys.TEMPERATURE] = value }
+    }
+
     private object PreferencesKeys {
         val FIRST_TIME = booleanPreferencesKey("first_time")
         val PREMIUM = booleanPreferencesKey("premium")
@@ -72,5 +80,6 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         val LENGTH = doublePreferencesKey("length")
         val WEIGHT = doublePreferencesKey("weight")
         val VOLUME = doublePreferencesKey("volume")
+        val TEMPERATURE = doublePreferencesKey("temperature")
     }
 }

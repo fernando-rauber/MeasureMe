@@ -5,6 +5,7 @@ import kotlinx.coroutines.withContext
 import uk.fernando.measure.database.dao.UnitDao
 import uk.fernando.measure.database.entity.LengthUnitEntity
 import uk.fernando.measure.datastore.PrefsStore
+import uk.fernando.measure.enum.UnitMeasure
 import uk.fernando.measure.enum.UnitMeasure.*
 import uk.fernando.measure.enum.UnitType
 import uk.fernando.measure.ext.roundOffDecimal
@@ -32,8 +33,8 @@ class AddUnitRepository(private val dao: UnitDao, private val prefs: PrefsStore)
         val unitType = UnitType.TEMPERATURE.value
         listOf(
             LengthUnitEntity(100, CELSIUS.value, unitType, 1.0, 1.0),
-            LengthUnitEntity(101, KELVIN.value, unitType, 274.15, 274.15),
-            LengthUnitEntity(102, FAHRENHEIT.value, unitType, 33.8, 33.8)
+            LengthUnitEntity(101, KELVIN.value, unitType, 1.0, 274.15),
+            LengthUnitEntity(102, FAHRENHEIT.value, unitType, 1.8, 33.8)
         )
     }
 
@@ -69,10 +70,17 @@ class AddUnitRepository(private val dao: UnitDao, private val prefs: PrefsStore)
                 UnitType.LENGTH -> prefs.getLength()
                 UnitType.TEMPERATURE -> prefs.getLength()
                 UnitType.WEIGHT -> prefs.getWeight()
-                else -> prefs.getVolume()
+                else -> prefs.getTemperature()
             }
 
-            unit.amount = (unit.multiple * storedValue).roundOffDecimal()
+            val add = when (UnitMeasure.getByValue(unit.unit)) {
+                FAHRENHEIT -> 32.0
+                KELVIN -> 273.15
+                else -> 0.0
+            }
+
+            unit.amount = ((unit.multiple * storedValue) + add).roundOffDecimal()
+
             dao.insertUnit(unit)
         }
     }

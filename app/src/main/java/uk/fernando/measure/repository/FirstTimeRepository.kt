@@ -30,8 +30,8 @@ class FirstTimeRepository(private val dao: UnitDao) {
         val unitType = UnitType.TEMPERATURE.value
         listOf(
             LengthUnitEntity(100, UnitMeasure.CELSIUS.value, unitType, 1.0, 1.0),
-            LengthUnitEntity(101, UnitMeasure.KELVIN.value, unitType, 274.15, 274.15),
-            LengthUnitEntity(102, UnitMeasure.FAHRENHEIT.value, unitType, 33.8, 33.8)
+            LengthUnitEntity(101, UnitMeasure.KELVIN.value, unitType, 1.0, 274.15),
+            LengthUnitEntity(102, UnitMeasure.FAHRENHEIT.value, unitType, 1.8, 33.8)
         )
     }
 

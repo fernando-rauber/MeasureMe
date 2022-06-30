@@ -14,10 +14,7 @@ import uk.fernando.measure.datastore.PrefsStoreImpl
 import uk.fernando.measure.repository.AddUnitRepository
 import uk.fernando.measure.repository.FirstTimeRepository
 import uk.fernando.measure.repository.UnitRepository
-import uk.fernando.measure.viewmodel.AddUnitViewModel
-import uk.fernando.measure.viewmodel.HomeViewModel
-import uk.fernando.measure.viewmodel.SettingsViewModel
-import uk.fernando.measure.viewmodel.SplashViewModel
+import uk.fernando.measure.viewmodel.*
 
 object KoinModule {
 
@@ -57,7 +54,8 @@ object KoinModule {
     private val viewModelModule: Module
         get() = module {
 
-            viewModel { HomeViewModel(get(),get()) }
+            viewModel { UnitViewModel(get(),get()) }
+            viewModel { TemperatureViewModel(get(),get()) }
             viewModel { AddUnitViewModel(get()) }
             viewModel { SettingsViewModel(get(),get()) }
             viewModel { SplashViewModel(get(), get()) }

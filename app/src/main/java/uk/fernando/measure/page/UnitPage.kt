@@ -6,7 +6,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -18,10 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
 import uk.fernando.measure.R
@@ -32,13 +28,14 @@ import uk.fernando.measure.enum.UnitType
 import uk.fernando.measure.ext.safeNav
 import uk.fernando.measure.navigation.Directions
 import uk.fernando.measure.theme.red
-import uk.fernando.measure.viewmodel.HomeViewModel
+import uk.fernando.measure.viewmodel.BaseUnitViewModel
+import uk.fernando.measure.viewmodel.UnitViewModel
 
 @Composable
-fun HomePage(
+fun UnitPage(
     navController: NavController = NavController(LocalContext.current),
     unitType: UnitType,
-    viewModel: HomeViewModel = getViewModel()
+    viewModel: UnitViewModel = getViewModel()
 ) {
     LaunchedEffect(Unit) {
         viewModel.fetchUnitsByType(unitType)
@@ -57,7 +54,7 @@ fun HomePage(
 }
 
 @Composable
-private fun NavigationBar(navController: NavController, unitType: UnitType) {
+fun NavigationBar(navController: NavController, unitType: UnitType) {
     NavigationBarTop(title = R.string.length_title,
         rightIcon = {
             Row {
@@ -83,7 +80,7 @@ private fun NavigationBar(navController: NavController, unitType: UnitType) {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-private fun MeasureList(modifier: Modifier, viewModel: HomeViewModel) {
+fun MeasureList(modifier: Modifier, viewModel: BaseUnitViewModel) {
     LazyColumn(
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 32.dp),
         modifier = modifier
