@@ -12,12 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import uk.fernando.measure.R
 import uk.fernando.measure.database.entity.LengthUnitEntity
+import uk.fernando.measure.ext.getUnitName
+import uk.fernando.measure.ext.getUnitTypeIcon
 import uk.fernando.measure.theme.green
-import uk.fernando.measure.theme.red
 
 @Composable
 fun AddUnitCard(unit: LengthUnitEntity, onClick: () -> Unit) {
@@ -44,7 +46,7 @@ fun AddUnitCard(unit: LengthUnitEntity, onClick: () -> Unit) {
                         .background(MaterialTheme.colorScheme.onBackground.copy(0.1f), CircleShape)
                         .padding(7.dp)
                         .size(36.dp),
-                    painter = painterResource(id = R.drawable.ic_ruler),
+                    painter = painterResource( unit.type.getUnitTypeIcon()),
                     contentDescription = null
                 )
 
@@ -52,7 +54,7 @@ fun AddUnitCard(unit: LengthUnitEntity, onClick: () -> Unit) {
                     modifier = Modifier
                         .padding(horizontal = 10.dp)
                         .weight(0.5f),
-                    text = unit.name,
+                    text = stringResource(unit.unit.getUnitName()),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold
                 )

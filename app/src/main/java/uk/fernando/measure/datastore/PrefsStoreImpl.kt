@@ -36,6 +36,10 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         return dataStore.data.map { prefs -> prefs[PreferencesKeys.WEIGHT] ?: 1.0 }.first()
     }
 
+    override suspend fun getVolume(): Double {
+        return dataStore.data.map { prefs -> prefs[PreferencesKeys.VOLUME] ?: 1.0 }.first()
+    }
+
     override suspend fun storeFirstTime(value: Boolean) {
         dataStore.edit { prefs -> prefs[PreferencesKeys.FIRST_TIME] = value }
     }
@@ -56,6 +60,10 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         dataStore.edit { prefs -> prefs[PreferencesKeys.WEIGHT] = value }
     }
 
+    override suspend fun storeVolume(value: Double) {
+        dataStore.edit { prefs -> prefs[PreferencesKeys.VOLUME] = value }
+    }
+
     private object PreferencesKeys {
         val FIRST_TIME = booleanPreferencesKey("first_time")
         val PREMIUM = booleanPreferencesKey("premium")
@@ -63,5 +71,6 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
 
         val LENGTH = doublePreferencesKey("length")
         val WEIGHT = doublePreferencesKey("weight")
+        val VOLUME = doublePreferencesKey("volume")
     }
 }

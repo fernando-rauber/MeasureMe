@@ -9,7 +9,7 @@ import java.util.*
 data class LengthUnitEntity(
     @PrimaryKey
     val id: Int,
-    val name: String = "",
+    val unit: Int,
     val type: Int,
     val multiple: Double = 0.0,
     var amount: Double = 0.0,

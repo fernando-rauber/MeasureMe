@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -15,15 +16,19 @@ import org.koin.androidx.compose.getViewModel
 import uk.fernando.measure.R
 import uk.fernando.measure.component.NavigationBarTop
 import uk.fernando.measure.component.unit.AddUnitCard
-import uk.fernando.measure.component.unit.UnitCard
 import uk.fernando.measure.viewmodel.AddUnitViewModel
-import uk.fernando.measure.viewmodel.HomeViewModel
 
 @Composable
 fun AddUnitPage(
     navController: NavController = NavController(LocalContext.current),
+    unitType: Int,
     viewModel: AddUnitViewModel = getViewModel()
 ) {
+
+    LaunchedEffect(Unit) {
+        viewModel.fetchAvailableUnits(unitType)
+    }
+
     Column {
         NavigationBarTop(title = R.string.length_title,
             leftIcon = R.drawable.ic_arrow_back,

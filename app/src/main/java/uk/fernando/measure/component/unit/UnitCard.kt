@@ -8,7 +8,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -16,11 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -29,13 +32,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import uk.fernando.measure.R
 import uk.fernando.measure.component.MyAnimation
 import uk.fernando.measure.database.entity.LengthUnitEntity
+import uk.fernando.measure.ext.getUnitName
+import uk.fernando.measure.ext.getUnitTypeIcon
 import uk.fernando.measure.ext.noRippleClickable
-import uk.fernando.measure.theme.green
-import uk.fernando.measure.theme.red
 
 @Composable
 fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
@@ -63,7 +64,7 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
                     .background(MaterialTheme.colorScheme.onBackground.copy(0.1f), CircleShape)
                     .padding(7.dp)
                     .size(36.dp),
-                painter = painterResource(id = R.drawable.ic_ruler),
+                painter = painterResource(unit.type.getUnitTypeIcon()),
                 contentDescription = null
             )
 
@@ -71,7 +72,7 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
                 modifier = Modifier
                     .padding(horizontal = 10.dp)
                     .weight(0.5f),
-                text = unit.name,
+                text = stringResource(unit.unit.getUnitName()),
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold
             )

@@ -7,8 +7,11 @@ import uk.fernando.measure.database.entity.LengthUnitEntity
 @Dao
 interface UnitDao {
 
-    @Query("SELECT * FROM ${LengthUnitEntity.NAME} ")
-    fun getUnitList(): List<LengthUnitEntity>
+    @Query("SELECT * FROM ${LengthUnitEntity.NAME} WHERE type = :type")
+    fun getUnitList(type: Int): List<LengthUnitEntity>
+
+    @Query("SELECT id FROM ${LengthUnitEntity.NAME} WHERE type = :type ")
+    fun getUnitIDList(type: Int): List<Int>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateAll(list: List<LengthUnitEntity>)

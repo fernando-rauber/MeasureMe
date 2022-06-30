@@ -24,4 +24,33 @@
     <string name="restore_restored">Premium Product Restored. Enjoy!</string>
     <string name="restore_not_found">Premium product not found to restore.</string>
     <string name="internet_required">Internet required to continue with this action.</string>
+
+    // Units
+    <string name="kilometer">Kilometer</string>
+    <string name="meter">Meter</string>
+    <string name="centimeter">Centimeter</string>
+    <string name="millimeter">Millimeter</string>
+    <string name="micrometer">Micrometer</string>
+    <string name="nanometer">Nanometer</string>
+    <string name="mile">Mile</string>
+    <string name="yard">Yard</string>
+    <string name="foot">Foot</string>
+    <string name="inch">Inch</string>
+    <string name="nautical_mile">Nautical mile</string>
+
+    <string name="celsius">Celsius</string>
+    <string name="kelvin">Kelvin</string>
+    <string name="fahrenheit">Fahrenheit</string>
+
+    <string name="kilogram">Kilogram</string>
+    <string name="gram">Gram</string>
+    <string name="milligram">Milligram</string>
+    <string name="microgram">Microgram</string>
+    <string name="imperial_ton">Imperial Ton</string>
+    <string name="us_ton">US Ton</string>
+    <string name="stone">Stone</string>
+    <string name="pound">Pound</string>
+    <string name="ounce">Ounce</string>
+    <string name="carat">Carat</string>
+    <string name="tonne">Tonne</string>
 </resources>

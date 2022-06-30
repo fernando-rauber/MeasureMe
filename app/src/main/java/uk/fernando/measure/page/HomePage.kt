@@ -28,6 +28,7 @@ import uk.fernando.measure.R
 import uk.fernando.measure.component.MySwipeDelete
 import uk.fernando.measure.component.NavigationBarTop
 import uk.fernando.measure.component.unit.UnitCard
+import uk.fernando.measure.enum.UnitType
 import uk.fernando.measure.ext.safeNav
 import uk.fernando.measure.navigation.Directions
 import uk.fernando.measure.theme.red
@@ -36,14 +37,15 @@ import uk.fernando.measure.viewmodel.HomeViewModel
 @Composable
 fun HomePage(
     navController: NavController = NavController(LocalContext.current),
+    unitType: UnitType,
     viewModel: HomeViewModel = getViewModel()
 ) {
     LaunchedEffect(Unit) {
-        viewModel.fetchLengthUnits()
+        viewModel.fetchUnitsByType(unitType)
     }
 
     Column {
-        NavigationBar(navController)
+        NavigationBar(navController, unitType)
 
         MeasureList(
             modifier = Modifier
@@ -55,12 +57,12 @@ fun HomePage(
 }
 
 @Composable
-private fun NavigationBar(navController: NavController) {
+private fun NavigationBar(navController: NavController, unitType: UnitType) {
     NavigationBarTop(title = R.string.length_title,
         rightIcon = {
             Row {
                 // add more measures units
-                IconButton(onClick = { navController.safeNav(Directions.addUnit.name) }) {
+                IconButton(onClick = { navController.safeNav(Directions.addUnit.name.plus("/${unitType.value}")) }) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_add),
                         contentDescription = null,
@@ -87,7 +89,7 @@ private fun MeasureList(modifier: Modifier, viewModel: HomeViewModel) {
         modifier = modifier
     ) {
 
-        items(viewModel.lengthUnit.value) { unit ->
+        items(viewModel.unitList.value) { unit ->
             key(unit.id, unit.date.time) {
                 MySwipeDelete(
                     item = unit,
