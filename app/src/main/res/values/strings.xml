@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MeasureMe</string>
+    <string name="app_name">ConvertMe</string>
 
     <string name="length_title">Length</string>
     <string name="weight_title">Weight</string>

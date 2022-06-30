@@ -14,6 +14,8 @@ import uk.fernando.measure.datastore.PrefsStoreImpl
 import uk.fernando.measure.repository.AddUnitRepository
 import uk.fernando.measure.repository.FirstTimeRepository
 import uk.fernando.measure.repository.UnitRepository
+import uk.fernando.measure.usecase.AddUnitUseCase
+import uk.fernando.measure.usecase.GetUnitsUseCase
 import uk.fernando.measure.viewmodel.*
 
 object KoinModule {
@@ -22,7 +24,7 @@ object KoinModule {
      * Keep the order applied
      * @return List<Module>
      */
-    fun allModules(): List<Module> = listOf(coreModule, databaseModule, repositoryModule, viewModelModule)
+    fun allModules(): List<Module> = listOf(coreModule, databaseModule, repositoryModule, useCaseModule, viewModelModule)
 
     private val coreModule = module {
         fun provideDataStore(app: Context): PrefsStore {
@@ -48,16 +50,22 @@ object KoinModule {
         get() = module {
             factory { FirstTimeRepository(get()) }
             factory { UnitRepository(get()) }
-            factory { AddUnitRepository(get(), get()) }
+            factory { AddUnitRepository(get()) }
+        }
+
+    private val useCaseModule: Module
+        get() = module {
+            factory { GetUnitsUseCase(get(), get()) }
+            factory { AddUnitUseCase(get(), get()) }
         }
 
     private val viewModelModule: Module
         get() = module {
 
-            viewModel { UnitViewModel(get(),get()) }
-            viewModel { TemperatureViewModel(get(),get()) }
+            viewModel { UnitViewModel(get()) }
+            viewModel { TemperatureViewModel(get(), get()) }
             viewModel { AddUnitViewModel(get()) }
-            viewModel { SettingsViewModel(get(),get()) }
+            viewModel { SettingsViewModel(get(), get()) }
             viewModel { SplashViewModel(get(), get()) }
         }
 

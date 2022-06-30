@@ -11,7 +11,7 @@ interface UnitDao {
     fun getUnitList(type: Int): List<LengthUnitEntity>
 
     @Query("SELECT id FROM ${LengthUnitEntity.NAME} WHERE type = :type ")
-    fun getUnitIDList(type: Int): List<Int>
+    fun getUnitIDListByType(type: Int): List<Int>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateAll(list: List<LengthUnitEntity>)
