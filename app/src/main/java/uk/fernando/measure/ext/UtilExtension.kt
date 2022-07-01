@@ -21,6 +21,13 @@ fun NavController.safeNav(direction: String) {
     }
 }
 
+fun Double.isInteger() = run {
+    if (this.toInt().toDouble() == this)
+        "${this.toInt()}"
+    else
+        "$this"
+}
+
 fun Double.roundOffDecimal(): Double {
     val df = DecimalFormat("#.###")
     df.roundingMode = RoundingMode.CEILING

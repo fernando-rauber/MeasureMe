@@ -36,6 +36,7 @@ import uk.fernando.measure.component.MyAnimation
 import uk.fernando.measure.database.entity.LengthUnitEntity
 import uk.fernando.measure.ext.getUnitName
 import uk.fernando.measure.ext.getUnitTypeIcon
+import uk.fernando.measure.ext.isInteger
 import uk.fernando.measure.ext.noRippleClickable
 
 @Composable
@@ -77,10 +78,12 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
                 fontWeight = FontWeight.Bold
             )
 
+            val amount = unit.amount.isInteger()
+
             MyAnimation(!canEdit) {
                 Text(
                     modifier = Modifier.noRippleClickable { canEdit = true },
-                    text = "${unit.amount}",
+                    text = amount,
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Medium
                 )
@@ -88,7 +91,7 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
 
             MyAnimation(canEdit) {
                 MyTextField(
-                    value = unit.amount.toString(),
+                    value = amount,
                     onDone = {
                         onDone(it)
                         canEdit = false
