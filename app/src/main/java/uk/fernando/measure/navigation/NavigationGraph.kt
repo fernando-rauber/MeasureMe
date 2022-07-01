@@ -21,7 +21,7 @@ fun NavGraphBuilder.buildGraph(navController: NavController) {
         UnitPage(navController, UnitType.WEIGHT)
     }
     composable(Directions.temperature.name) {
-        TemperaturePage(navController)
+        UnitPage(navController, UnitType.TEMPERATURE)
     }
     composable(Directions.volume.name) {
         UnitPage(navController, UnitType.VOLUME)

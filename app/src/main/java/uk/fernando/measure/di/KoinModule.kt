@@ -55,15 +55,14 @@ object KoinModule {
 
     private val useCaseModule: Module
         get() = module {
-            factory { GetUnitsUseCase(get(), get()) }
-            factory { AddUnitUseCase(get(), get()) }
+            single { GetUnitsUseCase(get(), get()) }
+            single { AddUnitUseCase(get(), get()) }
         }
 
     private val viewModelModule: Module
         get() = module {
 
             viewModel { UnitViewModel(get()) }
-            viewModel { TemperatureViewModel(get(), get()) }
             viewModel { AddUnitViewModel(get()) }
             viewModel { SettingsViewModel(get(), get()) }
             viewModel { SplashViewModel(get(), get()) }

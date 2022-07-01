@@ -7,7 +7,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.key
@@ -29,7 +32,6 @@ import uk.fernando.measure.ext.safeNav
 import uk.fernando.measure.navigation.Directions
 import uk.fernando.measure.theme.orange
 import uk.fernando.measure.theme.red
-import uk.fernando.measure.viewmodel.BaseUnitViewModel
 import uk.fernando.measure.viewmodel.UnitViewModel
 
 @Composable
@@ -78,7 +80,7 @@ fun NavigationBar(navController: NavController, unitType: UnitType) {
 }
 
 @Composable
-fun MeasureList(viewModel: BaseUnitViewModel, addUnitClick: () -> Unit) {
+fun MeasureList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
     Box(
         Modifier
             .fillMaxSize()
@@ -103,7 +105,7 @@ fun MeasureList(viewModel: BaseUnitViewModel, addUnitClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-private fun UnitList(viewModel: BaseUnitViewModel, addUnitClick: () -> Unit) {
+private fun UnitList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
     LazyColumn(
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 32.dp),
         modifier = Modifier.fillMaxSize()

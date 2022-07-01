@@ -1,6 +1,7 @@
 package uk.fernando.measure.viewmodel
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import uk.fernando.measure.database.entity.LengthUnitEntity
 import uk.fernando.measure.enum.UnitType
 import uk.fernando.measure.ext.TAG
@@ -8,9 +9,12 @@ import uk.fernando.measure.usecase.GetUnitsUseCase
 import uk.fernando.measure.util.Resource
 
 
-class UnitViewModel(private val useCase: GetUnitsUseCase) : BaseUnitViewModel() {
+class UnitViewModel(private val useCase: GetUnitsUseCase) : BaseViewModel() {
 
-    override fun fetchUnitsByType(type: UnitType) {
+    val unitList = mutableStateOf(emptyList<LengthUnitEntity>())
+    val loading = mutableStateOf(false)
+
+    fun fetchUnitsByType(type: UnitType) {
         launchDefault {
             useCase.getUnitsByType(type).collect() { result ->
                 when (result) {
@@ -22,7 +26,7 @@ class UnitViewModel(private val useCase: GetUnitsUseCase) : BaseUnitViewModel() 
         }
     }
 
-    override fun updateUnit(unit: LengthUnitEntity) {
+    fun updateUnit(unit: LengthUnitEntity) {
         launchDefault {
             val updatedList = useCase.updateAmount(unit, unitList.value)
 
@@ -31,7 +35,7 @@ class UnitViewModel(private val useCase: GetUnitsUseCase) : BaseUnitViewModel() 
         }
     }
 
-    override fun deleteUnit(unit: LengthUnitEntity) {
+    fun deleteUnit(unit: LengthUnitEntity) {
         launchIO { useCase.deleteUnit(unit) }
     }
 }
