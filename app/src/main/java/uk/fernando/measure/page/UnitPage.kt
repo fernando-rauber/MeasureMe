@@ -1,5 +1,6 @@
 package uk.fernando.measure.page
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,14 +22,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
 import uk.fernando.measure.R
-import uk.fernando.measure.component.MyAnimation
-import uk.fernando.measure.component.MyButton
-import uk.fernando.measure.component.MySwipeDelete
-import uk.fernando.measure.component.NavigationBarTop
+import uk.fernando.measure.component.*
 import uk.fernando.measure.component.unit.UnitCard
 import uk.fernando.measure.enum.UnitType
 import uk.fernando.measure.ext.safeNav
 import uk.fernando.measure.navigation.Directions
+import uk.fernando.measure.theme.orange
 import uk.fernando.measure.theme.red
 import uk.fernando.measure.viewmodel.BaseUnitViewModel
 import uk.fernando.measure.viewmodel.UnitViewModel
@@ -89,12 +88,7 @@ fun MeasureList(viewModel: BaseUnitViewModel, addUnitClick: () -> Unit) {
 
         // Loading
         MyAnimation(viewModel.loading.value) {
-            CircularProgressIndicator(
-                strokeWidth = 5.dp,
-                modifier = Modifier
-                    .offset(y = (-70).dp)
-                    .fillMaxWidth(0.2f)
-            )
+            MyLoadingSpinner()
         }
 
         // Content
@@ -155,7 +149,11 @@ private fun UnitList(viewModel: BaseUnitViewModel, addUnitClick: () -> Unit) {
         item {
             MyButton(
                 modifier = Modifier.padding(top = 10.dp),
-                onClick = addUnitClick, text = "+ Add Unit"
+                borderStroke = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
+                color = Color.White,
+                textColor = orange,
+                onClick = addUnitClick,
+                text = stringResource(R.string.add_unit_action)
             )
         }
     }

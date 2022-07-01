@@ -9,6 +9,7 @@
     // Unit Page
     <string name="empty_list_message">Add two or more to start to convert</string>
     <string name="add_unit_action">+ Add Unit</string>
+    <string name="add_all_unit_message">You have added all available units</string>
 
     // Settings
     <string name="settings_title">Settings</string>

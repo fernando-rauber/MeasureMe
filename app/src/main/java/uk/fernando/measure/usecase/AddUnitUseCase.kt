@@ -1,6 +1,8 @@
 package uk.fernando.measure.usecase
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import uk.fernando.measure.database.entity.LengthUnitEntity
 import uk.fernando.measure.datastore.PrefsStore
@@ -8,17 +10,27 @@ import uk.fernando.measure.enum.UnitMeasure
 import uk.fernando.measure.enum.UnitType
 import uk.fernando.measure.ext.roundOffDecimal
 import uk.fernando.measure.repository.AddUnitRepository
+import uk.fernando.measure.util.Resource
 
 class AddUnitUseCase(private val repository: AddUnitRepository, private val prefs: PrefsStore) {
 
-    suspend fun getAvailableUnitList(type: Int): List<LengthUnitEntity> {
-        val dbUnitIDList = repository.getUnitIDListByType(type)
+    suspend fun getAvailableUnitList(type: Int): Flow<Resource<List<LengthUnitEntity>>> = flow {
+        try {
+            emit(Resource.Loading(true))
+            val dbUnitIDList = repository.getUnitIDListByType(type)
 
-        return when (UnitType.getByValue(type)) {
-            UnitType.LENGTH -> lengthUnits.filter { !dbUnitIDList.contains(it.id) }
-            UnitType.WEIGHT -> weightUnits.filter { !dbUnitIDList.contains(it.id) }
-            UnitType.TEMPERATURE -> temperatureUnits.filter { !dbUnitIDList.contains(it.id) }
-            else -> weightUnits.filter { !dbUnitIDList.contains(it.id) }
+            val availableUnits = when (UnitType.getByValue(type)) {
+                UnitType.LENGTH -> lengthUnits.filter { !dbUnitIDList.contains(it.id) }
+                UnitType.WEIGHT -> weightUnits.filter { !dbUnitIDList.contains(it.id) }
+                UnitType.TEMPERATURE -> temperatureUnits.filter { !dbUnitIDList.contains(it.id) }
+                else -> weightUnits.filter { !dbUnitIDList.contains(it.id) }
+            }
+
+            emit(Resource.Success(availableUnits))
+            emit(Resource.Loading(false))
+        } catch (e: Exception) {
+            emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
+            emit(Resource.Loading(false))
         }
     }
 
