@@ -27,10 +27,8 @@ fun TemperaturePage(
         NavigationBar(navController, UnitType.TEMPERATURE)
 
         MeasureList(
-            modifier = Modifier
-                .padding(top = 20.dp)
-                .fillMaxSize(),
-            viewModel = viewModel
+            viewModel = viewModel,
+            addUnitClick = {}
         )
     }
 }

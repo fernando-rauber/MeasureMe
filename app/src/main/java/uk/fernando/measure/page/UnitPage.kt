@@ -6,9 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.key
@@ -17,10 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
 import uk.fernando.measure.R
+import uk.fernando.measure.component.MyAnimation
+import uk.fernando.measure.component.MyButton
 import uk.fernando.measure.component.MySwipeDelete
 import uk.fernando.measure.component.NavigationBarTop
 import uk.fernando.measure.component.unit.UnitCard
@@ -45,10 +47,8 @@ fun UnitPage(
         NavigationBar(navController, unitType)
 
         MeasureList(
-            modifier = Modifier
-                .padding(top = 20.dp)
-                .fillMaxSize(),
-            viewModel = viewModel
+            viewModel = viewModel,
+            addUnitClick = { navController.safeNav(Directions.addUnit.name.plus("/${unitType.value}")) }
         )
     }
 }
@@ -78,14 +78,42 @@ fun NavigationBar(navController: NavController, unitType: UnitType) {
         })
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MeasureList(modifier: Modifier, viewModel: BaseUnitViewModel) {
-    LazyColumn(
-        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 32.dp),
-        modifier = modifier
+fun MeasureList(viewModel: BaseUnitViewModel, addUnitClick: () -> Unit) {
+    Box(
+        Modifier
+            .fillMaxSize()
+            .padding(top = 20.dp),
+        contentAlignment = Alignment.Center
     ) {
 
+        // Loading
+        MyAnimation(viewModel.loading.value) {
+            CircularProgressIndicator(
+                strokeWidth = 5.dp,
+                modifier = Modifier
+                    .offset(y = (-70).dp)
+                    .fillMaxWidth(0.2f)
+            )
+        }
+
+        // Content
+        MyAnimation(!viewModel.loading.value) {
+            if (viewModel.unitList.value.isEmpty())
+                EmptyUnitListMessage(addUnitClick)
+            else
+                UnitList(viewModel, addUnitClick)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+private fun UnitList(viewModel: BaseUnitViewModel, addUnitClick: () -> Unit) {
+    LazyColumn(
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 32.dp),
+        modifier = Modifier.fillMaxSize()
+    ) {
         items(viewModel.unitList.value) { unit ->
             key(unit.id, unit.date.time) {
                 MySwipeDelete(
@@ -123,5 +151,35 @@ fun MeasureList(modifier: Modifier, viewModel: BaseUnitViewModel) {
                 )
             }
         }
+
+        item {
+            MyButton(
+                modifier = Modifier.padding(top = 10.dp),
+                onClick = addUnitClick, text = "+ Add Unit"
+            )
+        }
+    }
+}
+
+@Composable
+private fun EmptyUnitListMessage(addUnitClick: () -> Unit) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(0.6f)
+                .padding(bottom = 15.dp),
+            text = stringResource(R.string.empty_list_message),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground,
+            textAlign = TextAlign.Center
+        )
+        MyButton(
+            modifier = Modifier
+                .padding(16.dp)
+                .defaultMinSize(minHeight = 50.dp),
+            onClick = addUnitClick,
+            text = stringResource(R.string.add_unit_action)
+        )
     }
 }

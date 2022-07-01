@@ -11,6 +11,7 @@ import uk.fernando.measure.enum.UnitType
 abstract class BaseUnitViewModel : ViewModel() {
 
     val unitList = mutableStateOf(emptyList<LengthUnitEntity>())
+    val loading = mutableStateOf(false)
 
     open fun fetchUnitsByType(type: UnitType) {}
 
