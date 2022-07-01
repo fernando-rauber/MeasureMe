@@ -50,6 +50,15 @@ fun Int.getUnitTypeIcon(): Int {
     }
 }
 
+fun Int.getTitle(): Int {
+    return when (UnitType.getByValue(this)) {
+        UnitType.LENGTH -> R.string.length_title
+        UnitType.TEMPERATURE -> R.string.temperature_title
+        UnitType.WEIGHT -> R.string.weight_title
+        else -> R.string.volume_title
+    }
+}
+
 fun Int.getUnitName(): Int {
     return when (UnitMeasure.getByValue(this)) {
         KILOMETER -> R.string.kilometer

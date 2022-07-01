@@ -11,9 +11,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import uk.fernando.measure.component.MyBackground
 import uk.fernando.measure.component.NavigationBarBottom
 import uk.fernando.measure.navigation.Directions
@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val controller = rememberNavController()
+            val controller = rememberAnimatedNavController()
             val navBackStackEntry by controller.currentBackStackEntryAsState()
 
             MeasureMeTheme {
@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
 
                     MyBackground {
                         Column(modifier = Modifier.padding(padding)) {
-                            NavHost(
+                            AnimatedNavHost(
                                 navController = controller,
                                 startDestination = Directions.splash.name
                             ) {

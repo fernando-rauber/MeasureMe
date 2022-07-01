@@ -1,12 +1,18 @@
 package uk.fernando.measure.navigation
 
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
+import com.google.accompanist.navigation.animation.composable
 import uk.fernando.measure.enum.UnitType
 import uk.fernando.measure.navigation.Directions.UNIT_TYPE
-import uk.fernando.measure.page.*
+import uk.fernando.measure.page.AddUnitPage
+import uk.fernando.measure.page.SettingsPage
+import uk.fernando.measure.page.SplashPage
+import uk.fernando.measure.page.UnitPage
 
 
 @ExperimentalAnimationApi
@@ -14,18 +20,38 @@ fun NavGraphBuilder.buildGraph(navController: NavController) {
     composable(Directions.splash.name) {
         SplashPage(navController)
     }
-    composable(Directions.length.name) {
-        UnitPage(navController, UnitType.LENGTH)
-    }
-    composable(Directions.weight.name) {
+
+    composableSlideAnim(
+        leftDirection = null,
+        direction = Directions.length.name,
+        rightDirection = Directions.weight.name,
+        content = { UnitPage(navController, UnitType.LENGTH) }
+    )
+
+    composableSlideAnim(
+        leftDirection = Directions.length.name,
+        direction = Directions.weight.name,
+        rightDirection = Directions.temperature.name
+    ) {
         UnitPage(navController, UnitType.WEIGHT)
     }
-    composable(Directions.temperature.name) {
+
+    composableSlideAnim(
+        leftDirection = Directions.weight.name,
+        direction = Directions.temperature.name,
+        rightDirection = Directions.volume.name
+    ) {
         UnitPage(navController, UnitType.TEMPERATURE)
     }
-    composable(Directions.volume.name) {
+
+    composableSlideAnim(
+        leftDirection = Directions.temperature.name,
+        direction = Directions.volume.name,
+        rightDirection = null
+    ) {
         UnitPage(navController, UnitType.VOLUME)
     }
+
     composable(Directions.settings.name) {
         SettingsPage(navController)
     }
@@ -35,6 +61,27 @@ fun NavGraphBuilder.buildGraph(navController: NavController) {
             navController.popBackStack()
         else
             AddUnitPage(navController, unitType.toInt())
+    }
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+private fun NavGraphBuilder.composableSlideAnim(leftDirection: String?, direction: String, rightDirection: String?, content: @Composable () -> Unit) {
+    composable(direction,
+        enterTransition = {
+            when (initialState.destination.route) {
+                rightDirection -> slideIntoContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(700))
+                leftDirection -> slideIntoContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(700))
+                else -> null
+            }
+        },
+        exitTransition = {
+            when (targetState.destination.route) {
+                rightDirection -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(700))
+                leftDirection -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(700))
+                else -> null
+            }
+        }) {
+        content()
     }
 }
 

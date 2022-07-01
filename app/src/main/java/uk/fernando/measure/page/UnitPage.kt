@@ -28,6 +28,7 @@ import uk.fernando.measure.R
 import uk.fernando.measure.component.*
 import uk.fernando.measure.component.unit.UnitCard
 import uk.fernando.measure.enum.UnitType
+import uk.fernando.measure.ext.getTitle
 import uk.fernando.measure.ext.safeNav
 import uk.fernando.measure.navigation.Directions
 import uk.fernando.measure.theme.orange
@@ -56,7 +57,7 @@ fun UnitPage(
 
 @Composable
 fun NavigationBar(navController: NavController, unitType: UnitType) {
-    NavigationBarTop(title = R.string.length_title,
+    NavigationBarTop(title = unitType.value.getTitle(),
         rightIcon = {
             Row {
                 // add more measures units
@@ -152,7 +153,7 @@ private fun UnitList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
             MyButton(
                 modifier = Modifier.padding(top = 10.dp),
                 borderStroke = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
-                color = Color.White,
+                color = MaterialTheme.colorScheme.background,
                 textColor = orange,
                 onClick = addUnitClick,
                 text = stringResource(R.string.add_unit_action)
