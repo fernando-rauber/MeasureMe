@@ -28,10 +28,17 @@ fun Double.isInteger() = run {
         "$this"
 }
 
-fun Double.roundOffDecimal(): Double {
-    val df = DecimalFormat("#.###")
+fun Double.roundOffDecimal(pattern: String): Double {
+    val df = DecimalFormat(pattern)
     df.roundingMode = RoundingMode.CEILING
     return df.format(this).toDouble()
+}
+
+fun Int.getPatterDecimalFormat(): String {
+    return when (UnitType.getByValue(this)) {
+        UnitType.TEMPERATURE -> "#.##"
+        else -> "#.######"
+    }
 }
 
 fun Int.getUnitTypeIcon(): Int {

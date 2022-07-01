@@ -8,6 +8,7 @@ import uk.fernando.measure.database.entity.LengthUnitEntity
 import uk.fernando.measure.datastore.PrefsStore
 import uk.fernando.measure.enum.UnitMeasure
 import uk.fernando.measure.enum.UnitType
+import uk.fernando.measure.ext.getPatterDecimalFormat
 import uk.fernando.measure.ext.roundOffDecimal
 import uk.fernando.measure.repository.AddUnitRepository
 import uk.fernando.measure.util.Resource
@@ -37,7 +38,7 @@ class AddUnitUseCase(private val repository: AddUnitRepository, private val pref
     suspend fun insertUnit(unit: LengthUnitEntity) {
         withContext(Dispatchers.IO) {
 
-            val storedValue = when (UnitType.getByValue(unit.type)) {
+            val baseStoredValue = when (UnitType.getByValue(unit.type)) {
                 UnitType.LENGTH -> prefs.getLength()
                 UnitType.TEMPERATURE -> prefs.getTemperature()
                 UnitType.WEIGHT -> prefs.getWeight()
@@ -50,7 +51,9 @@ class AddUnitUseCase(private val repository: AddUnitRepository, private val pref
                 else -> 0.0
             }
 
-            unit.amount = ((unit.multiple * storedValue) + add).roundOffDecimal()
+            val newAmount = ((unit.multiple * baseStoredValue) + add)
+
+            unit.amount = newAmount.roundOffDecimal(unit.type.getPatterDecimalFormat())
 
             repository.insertUnit(unit)
         }

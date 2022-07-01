@@ -80,26 +80,33 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
 
             val amount = unit.amount.isInteger()
 
-            MyAnimation(!canEdit) {
-                Text(
-                    modifier = Modifier.noRippleClickable { canEdit = true },
-                    text = amount,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium
-                )
-            }
+            Box(
+                modifier = Modifier
+                    .weight(0.5f)
+                    .padding(end = 10.dp),
+                contentAlignment = Alignment.CenterEnd
+            ) {
 
-            MyAnimation(canEdit) {
-                MyTextField(
-                    value = amount,
-                    onDone = {
-                        onDone(it)
-                        canEdit = false
-                    },
-                    lostFocus = { canEdit = false }
-                )
-            }
+                MyAnimation(!canEdit) {
+                    Text(
+                        modifier = Modifier.noRippleClickable { canEdit = true },
+                        text = amount,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
 
+                MyAnimation(canEdit) {
+                    MyTextField(
+                        value = amount,
+                        onDone = {
+                            onDone(it)
+                            canEdit = false
+                        },
+                        lostFocus = { canEdit = false }
+                    )
+                }
+            }
 //            Divider(
 //                Modifier
 //                    .padding(horizontal = 5.dp)

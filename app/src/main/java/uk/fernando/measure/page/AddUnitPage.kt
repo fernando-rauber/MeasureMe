@@ -34,7 +34,7 @@ fun AddUnitPage(
     }
 
     Column {
-        NavigationBarTop(title = R.string.length_title,
+        NavigationBarTop(title = R.string.add_unit_title,
             leftIcon = R.drawable.ic_arrow_back,
             onLeftIconClick = { navController.popBackStack() }
         )

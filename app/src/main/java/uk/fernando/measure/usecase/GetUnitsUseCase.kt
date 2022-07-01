@@ -6,6 +6,7 @@ import uk.fernando.measure.database.entity.LengthUnitEntity
 import uk.fernando.measure.datastore.PrefsStore
 import uk.fernando.measure.enum.UnitMeasure
 import uk.fernando.measure.enum.UnitType
+import uk.fernando.measure.ext.getPatterDecimalFormat
 import uk.fernando.measure.ext.roundOffDecimal
 import uk.fernando.measure.repository.UnitRepository
 import uk.fernando.measure.util.Resource
@@ -27,7 +28,7 @@ class GetUnitsUseCase(private val repository: UnitRepository, private val prefs:
     }
 
     suspend fun updateAmount(unit: LengthUnitEntity, unitList: List<LengthUnitEntity>): List<LengthUnitEntity> {
-       // Temperature acts different than others units
+        // Temperature acts different than others units
         val baseUnit = when (UnitMeasure.getByValue(unit.unit)) {
             UnitMeasure.FAHRENHEIT -> (unit.amount - 32.0) * 0.55555555
             UnitMeasure.KELVIN -> unit.amount - 273.15
@@ -41,8 +42,9 @@ class GetUnitsUseCase(private val repository: UnitRepository, private val prefs:
                 UnitMeasure.KELVIN -> 273.15
                 else -> 0.0
             }
+            val newAmount = ((u.multiple * baseUnit) + add)
 
-            u.amount = ((u.multiple * baseUnit) + add).roundOffDecimal()
+            u.amount = newAmount.roundOffDecimal(u.type.getPatterDecimalFormat())
         }
 
         // Store so can use when add a new unit
