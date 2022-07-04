@@ -24,7 +24,7 @@ class AddUnitUseCase(private val repository: AddUnitRepository, private val pref
                 UnitType.LENGTH -> lengthUnits.filter { !dbUnitIDList.contains(it.id) }
                 UnitType.WEIGHT -> weightUnits.filter { !dbUnitIDList.contains(it.id) }
                 UnitType.TEMPERATURE -> temperatureUnits.filter { !dbUnitIDList.contains(it.id) }
-                else -> weightUnits.filter { !dbUnitIDList.contains(it.id) }
+                else -> volumeUnits.filter { !dbUnitIDList.contains(it.id) }
             }
 
             emit(Resource.Success(availableUnits))
@@ -98,6 +98,36 @@ class AddUnitUseCase(private val repository: AddUnitRepository, private val pref
             LengthUnitEntity(207, UnitMeasure.POUND.value, unitType, 2.2046244202, 2.2046244202),
             LengthUnitEntity(208, UnitMeasure.OUNCE.value, unitType, 35.273990723, 35.273990723),
             LengthUnitEntity(209, UnitMeasure.CARAT.value, unitType, 5000.0, 5000.0)
+        )
+    }
+
+    private val volumeUnits by lazy {
+        val unitType = UnitType.VOLUME.value
+        listOf(
+            LengthUnitEntity(300, UnitMeasure.LITER.value, unitType, 1.0, 1.0),
+            LengthUnitEntity(301, UnitMeasure.CUBIC_METER.value, unitType, 0.001, 0.001),
+//            LengthUnitEntity(301, UnitMeasure.CUBIC_KILOMETER.value, unitType, 0.001, 0.001),
+            LengthUnitEntity(303, UnitMeasure.CUBIC_CENTIMETER.value, unitType, 1000.0, 1000.0),
+            LengthUnitEntity(304, UnitMeasure.CUBIC_MILLIMETER.value, unitType, 1000000.0, 1000000.0),
+//            LengthUnitEntity(305, UnitMeasure.CUBIC_MILE.value, unitType, 0.00110231, 0.00110231),
+            LengthUnitEntity(306, UnitMeasure.CUBIC_YARD.value, unitType, 0.0013079506, 0.0013079506),
+            LengthUnitEntity(307, UnitMeasure.CUBIC_FOOT.value, unitType, 0.0353146667, 0.0353146667),
+            LengthUnitEntity(308, UnitMeasure.CUBIC_INCH.value, unitType, 61.023744095, 61.023744095),
+            LengthUnitEntity(309, UnitMeasure.MILLILITER.value, unitType, 1000.0, 1000.0),
+            LengthUnitEntity(310, UnitMeasure.US_GALLON.value, unitType, 0.2641721769, 0.2641721769),
+            LengthUnitEntity(311, UnitMeasure.US_QUART.value, unitType, 1.0566887074, 1.0566887074),
+            LengthUnitEntity(312, UnitMeasure.US_PINT.value, unitType, 2.1133774149, 2.1133774149),
+            LengthUnitEntity(313, UnitMeasure.US_CUP.value, unitType, 4.2267548297, 4.2267548297),
+            LengthUnitEntity(314, UnitMeasure.US_FLUID_OUNCE.value, unitType, 33.814038638, 33.814038638),
+            LengthUnitEntity(315, UnitMeasure.US_TABLE_SPOON.value, unitType, 67.628077276, 67.628077276),
+            LengthUnitEntity(316, UnitMeasure.US_TEA_SPOON.value, unitType, 202.88423183, 202.88423183),
+            LengthUnitEntity(317, UnitMeasure.IMPERIAL_GALLON.value, unitType, 0.2199692483, 0.2199692483),
+            LengthUnitEntity(318, UnitMeasure.IMPERIAL_QUART.value, unitType, 0.8798769932, 0.8798769932),
+            LengthUnitEntity(319, UnitMeasure.IMPERIAL_PINT.value, unitType, 1.7597539864, 1.7597539864),
+            LengthUnitEntity(320, UnitMeasure.IMPERIAL_CUP.value, unitType, 3.51951, 3.51951),
+            LengthUnitEntity(321, UnitMeasure.IMPERIAL_FLUID_OUNCE.value, unitType, 35.195079728, 35.195079728),
+            LengthUnitEntity(322, UnitMeasure.IMPERIAL_TABLE_SPOON.value, unitType, 56.312127565, 56.312127565),
+            LengthUnitEntity(323, UnitMeasure.IMPERIAL_TEA_SPOON.value, unitType, 168.93638269, 168.93638269)
         )
     }
 }

@@ -58,4 +58,29 @@
     <string name="pound">Pound</string>
     <string name="ounce">Ounce</string>
     <string name="carat">Carat</string>
+
+    <string name="cubit_meter">Cubit Meter</string>
+    <string name="cubit_kilometer">Cubit Kilometer</string>
+    <string name="cubit_centimeter">Cubit Centimeter</string>
+    <string name="cubit_millimeter">Cubit Millimeter</string>
+    <string name="cubit_mile">Cubit Mile</string>
+    <string name="cubit_yard">Cubit Yard</string>
+    <string name="cubit_foot">Cubit Foot</string>
+    <string name="cubit_inch">Cubit Inch</string>
+    <string name="liter">Liter</string>
+    <string name="milliliter">Milliliter</string>
+    <string name="us_gallon">US Gallon</string>
+    <string name="us_quart">US Quart</string>
+    <string name="us_pint">US Pint</string>
+    <string name="us_cup">US Cup</string>
+    <string name="us_fluid_ounce">US Fluid Ounce</string>
+    <string name="us_tablespoon">US Table Spoon</string>
+    <string name="us_teaspoon">US Tea Spoon</string>
+    <string name="imperial_gallon">Imperial Gallon</string>
+    <string name="imperial_quart">Imperial Quart</string>
+    <string name="imperial_pint">Imperial Pint</string>
+    <string name="imperial_cup">Imperial Cup</string>
+    <string name="imperial_fluid_ounce">Imperial Fluid Ounce</string>
+    <string name="imperial_tablespoon">Imperial Table Spoon</string>
+    <string name="imperial_teaspoon">Imperial Tea Spoon</string>
 </resources>

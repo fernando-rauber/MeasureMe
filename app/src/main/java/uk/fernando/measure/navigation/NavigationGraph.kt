@@ -17,7 +17,8 @@ import uk.fernando.measure.page.UnitPage
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.buildGraph(navController: NavController) {
-    composable(Directions.splash.name) {
+    composable(Directions.splash.name,
+        exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(700)) }) {
         SplashPage(navController)
     }
 
@@ -52,10 +53,18 @@ fun NavGraphBuilder.buildGraph(navController: NavController) {
         UnitPage(navController, UnitType.VOLUME)
     }
 
-    composable(Directions.settings.name) {
+    composable(Directions.settings.name,
+        enterTransition = { slideIntoContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(700)) },
+        exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(700)) }
+    ) {
         SettingsPage(navController)
     }
-    composable(Directions.addUnit.name.plus("/{$UNIT_TYPE}")) {
+
+    composable(Directions.addUnit.name.plus("/{$UNIT_TYPE}"),
+        enterTransition = { slideIntoContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(700)) },
+        exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(700)) }
+    ) {
+
         val unitType = it.arguments?.getString(UNIT_TYPE)
         if (unitType == null)
             navController.popBackStack()

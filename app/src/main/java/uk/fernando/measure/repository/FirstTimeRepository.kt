@@ -13,6 +13,7 @@ class FirstTimeRepository(private val dao: UnitDao) {
         dao.insertAll(lengthList)
         dao.insertAll(temperatureList)
         dao.insertAll(weightList)
+        dao.insertAll(volumeList)
     }
 
     private val lengthList by lazy {
@@ -22,7 +23,6 @@ class FirstTimeRepository(private val dao: UnitDao) {
             LengthUnitEntity(2, UnitMeasure.METER.value, unitType, 1000.0, 1000.0),
             LengthUnitEntity(7, UnitMeasure.MILE.value, unitType, 0.6213688756, 0.6213688756),
             LengthUnitEntity(9, UnitMeasure.FOOT.value, unitType, 3280.839895, 3280.839895),
-            LengthUnitEntity(10, UnitMeasure.INCH.value, unitType, 39370.07874, 39370.07874),
         )
     }
 
@@ -42,7 +42,16 @@ class FirstTimeRepository(private val dao: UnitDao) {
             LengthUnitEntity(201, UnitMeasure.GRAM.value, unitType, 1000.0, 1000.0),
             LengthUnitEntity(206, UnitMeasure.STONE.value, unitType, 0.157473, 0.157473),
             LengthUnitEntity(207, UnitMeasure.POUND.value, unitType, 2.2046244202, 2.2046244202),
-            LengthUnitEntity(208, UnitMeasure.OUNCE.value, unitType, 35.273990723, 35.273990723),
+        )
+    }
+
+    private val volumeList by lazy {
+        val unitType = UnitType.VOLUME.value
+        listOf(
+            LengthUnitEntity(300, UnitMeasure.LITER.value, unitType, 1.0, 1.0),
+            LengthUnitEntity(301, UnitMeasure.CUBIC_METER.value, unitType, 0.001, 0.001),
+            LengthUnitEntity(310, UnitMeasure.US_GALLON.value, unitType, 0.2641721769, 0.2641721769),
+            LengthUnitEntity(322, UnitMeasure.IMPERIAL_TABLE_SPOON.value, unitType, 56.312127565, 56.312127565),
         )
     }
 }
