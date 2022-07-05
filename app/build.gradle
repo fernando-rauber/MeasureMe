@@ -55,6 +55,8 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.8.0'
 //    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
 
+    implementation 'com.github.fernando-rauber:mylibrary:1.1'
+
     // Data Store
     implementation "androidx.datastore:datastore:1.0.0"
     implementation "androidx.datastore:datastore-preferences:1.0.0"

@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
 import uk.fernando.measure.R
+import uk.fernando.measure.component.MyAdBanner
 import uk.fernando.measure.component.MyAnimation
 import uk.fernando.measure.component.MyLoadingSpinner
 import uk.fernando.measure.component.NavigationBarTop
@@ -72,6 +73,8 @@ private fun UnitList(viewModel: AddUnitViewModel) {
                     }
                 }
         }
+
+        MyAdBanner(Modifier.align(Alignment.BottomCenter), unitId = R.string.ad_banner_add_unit)
     }
 }
 

@@ -54,7 +54,7 @@ fun UnitPage(
 }
 
 @Composable
-fun NavigationBar(navController: NavController, unitType: UnitType) {
+private fun NavigationBar(navController: NavController, unitType: UnitType) {
     NavigationBarTop(title = unitType.value.getTitle(),
         rightIcon = {
             Row {
@@ -97,6 +97,8 @@ fun MeasureList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
             else
                 UnitList(viewModel, addUnitClick)
         }
+
+        MyAdBanner(Modifier.align(Alignment.BottomCenter), unitId = R.string.ad_banner_unit)
     }
 }
 
