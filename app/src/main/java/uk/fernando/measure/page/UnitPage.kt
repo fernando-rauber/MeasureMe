@@ -63,7 +63,7 @@ fun NavigationBar(navController: NavController, unitType: UnitType) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_add),
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onBackground
+                        tint = Color.White
                     )
                 }
                 // Settings
@@ -71,7 +71,7 @@ fun NavigationBar(navController: NavController, unitType: UnitType) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_settings),
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onBackground
+                        tint = Color.White
                     )
                 }
             }

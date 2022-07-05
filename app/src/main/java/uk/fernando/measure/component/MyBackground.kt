@@ -8,7 +8,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import uk.fernando.measure.theme.orange
 
 @Composable
 fun MyBackground(content: @Composable () -> Unit) {
@@ -18,7 +17,6 @@ fun MyBackground(content: @Composable () -> Unit) {
                 .fillMaxWidth()
                 .fillMaxHeight(0.25f),
             shadowElevation = 4.dp,
-//            shape = RoundedCornerShape(bottomEndPercent = 70),
             color = MaterialTheme.colorScheme.primary,
             content = {}
         )

@@ -3,7 +3,6 @@ package uk.fernando.measure.component.unit
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -53,14 +52,14 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
     ) {
 
         Row(
-            Modifier.padding(start = 10.dp),
+            Modifier.padding(start = 7.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
             Icon(
                 modifier = Modifier
-                    .padding(vertical = 10.dp)
-                    .background(MaterialTheme.colorScheme.primary.copy(0.7f), CircleShape)
+                    .padding(vertical = 7.dp)
+                    .background(MaterialTheme.colorScheme.secondary.copy(0.6f), RoundedCornerShape(8.dp))
                     .padding(5.dp)
                     .size(36.dp),
                 painter = painterResource(unit.type.getUnitTypeIcon()),
@@ -95,13 +94,13 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
 
                         Divider(
                             modifier = Modifier
-                                .fillMaxHeight(0.8f)
+                                .fillMaxHeight(0.9f)
                                 .padding(start = 7.dp)
-                                .width(1.dp)
+                                .width(0.8.dp)
                         )
 
                         Icon(
-                            modifier = Modifier.padding(end = 3.dp),
+                            modifier = Modifier.padding(horizontal = 3.dp),
                             painter = painterResource(R.drawable.ic_calculator),
                             contentDescription = null
                         )

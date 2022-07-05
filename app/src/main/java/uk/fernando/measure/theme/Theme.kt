@@ -10,25 +10,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat.getInsetsController
 
 private val DarkColorScheme = darkColorScheme(
 
     primary = orange,
     background = dark,
+    secondary = blue,
     surface = lightDark,
-    onBackground = Color.White,
-    onSurface = Color.White,
-    primaryContainer = Color.White
+//    onBackground = Color.White,
+//    primaryContainer = Color.White
 )
 
 private val LightColorScheme = lightColorScheme(
 
-    primary = orange,
+    primary = orangeLight,
+    secondary = blueDark,
     surface = Color.White,
     background = whiteBackGround,
-    onBackground = Color.Black,
-    onSurfaceVariant = grey
+//    onBackground = Color.Black,
+//    onSurfaceVariant = grey
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -44,8 +45,7 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun MeasureMeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = true, // Dynamic color is available on Android 12+
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -56,8 +56,10 @@ fun MeasureMeTheme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
-            (view.context as Activity).window.statusBarColor = colorScheme.primary.toArgb()
-            ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
+            val window = (view.context as Activity).window
+            window.statusBarColor = colorScheme.primary.toArgb()
+
+            getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
 
