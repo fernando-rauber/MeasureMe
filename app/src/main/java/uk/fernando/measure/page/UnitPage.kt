@@ -122,7 +122,7 @@ private fun UnitList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
                                 .padding(top = 10.dp)
                                 .background(
                                     color = red,
-                                    shape = RoundedCornerShape(50)
+                                    shape = MaterialTheme.shapes.small
                                 )
 
                         ) {
@@ -153,7 +153,7 @@ private fun UnitList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
             MyButton(
                 modifier = Modifier.padding(top = 10.dp),
                 borderStroke = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
-                color = MaterialTheme.colorScheme.background,
+                color = MaterialTheme.colorScheme.surface,
                 textColor = orange,
                 onClick = addUnitClick,
                 text = stringResource(R.string.add_unit_action)

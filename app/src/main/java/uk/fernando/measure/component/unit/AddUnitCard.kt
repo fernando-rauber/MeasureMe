@@ -4,10 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,26 +25,32 @@ fun AddUnitCard(unit: LengthUnitEntity, onClick: () -> Unit) {
             .padding(top = 10.dp)
             .height(IntrinsicSize.Min)
             .fillMaxWidth(),
-        shadowElevation = 5.dp,
-        tonalElevation = 5.dp,
+        shadowElevation = 4.dp,
+        tonalElevation = 2.dp,
         shape = MaterialTheme.shapes.small
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
 
             Row(
                 Modifier
-                    .padding(10.dp)
+                    .padding(4.dp)
                     .weight(1f),
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
                 Icon(
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.onBackground.copy(0.1f), CircleShape)
-                        .padding(7.dp)
+                        .background(MaterialTheme.colorScheme.primary.copy(0.2f), CircleShape)
+                        .padding(4.dp)
                         .size(36.dp),
-                    painter = painterResource( unit.type.getUnitTypeIcon()),
+                    painter = painterResource(unit.type.getUnitTypeIcon()),
                     contentDescription = null
+                )
+
+                Divider(
+                    modifier = Modifier
+                        .fillMaxHeight(0.9f)
+                        .width(1.dp)
                 )
 
                 Text(
@@ -70,6 +73,7 @@ fun AddUnitCard(unit: LengthUnitEntity, onClick: () -> Unit) {
                         .padding(horizontal = 15.dp)
                         .align(Alignment.Center),
                     text = "ADD",
+                    style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Medium
                 )
             }

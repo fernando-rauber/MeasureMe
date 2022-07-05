@@ -8,10 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -32,6 +29,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import uk.fernando.measure.R
 import uk.fernando.measure.component.MyAnimation
 import uk.fernando.measure.database.entity.LengthUnitEntity
 import uk.fernando.measure.ext.getUnitName
@@ -41,29 +39,29 @@ import uk.fernando.measure.ext.noRippleClickable
 
 @Composable
 fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
-    var canEdit by remember { mutableStateOf(false) }
+    var isEditMode by remember { mutableStateOf(false) }
 
     Surface(
         modifier = Modifier
             .padding(top = 10.dp)
             .height(IntrinsicSize.Min)
-            .border(2.dp, if (canEdit) MaterialTheme.colorScheme.primary else Color.Transparent, RoundedCornerShape(50))
+            .border(2.dp, if (isEditMode) MaterialTheme.colorScheme.primary else Color.Transparent, MaterialTheme.shapes.small)
             .fillMaxWidth(),
-        shadowElevation = 5.dp,
-        tonalElevation = 5.dp,
-        shape = RoundedCornerShape(50)
+        shadowElevation = 4.dp,
+        tonalElevation = 2.dp,
+        shape = MaterialTheme.shapes.small
     ) {
 
         Row(
-            Modifier.padding(horizontal = 10.dp),
+            Modifier.padding(start = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
             Icon(
                 modifier = Modifier
                     .padding(vertical = 10.dp)
-                    .background(MaterialTheme.colorScheme.onBackground.copy(0.1f), CircleShape)
-                    .padding(7.dp)
+                    .background(MaterialTheme.colorScheme.primary.copy(0.7f), CircleShape)
+                    .padding(5.dp)
                     .size(36.dp),
                 painter = painterResource(unit.type.getUnitTypeIcon()),
                 contentDescription = null
@@ -71,11 +69,11 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
 
             Text(
                 modifier = Modifier
-                    .padding(horizontal = 10.dp)
+                    .padding(horizontal = 7.dp)
                     .weight(0.5f),
                 text = stringResource(unit.unit.getUnitName()),
                 style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Medium
             )
 
             val amount = unit.amount.isInteger()
@@ -83,42 +81,44 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
             Box(
                 modifier = Modifier
                     .weight(0.5f)
-                    .padding(end = 10.dp),
+                    .noRippleClickable { if (!isEditMode) isEditMode = true },
                 contentAlignment = Alignment.CenterEnd
             ) {
 
-                MyAnimation(!canEdit) {
-                    Text(
-                        modifier = Modifier.noRippleClickable { canEdit = true },
-                        text = amount,
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Medium
-                    )
+                MyAnimation(!isEditMode) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = amount,
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Medium
+                        )
+
+                        Divider(
+                            modifier = Modifier
+                                .fillMaxHeight(0.8f)
+                                .padding(start = 7.dp)
+                                .width(1.dp)
+                        )
+
+                        Icon(
+                            modifier = Modifier.padding(end = 3.dp),
+                            painter = painterResource(R.drawable.ic_calculator),
+                            contentDescription = null
+                        )
+                    }
                 }
 
-                MyAnimation(canEdit) {
+                MyAnimation(isEditMode) {
                     MyTextField(
                         value = amount,
                         onDone = {
                             onDone(it)
-                            canEdit = false
+                            isEditMode = false
                         },
-                        lostFocus = { canEdit = false }
+                        lostFocus = { isEditMode = false }
                     )
                 }
             }
-//            Divider(
-//                Modifier
-//                    .padding(horizontal = 5.dp)
-//                    .fillMaxHeight()
-//                    .width(1.dp)
-//            )
-//
-//            Text(
-//                text = "km",
-//                color = MaterialTheme.colorScheme.onSurface,
-//                style = MaterialTheme.typography.bodyMedium
-//            )
         }
     }
 }
@@ -148,6 +148,7 @@ private fun MyTextField(
     }
 
     BasicTextField(modifier = modifier
+        .padding(end = 5.dp)
         .focusRequester(focusRequester)
         .onFocusChanged {
             if (it.isFocused)
