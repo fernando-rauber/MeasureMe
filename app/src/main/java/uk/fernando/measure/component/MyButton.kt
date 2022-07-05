@@ -19,7 +19,7 @@ fun MyButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     text: String,
-    color: Color = orange,
+    color: Color = MaterialTheme.colorScheme.primary,
     textColor: Color = Color.White,
     fontSize: TextUnit = 17.sp,
     textModifier: Modifier = Modifier,

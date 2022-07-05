@@ -7,7 +7,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -49,7 +48,6 @@ fun SettingsPage(
         Column(
             Modifier
                 .padding(horizontal = 20.dp)
-                .padding(top = 20.dp)
                 .verticalScroll(rememberScrollState())
         ) {
 
@@ -133,6 +131,7 @@ private fun CustomSettingsResourcesCard(
     Surface(
         modifier = modifier,
         shape = MaterialTheme.shapes.small,
+        tonalElevation = 2.dp,
         shadowElevation = 4.dp
     ) {
         Row(
@@ -198,6 +197,7 @@ private fun CustomSettingsPremiumCard(
 ) {
     Surface(
         shape = MaterialTheme.shapes.small,
+        tonalElevation = 2.dp,
         shadowElevation = 4.dp
     ) {
         Row(

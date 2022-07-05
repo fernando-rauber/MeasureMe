@@ -2,9 +2,7 @@ package uk.fernando.measure.component
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -52,4 +50,6 @@ fun NavigationBarTop(
             }
         }
     }
+    
+    Spacer(modifier = Modifier.height(15.dp))
 }

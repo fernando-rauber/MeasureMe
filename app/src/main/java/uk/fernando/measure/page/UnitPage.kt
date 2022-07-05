@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -31,7 +30,6 @@ import uk.fernando.measure.enum.UnitType
 import uk.fernando.measure.ext.getTitle
 import uk.fernando.measure.ext.safeNav
 import uk.fernando.measure.navigation.Directions
-import uk.fernando.measure.theme.orange
 import uk.fernando.measure.theme.red
 import uk.fernando.measure.viewmodel.UnitViewModel
 
@@ -83,9 +81,7 @@ fun NavigationBar(navController: NavController, unitType: UnitType) {
 @Composable
 fun MeasureList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
     Box(
-        Modifier
-            .fillMaxSize()
-            .padding(top = 20.dp),
+        Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
 
@@ -154,7 +150,7 @@ private fun UnitList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
                 modifier = Modifier.padding(top = 10.dp),
                 borderStroke = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
                 color = MaterialTheme.colorScheme.surface,
-                textColor = orange,
+                textColor = MaterialTheme.colorScheme.primary,
                 onClick = addUnitClick,
                 text = stringResource(R.string.add_unit_action)
             )

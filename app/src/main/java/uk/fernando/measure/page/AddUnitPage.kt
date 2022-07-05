@@ -46,9 +46,7 @@ fun AddUnitPage(
 @Composable
 private fun UnitList(viewModel: AddUnitViewModel) {
     Box(
-        Modifier
-            .fillMaxSize()
-            .padding(top = 20.dp),
+        Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
 
