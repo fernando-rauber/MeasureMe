@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="uk.fernando.measure">
+    package="uk.fernando.convert">
 
     <application
-        android:name=".BaseApplication"
+        android:name="uk.fernando.convert.BaseApplication"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -20,7 +20,7 @@
             android:value="ca-app-pub-5791754615168338~7923137109" />
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name="uk.fernando.convert.activity.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MeasureMe"

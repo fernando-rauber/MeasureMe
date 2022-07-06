@@ -8,7 +8,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "uk.fernando.measure"
+        applicationId "uk.fernando.convert"
         minSdk 25
         targetSdk 32
         versionCode 1
@@ -53,9 +53,10 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.8.0'
-//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
 
-    implementation 'com.github.fernando-rauber:mylibrary:1.1'
+    implementation 'com.github.fernando-rauber.mylibrary:advertising:1.2'
+    implementation 'com.github.fernando-rauber.mylibrary:billing:1.2'
+    implementation 'com.github.fernando-rauber.mylibrary:logger:1.2'
 
     // Data Store
     implementation "androidx.datastore:datastore:1.0.0"
