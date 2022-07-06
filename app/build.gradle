@@ -26,6 +26,10 @@ android {
     }
 
     buildTypes {
+        all {
+            buildConfigField "String", "BILLING_PUBLIC_KEY", '"  "'
+        }
+
         debug {
             manifestPlaceholders["enableCrashReporting"] = false
             firebaseCrashlytics {
@@ -33,6 +37,7 @@ android {
                 mappingFileUploadEnabled false
             }
         }
+        
         release {
             minifyEnabled false
             manifestPlaceholders["enableCrashReporting"] = true
@@ -69,6 +74,8 @@ dependencies {
 
     // Firebase
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.11'
+
+    implementation "com.android.billingclient:billing-ktx:5.0.0"
 
     // Data Store
     implementation "androidx.datastore:datastore:1.0.0"

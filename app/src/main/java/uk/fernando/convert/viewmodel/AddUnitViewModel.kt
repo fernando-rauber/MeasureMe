@@ -19,7 +19,7 @@ class AddUnitViewModel(private val useCase: AddUnitUseCase) : BaseViewModel() {
             useCase.getAvailableUnitList(unitType).collect { result ->
                 when (result) {
                     is Resource.Success -> unitList.addAll(result.data ?: emptyList())
-                    is Resource.Error -> Log.e(TAG, result.message ?: "An unexpected error occured")
+                    is Resource.Error -> Log.e(TAG, result.message ?: "An unexpected error occurred")
                     is Resource.Loading -> loading.value = result.isLoading
                 }
             }

@@ -25,6 +25,7 @@ import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
 import uk.fernando.convert.BuildConfig
 import uk.fernando.convert.R
+import uk.fernando.convert.activity.MainActivity
 import uk.fernando.convert.component.NavigationBarTop
 import uk.fernando.convert.viewmodel.SettingsViewModel
 
@@ -63,13 +64,13 @@ fun SettingsPage(
                 subText = R.string.premium_subtext,
                 isPremium = isPremium.value,
             ) {
-//                        viewModel.requestPayment(context as MainActivity, context.isNetworkAvailable())
+                viewModel.requestPayment(context as MainActivity)
             }
 
             CustomSettingsResourcesCard(
                 modifier = Modifier.padding(vertical = 10.dp),
                 modifierRow = Modifier.clickable {
-//                            viewModel.restorePremium(context.isNetworkAvailable())
+                    viewModel.restorePremium()
                 },
                 text = R.string.restore_premium_action,
                 isChecked = false,
@@ -81,7 +82,7 @@ fun SettingsPage(
                 modifier = Modifier.padding(bottom = 10.dp),
                 modifierRow = Modifier
                     .clickable {
-                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(""))
+                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://app.websitepolicies.com/policies/view/7u94tia2"))
                         context.startActivity(browserIntent)
                     },
                 text = R.string.privacy_policy,
