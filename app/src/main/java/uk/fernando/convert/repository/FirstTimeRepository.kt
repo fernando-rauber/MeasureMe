@@ -6,14 +6,21 @@ import uk.fernando.convert.database.dao.UnitDao
 import uk.fernando.convert.database.entity.LengthUnitEntity
 import uk.fernando.convert.enum.UnitMeasure
 import uk.fernando.convert.enum.UnitType
+import uk.fernando.convert.ext.TAG
+import uk.fernando.logger.MyLogger
 
-class FirstTimeRepository(private val dao: UnitDao) {
+class FirstTimeRepository(private val dao: UnitDao, private val logger: MyLogger) {
 
     suspend fun setUpDatabase() = withContext(Dispatchers.IO) {
-        dao.insertAll(lengthList)
-        dao.insertAll(temperatureList)
-        dao.insertAll(weightList)
-        dao.insertAll(volumeList)
+        runCatching {
+            dao.insertAll(lengthList)
+            dao.insertAll(temperatureList)
+            dao.insertAll(weightList)
+            dao.insertAll(volumeList)
+        }.onFailure { e ->
+            logger.e(TAG, e.message.toString())
+            logger.addExceptionToCrashlytics(e)
+        }
     }
 
     private val lengthList by lazy {

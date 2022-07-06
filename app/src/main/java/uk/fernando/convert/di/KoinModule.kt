@@ -16,7 +16,13 @@ import uk.fernando.convert.repository.FirstTimeRepository
 import uk.fernando.convert.repository.UnitRepository
 import uk.fernando.convert.usecase.AddUnitUseCase
 import uk.fernando.convert.usecase.GetUnitsUseCase
-import uk.fernando.convert.viewmodel.*
+import uk.fernando.convert.viewmodel.AddUnitViewModel
+import uk.fernando.convert.viewmodel.SettingsViewModel
+import uk.fernando.convert.viewmodel.SplashViewModel
+import uk.fernando.convert.viewmodel.UnitViewModel
+import uk.fernando.logger.AndroidLogger
+import uk.fernando.logger.BuildConfig
+import uk.fernando.logger.MyLogger
 
 object KoinModule {
 
@@ -31,6 +37,7 @@ object KoinModule {
             return PrefsStoreImpl(app)
         }
 
+        single { getAndroidLogger() }
         single { provideDataStore(androidApplication()) }
     }
 
@@ -48,15 +55,15 @@ object KoinModule {
 
     private val repositoryModule: Module
         get() = module {
-            factory { FirstTimeRepository(get()) }
+            factory { FirstTimeRepository(get(), get()) }
             factory { UnitRepository(get()) }
             factory { AddUnitRepository(get()) }
         }
 
     private val useCaseModule: Module
         get() = module {
-            single { GetUnitsUseCase(get(), get()) }
-            single { AddUnitUseCase(get(), get()) }
+            single { GetUnitsUseCase(get(), get(), get()) }
+            single { AddUnitUseCase(get(), get(), get()) }
         }
 
     private val viewModelModule: Module
@@ -70,6 +77,12 @@ object KoinModule {
 
     private const val DB_NAME = "measure_me_fun.db"
 
+    private fun getAndroidLogger(): MyLogger {
+        return if (BuildConfig.BUILD_TYPE == "debug")
+            AndroidLogger(MyLogger.LogLevel.DEBUG)
+        else
+            AndroidLogger(MyLogger.LogLevel.ERROR)
+    }
 }
 
 

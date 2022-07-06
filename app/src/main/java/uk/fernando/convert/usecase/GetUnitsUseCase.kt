@@ -6,53 +6,67 @@ import uk.fernando.convert.database.entity.LengthUnitEntity
 import uk.fernando.convert.datastore.PrefsStore
 import uk.fernando.convert.enum.UnitMeasure
 import uk.fernando.convert.enum.UnitType
+import uk.fernando.convert.ext.TAG
 import uk.fernando.convert.ext.getPatterDecimalFormat
 import uk.fernando.convert.ext.roundOffDecimal
 import uk.fernando.convert.repository.UnitRepository
 import uk.fernando.convert.util.Resource
+import uk.fernando.logger.MyLogger
 
-class GetUnitsUseCase(private val repository: UnitRepository, private val prefs: PrefsStore) {
+class GetUnitsUseCase(
+    private val repository: UnitRepository,
+    private val prefs: PrefsStore,
+    private val logger: MyLogger
+) {
 
     suspend fun getUnitsByType(type: UnitType): Flow<Resource<List<LengthUnitEntity>>> = flow {
-        try {
+        runCatching {
             emit(Resource.Loading(true))
 
-            val units = repository.getUnitList(type)
-
+            repository.getUnitList(type)
+        }.onSuccess { units ->
             emit(Resource.Loading(false))
             emit(Resource.Success(units))
-        } catch (e: Exception) {
-            emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
+        }.onFailure { e ->
             emit(Resource.Loading(false))
+
+            logger.e(TAG, e.message.toString())
+            logger.addExceptionToCrashlytics(e)
         }
     }
 
     suspend fun updateAmount(unit: LengthUnitEntity, unitList: List<LengthUnitEntity>): List<LengthUnitEntity> {
-        // Temperature acts different than others units
-        val baseUnit = when (UnitMeasure.getByValue(unit.unit)) {
-            UnitMeasure.FAHRENHEIT -> (unit.amount - 32.0) * 0.55555555
-            UnitMeasure.KELVIN -> unit.amount - 273.15
-            UnitMeasure.CELSIUS -> unit.amount
-            else -> unit.amount / unit.multiple // any other unit
-        }
-
-        unitList.forEach { u ->
-            val add = when (UnitMeasure.getByValue(u.unit)) {
-                UnitMeasure.FAHRENHEIT -> 32.0
-                UnitMeasure.KELVIN -> 273.15
-                else -> 0.0
+        try {
+            // Temperature acts different than others units
+            val baseUnit = when (UnitMeasure.getByValue(unit.unit)) {
+                UnitMeasure.FAHRENHEIT -> (unit.amount - 32.0) * 0.55555555
+                UnitMeasure.KELVIN -> unit.amount - 273.15
+                UnitMeasure.CELSIUS -> unit.amount
+                else -> unit.amount / unit.multiple // any other unit
             }
-            val newAmount = ((u.multiple * baseUnit) + add)
 
-            u.amount = newAmount.roundOffDecimal(u.type.getPatterDecimalFormat())
+            unitList.forEach { u ->
+                val add = when (UnitMeasure.getByValue(u.unit)) {
+                    UnitMeasure.FAHRENHEIT -> 32.0
+                    UnitMeasure.KELVIN -> 273.15
+                    else -> 0.0
+                }
+                val newAmount = ((u.multiple * baseUnit) + add)
+
+                u.amount = newAmount.roundOffDecimal(u.type.getPatterDecimalFormat())
+            }
+
+            // Store so can use when add a new unit
+            storeAmount(unit.type, baseUnit)
+
+            repository.updateAll(unitList)
+
+            return unitList
+        } catch (e: Exception) {
+            logger.e(TAG, e.message.toString())
+            logger.addExceptionToCrashlytics(e)
+            return emptyList()
         }
-
-        // Store so can use when add a new unit
-        storeAmount(unit.type, baseUnit)
-
-        repository.updateAll(unitList)
-
-        return unitList
     }
 
     suspend fun deleteUnit(unit: LengthUnitEntity) {

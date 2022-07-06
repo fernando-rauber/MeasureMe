@@ -8,54 +8,67 @@ import uk.fernando.convert.database.entity.LengthUnitEntity
 import uk.fernando.convert.datastore.PrefsStore
 import uk.fernando.convert.enum.UnitMeasure
 import uk.fernando.convert.enum.UnitType
+import uk.fernando.convert.ext.TAG
 import uk.fernando.convert.ext.getPatterDecimalFormat
 import uk.fernando.convert.ext.roundOffDecimal
 import uk.fernando.convert.repository.AddUnitRepository
 import uk.fernando.convert.util.Resource
+import uk.fernando.logger.MyLogger
 
-class AddUnitUseCase(private val repository: AddUnitRepository, private val prefs: PrefsStore) {
+class AddUnitUseCase(
+    private val repository: AddUnitRepository,
+    private val prefs: PrefsStore,
+    private val logger: MyLogger
+) {
 
     suspend fun getAvailableUnitList(type: Int): Flow<Resource<List<LengthUnitEntity>>> = flow {
-        try {
+        runCatching {
             emit(Resource.Loading(true))
             val dbUnitIDList = repository.getUnitIDListByType(type)
 
-            val availableUnits = when (UnitType.getByValue(type)) {
+            when (UnitType.getByValue(type)) {
                 UnitType.LENGTH -> lengthUnits.filter { !dbUnitIDList.contains(it.id) }
                 UnitType.WEIGHT -> weightUnits.filter { !dbUnitIDList.contains(it.id) }
                 UnitType.TEMPERATURE -> temperatureUnits.filter { !dbUnitIDList.contains(it.id) }
                 else -> volumeUnits.filter { !dbUnitIDList.contains(it.id) }
             }
-
+        }.onSuccess { availableUnits ->
+            emit(Resource.Loading(false))
             emit(Resource.Success(availableUnits))
+        }.onFailure { e ->
             emit(Resource.Loading(false))
-        } catch (e: Exception) {
-            emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
-            emit(Resource.Loading(false))
+
+            logger.e(TAG, e.message.toString())
+            logger.addExceptionToCrashlytics(e)
         }
     }
 
     suspend fun insertUnit(unit: LengthUnitEntity) {
         withContext(Dispatchers.IO) {
 
-            val baseStoredValue = when (UnitType.getByValue(unit.type)) {
-                UnitType.LENGTH -> prefs.getLength()
-                UnitType.TEMPERATURE -> prefs.getTemperature()
-                UnitType.WEIGHT -> prefs.getWeight()
-                else -> prefs.getVolume()
+            runCatching {
+                val baseStoredValue = when (UnitType.getByValue(unit.type)) {
+                    UnitType.LENGTH -> prefs.getLength()
+                    UnitType.TEMPERATURE -> prefs.getTemperature()
+                    UnitType.WEIGHT -> prefs.getWeight()
+                    else -> prefs.getVolume()
+                }
+
+                val additionalAmount = when (UnitMeasure.getByValue(unit.unit)) {
+                    UnitMeasure.FAHRENHEIT -> 32.0
+                    UnitMeasure.KELVIN -> 273.15
+                    else -> 0.0
+                }
+
+                val newAmount = ((unit.multiple * baseStoredValue) + additionalAmount)
+
+                unit.amount = newAmount.roundOffDecimal(unit.type.getPatterDecimalFormat())
+
+                repository.insertUnit(unit)
+            }.onFailure { e ->
+                logger.e(TAG, e.message.toString())
+                logger.addExceptionToCrashlytics(e)
             }
-
-            val add = when (UnitMeasure.getByValue(unit.unit)) {
-                UnitMeasure.FAHRENHEIT -> 32.0
-                UnitMeasure.KELVIN -> 273.15
-                else -> 0.0
-            }
-
-            val newAmount = ((unit.multiple * baseStoredValue) + add)
-
-            unit.amount = newAmount.roundOffDecimal(unit.type.getPatterDecimalFormat())
-
-            repository.insertUnit(unit)
         }
     }
 
