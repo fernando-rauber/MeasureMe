@@ -5,6 +5,7 @@ import android.app.Application
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
@@ -91,7 +92,7 @@ class SettingsUseCase(
             }
     }
 
-    fun getBillingState() = billingState
+    fun getBillingState() = billingState.asStateFlow()
 
     private suspend fun observeBillingState() {
         billingHelper?.getBillingState()?.collect { state ->

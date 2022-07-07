@@ -65,7 +65,7 @@ object KoinModule {
         get() = module {
             single { GetUnitsUseCase(get(), get(), get()) }
             single { AddUnitUseCase(get(), get(), get()) }
-            single { SettingsUseCase(get(), get(), get()) }
+            factory { SettingsUseCase(get(), get(), get()) }
         }
 
     private val viewModelModule: Module

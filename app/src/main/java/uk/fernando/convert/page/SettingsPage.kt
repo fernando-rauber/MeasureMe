@@ -30,6 +30,7 @@ import uk.fernando.convert.R
 import uk.fernando.convert.activity.MainActivity
 import uk.fernando.convert.component.NavigationBarTop
 import uk.fernando.convert.viewmodel.SettingsViewModel
+import uk.fernando.snackbar.CustomSnackBar
 
 @Composable
 fun SettingsPage(
@@ -46,82 +47,91 @@ fun SettingsPage(
         viewModel.initialiseBillingHelper()
     }
 
-    Column(Modifier.fillMaxSize()) {
+    Box {
+        Column(Modifier.fillMaxSize()) {
 
-        NavigationBarTop(title = R.string.settings_title,
-            leftIcon = R.drawable.ic_arrow_back,
-            onLeftIconClick = { navController.popBackStack() }
-        )
-
-        Column(
-            Modifier
-                .padding(horizontal = 20.dp)
-                .verticalScroll(rememberScrollState())
-        ) {
-
-            CustomSettingsResourcesCard(
-                text = R.string.dark_mode,
-                isChecked = isDarkMode.value,
-                onCheckedChange = viewModel::updateDarkMode
+            NavigationBarTop(title = R.string.settings_title,
+                leftIcon = R.drawable.ic_arrow_back,
+                onLeftIconClick = { navController.popBackStack() }
             )
 
-            // Only available on Android 12+
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            Column(
+                Modifier
+                    .padding(horizontal = 20.dp)
+                    .verticalScroll(rememberScrollState())
+            ) {
+
+                CustomSettingsResourcesCard(
+                    text = R.string.dark_mode,
+                    isChecked = isDarkMode.value,
+                    onCheckedChange = viewModel::updateDarkMode
+                )
+
+                // Only available on Android 12+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    CustomSettingsResourcesCard(
+                        modifier = Modifier.padding(vertical = 10.dp),
+                        text = R.string.dynamic_color,
+                        subText = R.string.dynamic_color_subtext,
+                        isChecked = isDynamicColor.value,
+                        onCheckedChange = viewModel::updateDynamicColor
+                    )
+                } else
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                CustomSettingsPremiumCard(
+                    text = R.string.premium,
+                    subText = R.string.premium_subtext,
+                    isPremium = isPremium.value,
+                ) {
+                    viewModel.requestPayment(context as MainActivity)
+                }
+
                 CustomSettingsResourcesCard(
                     modifier = Modifier.padding(vertical = 10.dp),
-                    text = R.string.dynamic_color,
-                    subText = R.string.dynamic_color_subtext,
-                    isChecked = isDynamicColor.value,
-                    onCheckedChange = viewModel::updateDynamicColor
-                )
-            } else
-                Spacer(modifier = Modifier.height(10.dp))
-
-            CustomSettingsPremiumCard(
-                text = R.string.premium,
-                subText = R.string.premium_subtext,
-                isPremium = isPremium.value,
-            ) {
-                viewModel.requestPayment(context as MainActivity)
-            }
-
-            CustomSettingsResourcesCard(
-                modifier = Modifier.padding(vertical = 10.dp),
-                modifierRow = Modifier.clickable {
-                    viewModel.restorePremium()
-                },
-                text = R.string.restore_premium_action,
-                isChecked = false,
-                onCheckedChange = {},
-                showArrow = false
-            )
-
-            CustomSettingsResourcesCard(
-                modifier = Modifier.padding(bottom = 10.dp),
-                modifierRow = Modifier
-                    .clickable {
-                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://app.websitepolicies.com/policies/view/7u94tia2"))
-                        context.startActivity(browserIntent)
+                    modifierRow = Modifier.clickable {
+                        viewModel.restorePremium()
                     },
-                text = R.string.privacy_policy,
-                isChecked = false,
-                onCheckedChange = {},
-                showArrow = true
-            )
+                    text = R.string.restore_premium_action,
+                    isChecked = false,
+                    onCheckedChange = {},
+                    showArrow = false
+                )
 
-            Spacer(Modifier.weight(0.9f))
+                CustomSettingsResourcesCard(
+                    modifier = Modifier.padding(bottom = 10.dp),
+                    modifierRow = Modifier
+                        .clickable {
+                            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://app.websitepolicies.com/policies/view/7u94tia2"))
+                            context.startActivity(browserIntent)
+                        },
+                    text = R.string.privacy_policy,
+                    isChecked = false,
+                    onCheckedChange = {},
+                    showArrow = true
+                )
 
-            Text(
-                text = stringResource(id = R.string.version, BuildConfig.VERSION_NAME),
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 15.dp),
-                textAlign = TextAlign.Center
-            )
+                Spacer(Modifier.weight(0.9f))
+
+                Text(
+                    text = stringResource(id = R.string.version, BuildConfig.VERSION_NAME),
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 15.dp),
+                    textAlign = TextAlign.Center
+                )
+            }
         }
+
+        SnackBarDisplay(viewModel)
     }
+}
+
+@Composable
+private fun BoxScope.SnackBarDisplay(viewModel: SettingsViewModel) {
+    CustomSnackBar(snackBarSealed = viewModel.snackBar.value)
 }
 
 @Composable
