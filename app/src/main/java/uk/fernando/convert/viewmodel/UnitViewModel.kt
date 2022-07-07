@@ -13,6 +13,7 @@ class UnitViewModel(private val useCase: GetUnitsUseCase) : BaseViewModel() {
 
     val unitList = mutableStateOf(emptyList<LengthUnitEntity>())
     val loading = mutableStateOf(false)
+    private var unitListCount = 0
 
     fun fetchUnitsByType(type: UnitType) {
         launchDefault {
@@ -22,6 +23,8 @@ class UnitViewModel(private val useCase: GetUnitsUseCase) : BaseViewModel() {
                     is Resource.Error -> Log.e(TAG, result.message ?: "An unexpected error occured")
                     is Resource.Loading -> loading.value = result.isLoading
                 }
+
+                unitListCount = unitList.value.count()
             }
         }
     }
@@ -37,6 +40,10 @@ class UnitViewModel(private val useCase: GetUnitsUseCase) : BaseViewModel() {
 
     fun deleteUnit(unit: LengthUnitEntity) {
         launchIO { useCase.deleteUnit(unit) }
+        unitListCount--
+
+        if (unitListCount <= 0)
+            unitList.value = emptyList()
     }
 }
 

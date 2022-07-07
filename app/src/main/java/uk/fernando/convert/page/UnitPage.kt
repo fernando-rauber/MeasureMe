@@ -90,12 +90,14 @@ fun MeasureList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
             MyLoadingSpinner()
         }
 
-        // Content
-        MyAnimation(!viewModel.loading.value) {
-            if (viewModel.unitList.value.isEmpty())
-                EmptyUnitListMessage(addUnitClick)
-            else
-                UnitList(viewModel, addUnitClick)
+        // Empty List Message
+        MyAnimation(!viewModel.loading.value && viewModel.unitList.value.isEmpty()) {
+            EmptyUnitListMessage(addUnitClick)
+        }
+
+        // List
+        MyAnimation(!viewModel.loading.value && viewModel.unitList.value.isNotEmpty()) {
+            UnitList(viewModel, addUnitClick)
         }
 
         MyAdBanner(Modifier.align(Alignment.BottomCenter), unitId = R.string.ad_banner_unit)
