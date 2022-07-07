@@ -14,32 +14,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.getViewModel
-import uk.fernando.advertising.AdInterstitial
-import uk.fernando.convert.activity.MainActivity
+import uk.fernando.convert.R
 import uk.fernando.convert.navigation.Directions
 import uk.fernando.convert.viewmodel.SplashViewModel
-import uk.fernando.convert.R
 
 @Composable
-fun SplashPage(
-    navController: NavController = NavController(LocalContext.current),
-    viewModel: SplashViewModel = getViewModel()
-) {
-
-    val fullScreenAd = AdInterstitial(LocalContext.current as MainActivity, stringResource(R.string.ad_full_page))
-
-    if (viewModel.showVideoAd.value)
-        fullScreenAd.showAdvert()
-
+fun SplashPage(navController: NavController = NavController(LocalContext.current), viewModel: SplashViewModel = getViewModel()) {
     Box(
         Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)) {
+    ) {
 
         Column(
             Modifier
@@ -75,7 +63,9 @@ fun SplashPage(
 
     LaunchedEffect(Unit) {
         viewModel.firstSetUp(isDarkMode = isDarkMode)
-        delay(2000L)
+
+        delay(1500L)
+
         currentOnTimeout()
     }
 }

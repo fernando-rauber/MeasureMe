@@ -3,7 +3,8 @@
 
     <string name="ad_banner_unit">ca-app-pub-5791754615168338/3726499506</string>
     <string name="ad_banner_add_unit">ca-app-pub-5791754615168338/4273294417</string>
-    <string name="ad_full_page">ca-app-pub-5791754615168338/3507007657</string>
+    <string name="ad_banner_settings">ca-app-pub-5791754615168338/3120914718</string>
+<!--    <string name="ad_full_page">ca-app-pub-5791754615168338/3507007657</string>-->
 
     <string name="length_title">Length</string>
     <string name="weight_title">Weight</string>

@@ -8,7 +8,7 @@ interface PrefsStore {
     fun isPremium(): Flow<Boolean>
     fun isDarkMode(): Flow<Boolean>
     fun isDynamicColor(): Flow<Boolean>
-    suspend fun showVideoAd(): Boolean
+    fun counterVideoAd(): Flow<Int>
 
     suspend fun getLength(): Double
     suspend fun getWeight(): Double
@@ -19,7 +19,7 @@ interface PrefsStore {
     suspend fun storePremium(value: Boolean)
     suspend fun storeDarkMode(value: Boolean)
     suspend fun storeDynamicColor(value: Boolean)
-    suspend fun addCounterShowVideoAd(value: Double)
+    suspend fun addCounterVideoAd(value: Int)
 
     suspend fun storeLength(value: Double)
     suspend fun storeWeight(value: Double)

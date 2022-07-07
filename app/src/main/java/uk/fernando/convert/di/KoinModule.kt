@@ -16,14 +16,14 @@ import uk.fernando.convert.repository.FirstTimeRepository
 import uk.fernando.convert.repository.UnitRepository
 import uk.fernando.convert.usecase.AddUnitUseCase
 import uk.fernando.convert.usecase.GetUnitsUseCase
-import uk.fernando.convert.usecase.settings.SettingsUseCase
+import uk.fernando.convert.usecase.PurchaseUseCase
 import uk.fernando.convert.viewmodel.AddUnitViewModel
 import uk.fernando.convert.viewmodel.SettingsViewModel
 import uk.fernando.convert.viewmodel.SplashViewModel
 import uk.fernando.convert.viewmodel.UnitViewModel
 import uk.fernando.logger.AndroidLogger
 import uk.fernando.convert.BuildConfig
-import uk.fernando.convert.usecase.ShowVideoAdUseCase
+import uk.fernando.convert.usecase.AddVideoAdCounterUseCase
 import uk.fernando.logger.MyLogger
 
 object KoinModule {
@@ -66,8 +66,8 @@ object KoinModule {
         get() = module {
             single { GetUnitsUseCase(get(), get(), get()) }
             single { AddUnitUseCase(get(), get(), get()) }
-            single { SettingsUseCase(get(), get(), get()) }
-            single { ShowVideoAdUseCase(get()) }
+            single { PurchaseUseCase(get(), get(), get()) }
+            single { AddVideoAdCounterUseCase(get()) }
         }
 
     private val viewModelModule: Module
@@ -76,7 +76,7 @@ object KoinModule {
             viewModel { UnitViewModel(get()) }
             viewModel { AddUnitViewModel(get()) }
             viewModel { SettingsViewModel(get(), get()) }
-            viewModel { SplashViewModel(get(), get(), get()) }
+            viewModel { SplashViewModel(get(), get()) }
         }
 
     private const val DB_NAME = "measure_me_fun.db"

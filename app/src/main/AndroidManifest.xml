@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="uk.fernando.convert">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name="uk.fernando.convert.BaseApplication"
         android:allowBackup="false"
@@ -17,7 +19,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5791754615168338~7923137109" />
+            android:value="ca-app-pub-5791754615168338~2811204783" />
 
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"

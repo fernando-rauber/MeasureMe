@@ -1,4 +1,4 @@
-package uk.fernando.convert.usecase.settings
+package uk.fernando.convert.usecase
 
 import android.app.Activity
 import android.app.Application
@@ -20,7 +20,7 @@ import uk.fernando.logger.MyLogger
 
 const val PREMIUM_PRODUCT = "convert_me_premium"
 
-class SettingsUseCase(
+class PurchaseUseCase(
     private val application: Application,
     private val prefs: PrefsStore,
     private val logger: MyLogger

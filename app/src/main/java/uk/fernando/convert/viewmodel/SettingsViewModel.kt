@@ -5,13 +5,13 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.*
 import uk.fernando.convert.datastore.PrefsStore
-import uk.fernando.convert.usecase.settings.SettingsUseCase
+import uk.fernando.convert.usecase.PurchaseUseCase
 import uk.fernando.convert.util.Resource
 import uk.fernando.snackbar.SnackBarSealed
 
 
 class SettingsViewModel(
-    private val useCase: SettingsUseCase,
+    private val useCase: PurchaseUseCase,
     val prefs: PrefsStore
 ) : BaseViewModel() {
 

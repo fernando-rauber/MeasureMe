@@ -11,7 +11,7 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-//        MyAdvertising.setDeviceID(listOf("F8941E8AB78DA8CAD502FE0CE3ABF687"))
+        MyAdvertising.setDeviceID(listOf("F8941E8AB78DA8CAD502FE0CE3ABF687"))
         MyAdvertising.initialize(this)
 
         startKoin {
