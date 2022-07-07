@@ -52,7 +52,10 @@ fun SettingsPage(
 
             NavigationBarTop(title = R.string.settings_title,
                 leftIcon = R.drawable.ic_arrow_back,
-                onLeftIconClick = { navController.popBackStack() }
+                onLeftIconClick = {
+                    viewModel.snackBar.value = null
+                    navController.popBackStack()
+                }
             )
 
             Column(

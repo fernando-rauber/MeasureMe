@@ -22,7 +22,7 @@ import uk.fernando.convert.viewmodel.SettingsViewModel
 import uk.fernando.convert.viewmodel.SplashViewModel
 import uk.fernando.convert.viewmodel.UnitViewModel
 import uk.fernando.logger.AndroidLogger
-import uk.fernando.logger.BuildConfig
+import uk.fernando.convert.BuildConfig
 import uk.fernando.logger.MyLogger
 
 object KoinModule {
@@ -65,7 +65,7 @@ object KoinModule {
         get() = module {
             single { GetUnitsUseCase(get(), get(), get()) }
             single { AddUnitUseCase(get(), get(), get()) }
-            factory { SettingsUseCase(get(), get(), get()) }
+            single { SettingsUseCase(get(), get(), get()) }
         }
 
     private val viewModelModule: Module

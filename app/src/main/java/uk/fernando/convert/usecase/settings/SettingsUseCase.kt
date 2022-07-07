@@ -2,22 +2,21 @@ package uk.fernando.convert.usecase.settings
 
 import android.app.Activity
 import android.app.Application
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.launch
 import uk.fernando.billing.BillingHelper
 import uk.fernando.billing.BillingState
 import uk.fernando.convert.BuildConfig
+import uk.fernando.convert.R
 import uk.fernando.convert.datastore.PrefsStore
 import uk.fernando.convert.ext.TAG
 import uk.fernando.convert.ext.isNetworkAvailable
 import uk.fernando.convert.util.Resource
 import uk.fernando.logger.MyLogger
-import uk.fernando.convert.R
 
 const val PREMIUM_PRODUCT = "convert_me_premium"
 
@@ -31,16 +30,17 @@ class SettingsUseCase(
     private val billingState = MutableStateFlow<Resource<Int>?>(null)
     private var isPremium = false
 
-    suspend fun startInAppPurchaseJourney() {
+    fun startInAppPurchaseJourney(scope: CoroutineScope) {
         if (application.isNetworkAvailable()) {
-            withContext(Dispatchers.Default) {
+
+            scope.launch {
                 val isPremiumDS = prefs.isPremium().first()
                 isPremium = isPremiumDS
 
                 if (!isPremium) {
                     billingHelper = BillingHelper.getInstance(
                         application,
-                        this,
+                        scope,
                         arrayOf(PREMIUM_PRODUCT), // one only purchase
                         arrayOf(), // subscription
                         BuildConfig.BILLING_PUBLIC_KEY
@@ -52,22 +52,22 @@ class SettingsUseCase(
         }
     }
 
-    suspend fun requestPayment(activity: Activity) {
+    fun requestPayment(activity: Activity, scope: CoroutineScope) {
         if (!application.isNetworkAvailable()) {
             billingState.value = Resource.Error("", R.string.internet_required)
             return
         }
 
-        withContext(Dispatchers.Default) {
+        scope.launch {
             if (billingHelper == null) {
-                startInAppPurchaseJourney()
+                startInAppPurchaseJourney(scope)
                 delay(1000)
             }
             billingHelper?.launchBillingFlow(activity, PREMIUM_PRODUCT)
         }
     }
 
-    suspend fun restorePremium() {
+    fun restorePremium(scope: CoroutineScope) {
         if (!application.isNetworkAvailable()) {
             billingState.value = Resource.Error("", R.string.internet_required)
             return
@@ -76,11 +76,12 @@ class SettingsUseCase(
         if (isPremium)
             billingState.value = Resource.Success(R.string.restore_restored)
         else
-            withContext(Dispatchers.Default) {
+            scope.launch {
                 if (billingHelper == null) {
-                    startInAppPurchaseJourney()
+                    startInAppPurchaseJourney(scope)
                     delay(1000)
                 }
+
                 val isPurchased = billingHelper?.isPurchased(PREMIUM_PRODUCT)?.distinctUntilChanged()?.first()
 
                 if (isPurchased == true) {
@@ -92,7 +93,7 @@ class SettingsUseCase(
             }
     }
 
-    fun getBillingState() = billingState.asStateFlow()
+    fun getBillingState() = billingState
 
     private suspend fun observeBillingState() {
         billingHelper?.getBillingState()?.collect { state ->

@@ -3,6 +3,7 @@ package uk.fernando.convert.viewmodel
 import android.app.Activity
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import kotlinx.coroutines.*
 import uk.fernando.convert.datastore.PrefsStore
 import uk.fernando.convert.usecase.settings.SettingsUseCase
 import uk.fernando.convert.util.Resource
@@ -16,6 +17,10 @@ class SettingsViewModel(
 
     val snackBar: MutableState<SnackBarSealed?> = mutableStateOf(null)
 
+    private val scope = CoroutineScope(
+        Job() + Dispatchers.Main
+    )
+
     fun updateDarkMode(value: Boolean) {
         launchIO { prefs.storeDarkMode(value) }
     }
@@ -25,8 +30,9 @@ class SettingsViewModel(
     }
 
     fun initialiseBillingHelper() {
-        launchDefault {
-            useCase.startInAppPurchaseJourney()
+        useCase.startInAppPurchaseJourney(scope)
+
+        scope.launch {
 
             useCase.getBillingState().collect() { state ->
                 when (state) {
@@ -39,14 +45,14 @@ class SettingsViewModel(
     }
 
     fun requestPayment(activity: Activity) {
-        launchDefault {
-            useCase.requestPayment(activity)
-        }
+        useCase.requestPayment(activity, scope)
     }
 
     fun restorePremium() {
-        launchDefault {
-            useCase.restorePremium()
-        }
+        useCase.restorePremium(scope)
+    }
+
+    override fun onCleared() {
+        scope.cancel()
     }
 }
