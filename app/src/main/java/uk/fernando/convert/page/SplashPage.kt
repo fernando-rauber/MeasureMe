@@ -1,8 +1,11 @@
 package uk.fernando.convert.page
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -10,19 +13,33 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.getViewModel
+import uk.fernando.advertising.AdInterstitial
+import uk.fernando.convert.activity.MainActivity
 import uk.fernando.convert.navigation.Directions
 import uk.fernando.convert.viewmodel.SplashViewModel
+import uk.fernando.convert.R
 
 @Composable
 fun SplashPage(
     navController: NavController = NavController(LocalContext.current),
     viewModel: SplashViewModel = getViewModel()
 ) {
-    Box(Modifier.fillMaxSize()) {
+
+    val fullScreenAd = AdInterstitial(LocalContext.current as MainActivity, stringResource(R.string.ad_full_page))
+
+    if (viewModel.showVideoAd.value)
+        fullScreenAd.showAdvert()
+
+    Box(
+        Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)) {
 
         Column(
             Modifier
@@ -32,13 +49,13 @@ fun SplashPage(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-//            Image(
-//                painter = painterResource(id = R.drawable.ic_logo),
-//                contentDescription = null,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .aspectRatio(1f)
-//            )
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
+            )
 
             CircularProgressIndicator(
                 strokeWidth = 5.dp,
@@ -58,7 +75,7 @@ fun SplashPage(
 
     LaunchedEffect(Unit) {
         viewModel.firstSetUp(isDarkMode = isDarkMode)
-        delay(1000L)
+        delay(2000L)
         currentOnTimeout()
     }
 }

@@ -23,6 +23,7 @@ import uk.fernando.convert.viewmodel.SplashViewModel
 import uk.fernando.convert.viewmodel.UnitViewModel
 import uk.fernando.logger.AndroidLogger
 import uk.fernando.convert.BuildConfig
+import uk.fernando.convert.usecase.ShowVideoAdUseCase
 import uk.fernando.logger.MyLogger
 
 object KoinModule {
@@ -66,6 +67,7 @@ object KoinModule {
             single { GetUnitsUseCase(get(), get(), get()) }
             single { AddUnitUseCase(get(), get(), get()) }
             single { SettingsUseCase(get(), get(), get()) }
+            single { ShowVideoAdUseCase(get()) }
         }
 
     private val viewModelModule: Module
@@ -74,7 +76,7 @@ object KoinModule {
             viewModel { UnitViewModel(get()) }
             viewModel { AddUnitViewModel(get()) }
             viewModel { SettingsViewModel(get(), get()) }
-            viewModel { SplashViewModel(get(), get()) }
+            viewModel { SplashViewModel(get(), get(), get()) }
         }
 
     private const val DB_NAME = "measure_me_fun.db"

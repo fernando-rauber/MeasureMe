@@ -32,6 +32,10 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         return dataStore.data.map { prefs -> prefs[PreferencesKeys.DYNAMIC_COLOR] ?: false }
     }
 
+    override suspend fun showVideoAd(): Boolean {
+        return dataStore.data.map { prefs -> prefs[PreferencesKeys.SHOW_VIDEO_AD] ?: 0.0 }.first() >= 5.0
+    }
+
     override suspend fun getLength(): Double {
         return dataStore.data.map { prefs -> prefs[PreferencesKeys.LENGTH] ?: 1.0 }.first()
     }
@@ -64,6 +68,11 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         dataStore.edit { prefs -> prefs[PreferencesKeys.DYNAMIC_COLOR] = value }
     }
 
+    override suspend fun addCounterShowVideoAd(value: Double) {
+        val currentAmount = dataStore.data.map { prefs -> prefs[PreferencesKeys.SHOW_VIDEO_AD] ?: 0.0 }.first()
+        dataStore.edit { prefs -> prefs[PreferencesKeys.SHOW_VIDEO_AD] = currentAmount + value }
+    }
+
     override suspend fun storeLength(value: Double) {
         dataStore.edit { prefs -> prefs[PreferencesKeys.LENGTH] = value }
     }
@@ -85,6 +94,7 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         val PREMIUM = booleanPreferencesKey("premium")
         val DARK_MODE = booleanPreferencesKey("dark_mode")
         val DYNAMIC_COLOR = booleanPreferencesKey("dynamic_color")
+        val SHOW_VIDEO_AD = doublePreferencesKey("show_video_ad")
 
         val LENGTH = doublePreferencesKey("length")
         val WEIGHT = doublePreferencesKey("weight")
