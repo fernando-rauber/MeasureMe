@@ -28,6 +28,10 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         return dataStore.data.map { prefs -> prefs[PreferencesKeys.DARK_MODE] ?: false }
     }
 
+    override fun isDynamicColor(): Flow<Boolean> {
+        return dataStore.data.map { prefs -> prefs[PreferencesKeys.DYNAMIC_COLOR] ?: false }
+    }
+
     override suspend fun getLength(): Double {
         return dataStore.data.map { prefs -> prefs[PreferencesKeys.LENGTH] ?: 1.0 }.first()
     }
@@ -56,6 +60,10 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         dataStore.edit { prefs -> prefs[PreferencesKeys.DARK_MODE] = value }
     }
 
+    override suspend fun storeDynamicColor(value: Boolean) {
+        dataStore.edit { prefs -> prefs[PreferencesKeys.DYNAMIC_COLOR] = value }
+    }
+
     override suspend fun storeLength(value: Double) {
         dataStore.edit { prefs -> prefs[PreferencesKeys.LENGTH] = value }
     }
@@ -76,6 +84,7 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         val FIRST_TIME = booleanPreferencesKey("first_time")
         val PREMIUM = booleanPreferencesKey("premium")
         val DARK_MODE = booleanPreferencesKey("dark_mode")
+        val DYNAMIC_COLOR = booleanPreferencesKey("dynamic_color")
 
         val LENGTH = doublePreferencesKey("length")
         val WEIGHT = doublePreferencesKey("weight")

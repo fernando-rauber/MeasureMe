@@ -34,8 +34,9 @@ class MainActivity : ComponentActivity() {
             val controller = rememberAnimatedNavController()
             val navBackStackEntry by controller.currentBackStackEntryAsState()
             val isDarkMode = dataStore.isDarkMode().collectAsState(true)
+            val isDynamicColor = dataStore.isDynamicColor().collectAsState(initial = false)
 
-            MeasureMeTheme(darkTheme = isDarkMode.value) {
+            MeasureMeTheme(darkTheme = isDarkMode.value, dynamicColor = isDynamicColor.value) {
 
                 Scaffold(
                     bottomBar = {

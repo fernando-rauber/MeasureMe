@@ -2,12 +2,7 @@ package uk.fernando.convert.viewmodel
 
 import android.app.Activity
 import android.util.Log
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.distinctUntilChanged
-import uk.fernando.billing.BillingState
-import uk.fernando.convert.R
 import uk.fernando.convert.datastore.PrefsStore
-import uk.fernando.convert.ext.TAG
 import uk.fernando.convert.usecase.settings.SettingsUseCase
 import uk.fernando.convert.util.Resource
 
@@ -17,8 +12,12 @@ class SettingsViewModel(
     val prefs: PrefsStore
 ) : BaseViewModel() {
 
-    fun updateDarkMode(isDarkMode: Boolean) {
-        launchIO { prefs.storeDarkMode(isDarkMode) }
+    fun updateDarkMode(value: Boolean) {
+        launchIO { prefs.storeDarkMode(value) }
+    }
+
+    fun updateDynamicColor(value: Boolean) {
+        launchIO { prefs.storeDynamicColor(value) }
     }
 
     fun initialiseBillingHelper() {

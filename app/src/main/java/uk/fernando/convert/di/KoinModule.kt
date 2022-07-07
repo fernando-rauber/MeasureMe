@@ -16,6 +16,7 @@ import uk.fernando.convert.repository.FirstTimeRepository
 import uk.fernando.convert.repository.UnitRepository
 import uk.fernando.convert.usecase.AddUnitUseCase
 import uk.fernando.convert.usecase.GetUnitsUseCase
+import uk.fernando.convert.usecase.settings.SettingsUseCase
 import uk.fernando.convert.viewmodel.AddUnitViewModel
 import uk.fernando.convert.viewmodel.SettingsViewModel
 import uk.fernando.convert.viewmodel.SplashViewModel
@@ -64,6 +65,7 @@ object KoinModule {
         get() = module {
             single { GetUnitsUseCase(get(), get(), get()) }
             single { AddUnitUseCase(get(), get(), get()) }
+            single { SettingsUseCase(get(), get(), get()) }
         }
 
     private val viewModelModule: Module

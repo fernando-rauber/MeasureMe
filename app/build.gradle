@@ -27,7 +27,7 @@ android {
 
     buildTypes {
         all {
-            buildConfigField "String", "BILLING_PUBLIC_KEY", '"  "'
+            buildConfigField "String", "BILLING_PUBLIC_KEY", '"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnnujx8sbnCDAzJSQ9VyzGMI+WYn6xBFBFczQHR93sFvX8uEOjlDOVGRz9e9gGOnM9o/fjdvZ9J7qRHnwqKP3V9OPBRlGrcCKfuveWtx2EhvH9RQR5PlHrJDefOwiyySp21MRNuDd7SyHhYm+8InXVGqhM7pNjphtux/r1MJWTExBZFWoYWYoIRoxcJONP7LGo09yfAOpWwpe8xNBDapeNORY4Zhjit4HygXsf24K34mm937hQqGtqbdBuq+JDT5+ODHwq+n8Qng5xSSvuQ/KFgvozBd/WYBvawvpGjSMkMdNWUOO8XZCiuTTH85Jub6XjwhSjGAVyh6BowXw4JLoUQIDAQAB"'
         }
 
         debug {

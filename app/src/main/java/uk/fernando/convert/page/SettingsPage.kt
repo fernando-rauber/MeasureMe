@@ -2,6 +2,7 @@ package uk.fernando.convert.page
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -10,6 +11,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,6 +40,11 @@ fun SettingsPage(
     val context = LocalContext.current
     val isDarkMode = viewModel.prefs.isDarkMode().collectAsState(initial = false)
     val isPremium = viewModel.prefs.isPremium().collectAsState(initial = false)
+    val isDynamicColor = viewModel.prefs.isDynamicColor().collectAsState(initial = false)
+
+    LaunchedEffect(Unit) {
+        viewModel.initialiseBillingHelper()
+    }
 
     Column(Modifier.fillMaxSize()) {
 
@@ -53,11 +60,22 @@ fun SettingsPage(
         ) {
 
             CustomSettingsResourcesCard(
-                modifier = Modifier.padding(bottom = 10.dp),
                 text = R.string.dark_mode,
                 isChecked = isDarkMode.value,
                 onCheckedChange = viewModel::updateDarkMode
             )
+
+            // Only available on Android 12+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                CustomSettingsResourcesCard(
+                    modifier = Modifier.padding(vertical = 10.dp),
+                    text = R.string.dynamic_color,
+                    subText = R.string.dynamic_color_subtext,
+                    isChecked = isDynamicColor.value,
+                    onCheckedChange = viewModel::updateDynamicColor
+                )
+            } else
+                Spacer(modifier = Modifier.height(10.dp))
 
             CustomSettingsPremiumCard(
                 text = R.string.premium,
