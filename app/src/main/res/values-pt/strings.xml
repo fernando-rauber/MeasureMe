@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="length_title">Comprimento</string>
+    <string name="weight_title">Peso</string>
+    <string name="volume_title">Volume</string>
+    <string name="temperature_title">Temperatura</string>
+
+    <string name="add_unit_title">Adicionar unidade</string>
+
+    // Unit Page
+    <string name="empty_list_message">Adicione duas ou mais unidades para converter</string>
+    <string name="add_unit_action">+ Adicionar unidade</string>
+    <string name="add_all_unit_message">Você adicionou todas as unidades disponíveis</string>
+
+    // Settings
+    <string name="settings_title">Configuração</string>
+    <string name="dark_mode">Modo Escuro</string>
+    <string name="dynamic_color">Cor Dinâmica</string>
+    <string name="dynamic_color_subtext">ConvertMe irá combinar as cores do seu papel de parede.</string>
+    <string name="premium">Premium</string>
+    <string name="premium_subtext">Remover anúncios.</string>
+    <string name="restore_premium_action">Restaurar Premium</string>
+    <string name="privacy_policy">Política de Privacidade</string>
+    <string name="version">Versão %s</string>
+
+    // Purchase
+    <string name="purchase_success">Obrigado, agora você é um usuário premium!</string>
+    <string name="purchase_error">Algo deu errado! Tente mais tarde</string>
+    <string name="purchased">Comprado</string>
+    <string name="restore_restored">Produto premium restaurado. Aproveite!</string>
+    <string name="restore_not_found">Produto premium não encontrado para restaurar.</string>
+    <string name="internet_required">Internet necessária para continuar com esta ação.</string>
+
+    // Units
+    <string name="kilometer">Quilômetro</string>
+    <string name="meter">Metro</string>
+    <string name="centimeter">Centímetro</string>
+    <string name="millimeter">Millimeter</string>
+    <string name="micrometer">Milímetro</string>
+    <string name="nanometer">Nanometro</string>
+    <string name="mile">Milha</string>
+    <string name="yard">Jarda</string>
+    <string name="foot">Pé</string>
+    <string name="inch">Polegada</string>
+    <string name="nautical_mile">Milha náutica</string>
+
+    <string name="celsius">Celsius</string>
+    <string name="kelvin">Kelvin</string>
+    <string name="fahrenheit">Fahrenheit</string>
+
+    <string name="kilogram">Quilograma</string>
+    <string name="gram">Grama</string>
+    <string name="milligram">Miligrama</string>
+    <string name="microgram">Micrograma</string>
+    <string name="imperial_ton">Tonelada Imperial</string>
+    <string name="us_ton">tonelada dos EUA</string>
+    <string name="tonne">Tonelada</string>
+    <string name="stone">Pedra</string>
+    <string name="pound">Libra</string>
+    <string name="ounce">Onça</string>
+    <string name="carat">Quilate</string>
+
+    <string name="cubic_meter">Metro cúbico</string>
+    <string name="cubic_kilometer">Quilômetro Cúbico</string>
+    <string name="cubic_centimeter">Centímetro cúbico</string>
+    <string name="cubic_millimeter">Milímetro Cúbico</string>
+    <string name="cubic_mile">Milha Cúbica</string>
+    <string name="cubic_yard">Jarda Cúbico</string>
+    <string name="cubic_foot">Pé cúbico</string>
+    <string name="cubic_inch">Polegada cúbica</string>
+    <string name="liter">Litro</string>
+    <string name="milliliter">Mililitro</string>
+    <string name="us_gallon">Galão Americano</string>
+    <string name="us_quart">Quart Americano</string>
+    <string name="us_pint">Caneca Americana</string>
+    <string name="us_cup">Copo Americana</string>
+    <string name="us_fluid_ounce">Onça Fluida Americana</string>
+    <string name="us_tablespoon">Colher de mesa Americana</string>
+    <string name="us_teaspoon">Colher de chá Americana</string>
+    <string name="imperial_gallon">Galão Imperial</string>
+    <string name="imperial_quart">Quart Imperial</string>
+    <string name="imperial_pint">Caneca Imperial</string>
+    <string name="imperial_cup">Copo Imperial</string>
+    <string name="imperial_fluid_ounce">Onça Fluida Imperial</string>
+    <string name="imperial_tablespoon">Colher de mesa Imperial</string>
+    <string name="imperial_teaspoon">Colher de chá Imperial</string>
+
+</resources>

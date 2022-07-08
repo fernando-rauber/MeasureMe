@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">ConvertMe</string>
+    <string name="app_name" translatable="false">ConvertMe</string>
 
-    <string name="ad_banner_unit">ca-app-pub-5791754615168338/3726499506</string>
-    <string name="ad_banner_add_unit">ca-app-pub-5791754615168338/4273294417</string>
+    <string name="ad_banner_unit" translatable="false">ca-app-pub-5791754615168338/3726499506</string>
+    <string name="ad_banner_add_unit" translatable="false">ca-app-pub-5791754615168338/4273294417</string>
 <!--    <string name="ad_full_page">ca-app-pub-5791754615168338/3507007657</string>-->
 
     <string name="length_title">Length</string>
@@ -22,7 +22,7 @@
     <string name="settings_title">Settings</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="dynamic_color">Dynamic Color</string>
-    <string name="dynamic_color_subtext">ConvertMe will match your background wallpaper colours.</string>
+    <string name="dynamic_color_subtext">ConvertMe will match your wallpaper colours.</string>
     <string name="premium">Premium</string>
     <string name="premium_subtext">Remove Ads.</string>
     <string name="restore_premium_action">Restore Premium</string>
@@ -33,7 +33,7 @@
     <string name="purchase_success">Thank you, You are now a premium user!</string>
     <string name="purchase_error">Something went wrong! Try it later</string>
     <string name="purchased">Purchased</string>
-    <string name="restore_restored">Premium Product Restored. Enjoy!</string>
+    <string name="restore_restored">Premium product restored. Enjoy!</string>
     <string name="restore_not_found">Premium product not found to restore.</string>
     <string name="internet_required">Internet required to continue with this action.</string>
 
@@ -66,14 +66,14 @@
     <string name="ounce">Ounce</string>
     <string name="carat">Carat</string>
 
-    <string name="cubit_meter">Cubit Meter</string>
-    <string name="cubit_kilometer">Cubit Kilometer</string>
-    <string name="cubit_centimeter">Cubit Centimeter</string>
-    <string name="cubit_millimeter">Cubit Millimeter</string>
-    <string name="cubit_mile">Cubit Mile</string>
-    <string name="cubit_yard">Cubit Yard</string>
-    <string name="cubit_foot">Cubit Foot</string>
-    <string name="cubit_inch">Cubit Inch</string>
+    <string name="cubic_meter">Cubic Meter</string>
+    <string name="cubic_kilometer">Cubic Kilometer</string>
+    <string name="cubic_centimeter">Cubic Centimeter</string>
+    <string name="cubic_millimeter">Cubic Millimeter</string>
+    <string name="cubic_mile">Cubic Mile</string>
+    <string name="cubic_yard">Cubic Yard</string>
+    <string name="cubic_foot">Cubic Foot</string>
+    <string name="cubic_inch">Cubic Inch</string>
     <string name="liter">Liter</string>
     <string name="milliliter">Milliliter</string>
     <string name="us_gallon">US Gallon</string>
