@@ -16,10 +16,11 @@ class SettingsViewModel(
 ) : BaseViewModel() {
 
     val snackBar: MutableState<SnackBarSealed?> = mutableStateOf(null)
+    private val scope = CoroutineScope(        Job() + Dispatchers.Main    )
 
-    private val scope = CoroutineScope(
-        Job() + Dispatchers.Main
-    )
+    init {
+        initialiseBillingHelper()
+    }
 
     fun updateDarkMode(value: Boolean) {
         launchIO { prefs.storeDarkMode(value) }
@@ -29,7 +30,7 @@ class SettingsViewModel(
         launchIO { prefs.storeDynamicColor(value) }
     }
 
-    fun initialiseBillingHelper() {
+   private fun initialiseBillingHelper() {
         useCase.startInAppPurchaseJourney(scope)
 
         scope.launch {

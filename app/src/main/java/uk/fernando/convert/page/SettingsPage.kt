@@ -43,9 +43,9 @@ fun SettingsPage(
     val isPremium = viewModel.prefs.isPremium().collectAsState(initial = false)
     val isDynamicColor = viewModel.prefs.isDynamicColor().collectAsState(initial = false)
 
-    LaunchedEffect(Unit) {
-        viewModel.initialiseBillingHelper()
-    }
+//    LaunchedEffect(Unit) {
+//        viewModel.initialiseBillingHelper()
+//    }
 
     Box {
         Column(Modifier.fillMaxSize()) {

@@ -87,9 +87,11 @@ fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
                 MyAnimation(!isEditMode) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
+                            modifier = Modifier.weight(1f),
                             text = amount,
                             style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium
+                            fontWeight = FontWeight.Medium,
+                            textAlign = TextAlign.End
                         )
 
                         Divider(

@@ -59,7 +59,7 @@ fun MeasureMeTheme(
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
 
-            getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+            getInsetsController(window, view).isAppearanceLightStatusBars = false //darkTheme
         }
     }
 
