@@ -1,7 +1,6 @@
 package uk.fernando.convert.viewmodel
 
 import android.app.Activity
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.*
@@ -20,7 +19,6 @@ class SettingsViewModel(
     private val scope = CoroutineScope(Job() + Dispatchers.Main)
 
     init {
-        Log.e("&&&&", "initialiseBillingHelper ")
         initialiseBillingHelper()
     }
 

@@ -66,6 +66,7 @@ fun Int.getUnitName(): Int {
         MICROGRAM -> R.string.microgram
         IMPERIAL_TON -> R.string.imperial_ton
         US_TON -> R.string.us_ton
+        TONNE -> R.string.tonne
         STONE -> R.string.stone
         POUND -> R.string.pound
         OUNCE -> R.string.ounce

@@ -11,7 +11,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,15 +36,10 @@ fun SettingsPage(
     navController: NavController = NavController(LocalContext.current),
     viewModel: SettingsViewModel = getViewModel()
 ) {
-
     val context = LocalContext.current
     val isDarkMode = viewModel.prefs.isDarkMode().collectAsState(initial = false)
     val isPremium = viewModel.prefs.isPremium().collectAsState(initial = false)
     val isDynamicColor = viewModel.prefs.isDynamicColor().collectAsState(initial = false)
-
-//    LaunchedEffect(Unit) {
-//        viewModel.initialiseBillingHelper()
-//    }
 
     Box {
         Column(Modifier.fillMaxSize()) {

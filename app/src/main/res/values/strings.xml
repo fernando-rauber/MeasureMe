@@ -14,6 +14,7 @@
 
     // Unit Page
     <string name="empty_list_message">Add two or more units to convert</string>
+<!--    <string name="rounded_amount_message">Decimal amounts have been rounded-up</string>-->
     <string name="add_unit_action">+ Add Unit</string>
     <string name="add_all_unit_message">You have added all available units</string>
 
@@ -59,6 +60,7 @@
     <string name="microgram">Microgram</string>
     <string name="imperial_ton">Imperial Ton</string>
     <string name="us_ton">US Ton</string>
+    <string name="tonne">Tonne</string>
     <string name="stone">Stone</string>
     <string name="pound">Pound</string>
     <string name="ounce">Ounce</string>
