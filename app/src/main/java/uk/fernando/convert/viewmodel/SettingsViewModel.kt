@@ -1,6 +1,7 @@
 package uk.fernando.convert.viewmodel
 
 import android.app.Activity
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.*
@@ -16,9 +17,10 @@ class SettingsViewModel(
 ) : BaseViewModel() {
 
     val snackBar: MutableState<SnackBarSealed?> = mutableStateOf(null)
-    private val scope = CoroutineScope(        Job() + Dispatchers.Main    )
+    private val scope = CoroutineScope(Job() + Dispatchers.Main)
 
     init {
+        Log.e("&&&&", "initialiseBillingHelper ")
         initialiseBillingHelper()
     }
 
@@ -30,7 +32,7 @@ class SettingsViewModel(
         launchIO { prefs.storeDynamicColor(value) }
     }
 
-   private fun initialiseBillingHelper() {
+    private fun initialiseBillingHelper() {
         useCase.startInAppPurchaseJourney(scope)
 
         scope.launch {
@@ -55,5 +57,6 @@ class SettingsViewModel(
 
     override fun onCleared() {
         scope.cancel()
+        useCase.getBillingState().value = Resource.Loading(false) // Just to clear the last message
     }
 }
