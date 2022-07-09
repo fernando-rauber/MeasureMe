@@ -3,7 +3,7 @@ package uk.fernando.convert.viewmodel
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import uk.fernando.convert.database.entity.LengthUnitEntity
+import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.ext.TAG
 import uk.fernando.convert.usecase.AddUnitUseCase
 import uk.fernando.convert.util.Resource
@@ -11,7 +11,7 @@ import uk.fernando.convert.util.Resource
 
 class AddUnitViewModel(private val useCase: AddUnitUseCase) : BaseViewModel() {
 
-    val unitList = mutableStateListOf<LengthUnitEntity>()
+    val unitList = mutableStateListOf<UnitEntity>()
     val loading = mutableStateOf(false)
 
     fun fetchAvailableUnits(unitType: Int) {
@@ -26,7 +26,7 @@ class AddUnitViewModel(private val useCase: AddUnitUseCase) : BaseViewModel() {
         }
     }
 
-    fun addUnit(unit: LengthUnitEntity) {
+    fun addUnit(unit: UnitEntity) {
         launchDefault {
             unitList.remove(unit)
 

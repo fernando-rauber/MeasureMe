@@ -16,13 +16,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import uk.fernando.convert.database.entity.LengthUnitEntity
+import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.ext.getUnitName
 import uk.fernando.convert.ext.getUnitTypeIcon
 import uk.fernando.convert.R
 
 @Composable
-fun AddUnitCard(unit: LengthUnitEntity, onClick: () -> Unit) {
+fun AddUnitCard(unit: UnitEntity, onClick: () -> Unit) {
     Surface(
         modifier = Modifier
             .padding(top = 10.dp)

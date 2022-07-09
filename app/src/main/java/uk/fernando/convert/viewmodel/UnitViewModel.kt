@@ -2,7 +2,7 @@ package uk.fernando.convert.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
-import uk.fernando.convert.database.entity.LengthUnitEntity
+import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.enum.UnitType
 import uk.fernando.convert.ext.TAG
 import uk.fernando.convert.usecase.GetUnitsUseCase
@@ -11,7 +11,7 @@ import uk.fernando.convert.util.Resource
 
 class UnitViewModel(private val useCase: GetUnitsUseCase) : BaseViewModel() {
 
-    val unitList = mutableStateOf(emptyList<LengthUnitEntity>())
+    val unitList = mutableStateOf(emptyList<UnitEntity>())
     val loading = mutableStateOf(false)
     private var unitListCount = 0
 
@@ -29,7 +29,7 @@ class UnitViewModel(private val useCase: GetUnitsUseCase) : BaseViewModel() {
         }
     }
 
-    fun updateUnit(unit: LengthUnitEntity) {
+    fun updateUnit(unit: UnitEntity) {
         launchDefault {
             val updatedList = useCase.updateAmount(unit, unitList.value)
 
@@ -38,7 +38,7 @@ class UnitViewModel(private val useCase: GetUnitsUseCase) : BaseViewModel() {
         }
     }
 
-    fun deleteUnit(unit: LengthUnitEntity) {
+    fun deleteUnit(unit: UnitEntity) {
         launchIO { useCase.deleteUnit(unit) }
         unitListCount--
 

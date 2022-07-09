@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.util.*
 
-@Entity(tableName = LengthUnitEntity.NAME)
-data class LengthUnitEntity(
+@Entity(tableName = UnitEntity.NAME)
+data class UnitEntity(
     @PrimaryKey
     val id: Int,
     val unit: Int,
@@ -17,6 +17,6 @@ data class LengthUnitEntity(
 ) : Serializable {
 
     companion object {
-        const val NAME = "length"
+        const val NAME = "unit"
     }
 }

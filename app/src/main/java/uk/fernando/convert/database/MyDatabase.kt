@@ -5,13 +5,13 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import uk.fernando.convert.database.converter.DateTypeConverter
 import uk.fernando.convert.database.dao.UnitDao
-import uk.fernando.convert.database.entity.LengthUnitEntity
+import uk.fernando.convert.database.entity.UnitEntity
 
 @TypeConverters(DateTypeConverter::class)
 @Database(
     version = DATABASE_VERSION,
     exportSchema = false,
-    entities = [LengthUnitEntity::class]
+    entities = [UnitEntity::class]
 )
 abstract class MyDatabase : RoomDatabase() {
 

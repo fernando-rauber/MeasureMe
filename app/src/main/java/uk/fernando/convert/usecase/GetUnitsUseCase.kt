@@ -2,7 +2,7 @@ package uk.fernando.convert.usecase
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import uk.fernando.convert.database.entity.LengthUnitEntity
+import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.datastore.PrefsStore
 import uk.fernando.convert.enum.UnitMeasure
 import uk.fernando.convert.enum.UnitType
@@ -19,7 +19,7 @@ class GetUnitsUseCase(
     private val logger: MyLogger
 ) {
 
-    suspend fun getUnitsByType(type: UnitType): Flow<Resource<List<LengthUnitEntity>>> = flow {
+    suspend fun getUnitsByType(type: UnitType): Flow<Resource<List<UnitEntity>>> = flow {
         runCatching {
             emit(Resource.Loading(true))
 
@@ -35,7 +35,7 @@ class GetUnitsUseCase(
         }
     }
 
-    suspend fun updateAmount(unit: LengthUnitEntity, unitList: List<LengthUnitEntity>): List<LengthUnitEntity> {
+    suspend fun updateAmount(unit: UnitEntity, unitList: List<UnitEntity>): List<UnitEntity> {
         try {
             // Temperature acts different than others units
             val baseUnit = when (UnitMeasure.getByValue(unit.unit)) {
@@ -69,7 +69,7 @@ class GetUnitsUseCase(
         }
     }
 
-    suspend fun deleteUnit(unit: LengthUnitEntity) {
+    suspend fun deleteUnit(unit: UnitEntity) {
         repository.deleteUnit(unit)
     }
 

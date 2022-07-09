@@ -3,7 +3,7 @@ package uk.fernando.convert.repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import uk.fernando.convert.database.dao.UnitDao
-import uk.fernando.convert.database.entity.LengthUnitEntity
+import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.enum.UnitType
 
 class UnitRepository(private val dao: UnitDao) {
@@ -12,13 +12,13 @@ class UnitRepository(private val dao: UnitDao) {
         dao.getUnitList(unit.value)
     }
 
-    suspend fun updateAll(list: List<LengthUnitEntity>) {
+    suspend fun updateAll(list: List<UnitEntity>) {
         withContext(Dispatchers.IO) {
             dao.updateAll(list)
         }
     }
 
-    suspend fun deleteUnit(unit: LengthUnitEntity) {
+    suspend fun deleteUnit(unit: UnitEntity) {
         withContext(Dispatchers.IO) {
             dao.deleteUnit(unit)
         }

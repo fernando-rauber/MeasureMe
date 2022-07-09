@@ -3,7 +3,7 @@ package uk.fernando.convert.repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import uk.fernando.convert.database.dao.UnitDao
-import uk.fernando.convert.database.entity.LengthUnitEntity
+import uk.fernando.convert.database.entity.UnitEntity
 
 class AddUnitRepository(private val dao: UnitDao) {
 
@@ -11,7 +11,7 @@ class AddUnitRepository(private val dao: UnitDao) {
         dao.getUnitIDListByType(type)
     }
 
-    suspend fun insertUnit(unit: LengthUnitEntity) {
+    suspend fun insertUnit(unit: UnitEntity) {
         withContext(Dispatchers.IO) {
             dao.insertUnit(unit)
         }

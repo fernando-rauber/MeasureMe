@@ -30,14 +30,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import uk.fernando.convert.R
 import uk.fernando.convert.component.MyAnimation
-import uk.fernando.convert.database.entity.LengthUnitEntity
+import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.ext.getUnitName
 import uk.fernando.convert.ext.getUnitTypeIcon
 import uk.fernando.convert.ext.isInteger
 import uk.fernando.convert.ext.noRippleClickable
 
 @Composable
-fun UnitCard(unit: LengthUnitEntity, onDone: (Double) -> Unit) {
+fun UnitCard(unit: UnitEntity, onDone: (Double) -> Unit) {
     var isEditMode by remember { mutableStateOf(false) }
 
     Surface(
