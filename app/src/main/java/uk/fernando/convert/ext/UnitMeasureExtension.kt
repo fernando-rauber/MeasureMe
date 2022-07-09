@@ -6,10 +6,12 @@ import uk.fernando.convert.enum.UnitMeasure.*
 import uk.fernando.convert.enum.UnitType
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.*
 
 
 fun Double.roundOffDecimal(pattern: String): Double {
-    val df = DecimalFormat(pattern)
+    val df = DecimalFormat(pattern, DecimalFormatSymbols(Locale.ENGLISH))
     df.roundingMode = RoundingMode.CEILING
     return df.format(this).toDouble()
 }
@@ -74,14 +76,14 @@ fun Int.getUnitName(): Int {
 
         // Volume
         LITER -> R.string.liter
-        CUBIC_METER -> R.string.cubit_meter
-//        CUBIC_KILOMETER -> R.string.cubit_kilometer
-        CUBIC_CENTIMETER -> R.string.cubit_centimeter
-        CUBIC_MILLIMETER -> R.string.cubit_millimeter
+        CUBIC_METER -> R.string.cubic_meter
+//        CUBIC_KILOMETER -> R.string.cubic_kilometer
+        CUBIC_CENTIMETER -> R.string.cubic_centimeter
+        CUBIC_MILLIMETER -> R.string.cubic_millimeter
 //        CUBIC_MILE -> R.string.cubic_mile
-        CUBIC_YARD -> R.string.cubit_yard
-        CUBIC_FOOT -> R.string.cubit_foot
-        CUBIC_INCH -> R.string.cubit_inch
+        CUBIC_YARD -> R.string.cubic_yard
+        CUBIC_FOOT -> R.string.cubic_foot
+        CUBIC_INCH -> R.string.cubic_inch
         MILLILITER -> R.string.millimeter
         US_GALLON -> R.string.us_gallon
         US_QUART -> R.string.us_quart
