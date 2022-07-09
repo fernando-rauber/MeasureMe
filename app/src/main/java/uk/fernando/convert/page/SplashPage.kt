@@ -27,6 +27,7 @@ fun SplashPage(navController: NavController = NavController(LocalContext.current
     Box(
         Modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
     ) {
 
         Column(

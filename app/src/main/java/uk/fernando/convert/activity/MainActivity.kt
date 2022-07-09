@@ -14,12 +14,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 import uk.fernando.advertising.AdInterstitial
+import uk.fernando.convert.R
 import uk.fernando.convert.component.MyBackground
 import uk.fernando.convert.component.NavigationBarBottom
 import uk.fernando.convert.datastore.PrefsStore
@@ -39,7 +41,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fullScreenAd = AdInterstitial(this@MainActivity, "ca-app-pub-5791754615168338/3507007657")
 
         setContent {
             val controller = rememberAnimatedNavController()
@@ -47,6 +48,7 @@ class MainActivity : ComponentActivity() {
 
             val isDarkMode = dataStore.isDarkMode().collectAsState(true)
             val isDynamicColor = dataStore.isDynamicColor().collectAsState(initial = false)
+            val isPremium = dataStore.isPremium().collectAsState(initial = false)
 
             MeasureMeTheme(darkTheme = isDarkMode.value, dynamicColor = isDynamicColor.value) {
 
@@ -73,7 +75,10 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
-            ShouldShowFullAd(dataStore, addVideoAdCounterUserCase)
+            if (!isPremium.value) {
+                fullScreenAd = AdInterstitial(this@MainActivity, stringResource(id = R.string.ad_full_page))
+                ShouldShowFullAd(dataStore, addVideoAdCounterUserCase)
+            }
         }
     }
 
@@ -97,6 +102,7 @@ class MainActivity : ComponentActivity() {
             rememberCoroutineScope().launch {
 
                 addVideoAdCounterUserCase(-4)
+                delay(2000)
                 fullScreenAd.showAdvert()
             }
         }
