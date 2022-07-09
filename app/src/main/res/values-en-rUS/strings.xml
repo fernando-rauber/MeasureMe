@@ -1,9 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">ConvertMe</string>
-
-    <string name="ad_banner_unit" translatable="false">ca-app-pub-5791754615168338/3726499506</string>
-    <string name="ad_banner_add_unit" translatable="false">ca-app-pub-5791754615168338/4273294417</string>
-    <!--    <string name="ad_full_page">ca-app-pub-5791754615168338/3507007657</string>-->
 
     <string name="length_title">Length</string>
     <string name="weight_title">Weight</string>
@@ -14,7 +10,6 @@
 
     // Unit Page
     <string name="empty_list_message">Add two or more units to convert</string>
-    <!--    <string name="rounded_amount_message">Decimal amounts have been rounded-up</string>-->
     <string name="add_unit_action">+ Add Unit</string>
     <string name="add_all_unit_message">You have added all available units</string>
 
@@ -22,7 +17,7 @@
     <string name="settings_title">Settings</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="dynamic_color">Dynamic Color</string>
-    <string name="dynamic_color_subtext">ConvertMe will fit your phone\'s colours palette.</string>
+    <string name="dynamic_color_subtext">ConvertMe will fit your phone\'s colors palette.</string>
     <string name="premium">Premium</string>
     <string name="premium_subtext">Remove ads.</string>
     <string name="restore_premium_action">Restore Premium</string>
@@ -38,12 +33,12 @@
     <string name="internet_required">Internet required to continue with this action.</string>
 
     // Units
-    <string name="kilometer">Kilometre</string>
-    <string name="meter">Metre</string>
-    <string name="centimeter">Centimetre</string>
-    <string name="millimeter">Millimetre</string>
-    <string name="micrometer">Micrometre</string>
-    <string name="nanometer">Nanometre</string>
+    <string name="kilometer">Kilometer</string>
+    <string name="meter">Meter</string>
+    <string name="centimeter">Centimeter</string>
+    <string name="millimeter">Millimeter</string>
+    <string name="micrometer">Micrometer</string>
+    <string name="nanometer">Nanometer</string>
     <string name="mile">Mile</string>
     <string name="yard">Yard</string>
     <string name="foot">Foot</string>
@@ -66,16 +61,16 @@
     <string name="ounce">Ounce</string>
     <string name="carat">Carat</string>
 
-    <string name="cubic_meter">Cubic Metre</string>
-    <string name="cubic_kilometer">Cubic Kilometre</string>
-    <string name="cubic_centimeter">Cubic Centimetre</string>
-    <string name="cubic_millimeter">Cubic Millimetre</string>
+    <string name="cubic_meter">Cubic Meter</string>
+    <string name="cubic_kilometer">Cubic Kilometer</string>
+    <string name="cubic_centimeter">Cubic Centimeter</string>
+    <string name="cubic_millimeter">Cubic Millimeter</string>
     <string name="cubic_mile">Cubic Mile</string>
     <string name="cubic_yard">Cubic Yard</string>
     <string name="cubic_foot">Cubic Foot</string>
     <string name="cubic_inch">Cubic Inch</string>
-    <string name="liter">Litre</string>
-    <string name="milliliter">Millilitre</string>
+    <string name="liter">Liter</string>
+    <string name="milliliter">Milliliter</string>
     <string name="us_gallon">US Gallon</string>
     <string name="us_quart">US Quart</string>
     <string name="us_pint">US Pint</string>
@@ -90,5 +85,4 @@
     <string name="imperial_fluid_ounce">Imperial Fluid Ounce</string>
     <string name="imperial_tablespoon">Imperial Tablespoon</string>
     <string name="imperial_teaspoon">Imperial Teaspoon</string>
-
 </resources>

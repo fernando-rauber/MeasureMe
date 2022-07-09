@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="length_title">Longitud</string>
+    <string name="weight_title">Peso</string>
+    <string name="volume_title">Volumen</string>
+    <string name="temperature_title">Temperatura</string>
+
+    <string name="add_unit_title">Agregar Unidad</string>
+
+    // Unit Page
+    <string name="empty_list_message">Agrega dos o más unidades para convertir</string>
+    <string name="add_unit_action">+ Agregar Unidad</string>
+    <string name="add_all_unit_message">Ha agregado todas las unidades disponibles</string>
+
+    // Settings
+    <string name="settings_title">Ajustes</string>
+    <string name="dark_mode">Modo Oscuro</string>
+    <string name="dynamic_color">Color Dinámico</string>
+    <string name="dynamic_color_subtext">ConvertMe se ajustará a la paleta de colores de su teléfono.</string>
+    <string name="premium">Premium</string>
+    <string name="premium_subtext">Eliminar anuncios.</string>
+    <string name="restore_premium_action">Restaurar Premium</string>
+    <string name="privacy_policy">Política de privacidad</string>
+    <string name="version">Versión %s</string>
+
+    // Purchase
+    <string name="purchase_success">Gracias, ahora eres un usuario premium!</string>
+    <string name="purchase_error">¡Algo salió mal! Pruébalo más tarde</string>
+    <string name="purchased">Comprado</string>
+    <string name="restore_restored">Producto premium restaurado. Divertirse!</string>
+    <string name="restore_not_found">Producto premium no encontrado para restaurar.</string>
+    <string name="internet_required">Se requiere Internet para continuar con esta acción.</string>
+
+    // Units
+    <string name="kilometer">Kilómetro</string>
+    <string name="meter">Metro</string>
+    <string name="centimeter">Centímetro</string>
+    <string name="millimeter">Milímetro</string>
+    <string name="micrometer">Micrómetro</string>
+    <string name="nanometer">Nanómetro</string>
+    <string name="mile">Milla</string>
+    <string name="yard">Yarda</string>
+    <string name="foot">Pie</string>
+    <string name="inch">Pulgada</string>
+    <string name="nautical_mile">Milla Nautica</string>
+
+    <string name="celsius">Celsius</string>
+    <string name="kelvin">Kelvin</string>
+    <string name="fahrenheit">Fahrenheit</string>
+
+    <string name="kilogram">Kilogramo</string>
+    <string name="gram">Gramo</string>
+    <string name="milligram">Miligramo</string>
+    <string name="microgram">Microgramo</string>
+    <string name="imperial_ton">Tonelada Imperial</string>
+    <string name="us_ton">Tonelada Estadounidense</string>
+    <string name="tonne">Tonelada</string>
+    <string name="stone">Piedra</string>
+    <string name="pound">Libra</string>
+    <string name="ounce">Onza</string>
+    <string name="carat">Quilate</string>
+
+    <string name="cubic_meter">Metro Cúbico</string>
+    <string name="cubic_kilometer">Kilómetro Cúbico</string>
+    <string name="cubic_centimeter">Centímetro Cúbico</string>
+    <string name="cubic_millimeter">Milímetro Cúbico</string>
+    <string name="cubic_mile">Milla Cúbica</string>
+    <string name="cubic_yard">Yarda Cúbica</string>
+    <string name="cubic_foot">Pie Cubico</string>
+    <string name="cubic_inch">Pulgada Cúbica</string>
+    <string name="liter">Litro</string>
+    <string name="milliliter">Mililitro</string>
+    <string name="us_gallon">Galón Estadounidense</string>
+    <string name="us_quart">Cuarto de Galón Estadounidense</string>
+    <string name="us_pint">Pint Estadounidense</string>
+    <string name="us_cup">Taza Estadounidense</string>
+    <string name="us_fluid_ounce">Onza Líquida Estadounidense</string>
+    <string name="us_tablespoon">Cucharada Estadounidense</string>
+    <string name="us_teaspoon">Cucharadita Estadounidense</string>
+    <string name="imperial_gallon">Galón Imperial</string>
+    <string name="imperial_quart">Cuarto de Galón Imperial</string>
+    <string name="imperial_pint">Pint Imperial</string>
+    <string name="imperial_cup">Taza Imperial</string>
+    <string name="imperial_fluid_ounce">Onza Líquida Imperial</string>
+    <string name="imperial_tablespoon">Cucharada Imperial</string>
+    <string name="imperial_teaspoon">Cucharadita Imperial</string>
+
+</resources>
