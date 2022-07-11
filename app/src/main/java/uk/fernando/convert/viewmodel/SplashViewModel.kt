@@ -10,9 +10,9 @@ class SplashViewModel(
 
     fun firstSetUp(isDarkMode: Boolean) {
         launchIO {
-            if (prefs.isFirstTime()) {
+            if (prefs.getVersion() == 1) {
                 prefs.storeDarkMode(isDarkMode)
-                prefs.storeFirstTime(false)
+                prefs.storeVersion(2)
 
                 rep.setUpDatabase()
             }

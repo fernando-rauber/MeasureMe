@@ -13,8 +13,8 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(STORE_NAME
 class PrefsStoreImpl(context: Context) : PrefsStore {
 
     private val dataStore = context.dataStore
-    override suspend fun isFirstTime(): Boolean {
-        return dataStore.data.map { prefs -> prefs[PreferencesKeys.FIRST_TIME] ?: true }.first()
+    override suspend fun getVersion(): Int {
+        return dataStore.data.map { prefs -> prefs[PreferencesKeys.VERSION] ?: 1 }.first()
     }
 
     override fun isPremium(): Flow<Boolean> {
@@ -49,8 +49,8 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         return dataStore.data.map { prefs -> prefs[PreferencesKeys.TEMPERATURE] ?: 1.0 }.first()
     }
 
-    override suspend fun storeFirstTime(value: Boolean) {
-        dataStore.edit { prefs -> prefs[PreferencesKeys.FIRST_TIME] = value }
+    override suspend fun storeVersion(value: Int) {
+        dataStore.edit { prefs -> prefs[PreferencesKeys.VERSION] = value }
     }
 
     override suspend fun storePremium(value: Boolean) {
@@ -87,7 +87,7 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
     }
 
     private object PreferencesKeys {
-        val FIRST_TIME = booleanPreferencesKey("first_time")
+        val VERSION = intPreferencesKey("version")
         val PREMIUM = booleanPreferencesKey("premium")
         val DARK_MODE = booleanPreferencesKey("dark_mode")
         val DYNAMIC_COLOR = booleanPreferencesKey("dynamic_color")

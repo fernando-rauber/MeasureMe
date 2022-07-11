@@ -166,8 +166,11 @@ private fun MyTextField(
         keyboardActions = KeyboardActions(
             onDone = {
                 if (textField.text.isNotEmpty()) {
-                    onDone(textField.text.toDouble())
-                    keyboardController?.hide()
+                    val newValue = textField.text.toDoubleOrNull()
+                    if (newValue != null) {
+                        onDone(newValue)
+                        keyboardController?.hide()
+                    }
                 }
             }
         ),

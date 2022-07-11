@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface PrefsStore {
 
-    suspend fun isFirstTime(): Boolean
+    suspend fun getVersion(): Int
     fun isPremium(): Flow<Boolean>
     fun isDarkMode(): Flow<Boolean>
     fun isDynamicColor(): Flow<Boolean>
@@ -15,7 +15,7 @@ interface PrefsStore {
     suspend fun getVolume(): Double
     suspend fun getTemperature(): Double
 
-    suspend fun storeFirstTime(value: Boolean)
+    suspend fun storeVersion(value: Int)
     suspend fun storePremium(value: Boolean)
     suspend fun storeDarkMode(value: Boolean)
     suspend fun storeDynamicColor(value: Boolean)
