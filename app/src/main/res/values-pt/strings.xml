@@ -18,19 +18,8 @@
     <string name="dark_mode">Modo Escuro</string>
     <string name="dynamic_color">Cor Dinâmica</string>
     <string name="dynamic_color_subtext">O App irá combinar com paleta de cores do seu telefone.</string>
-    <string name="premium">Premium</string>
-    <string name="premium_subtext">Remover anúncios.</string>
-    <string name="restore_premium_action">Restaurar Premium</string>
     <string name="privacy_policy">Política de Privacidade</string>
     <string name="version">Versão %s</string>
-
-    // Purchase
-    <string name="purchase_success">Obrigado, agora você é um usuário premium!</string>
-    <string name="purchase_error">Algo deu errado! Tente mais tarde</string>
-    <string name="purchased">Comprado</string>
-    <string name="restore_restored">Produto premium restaurado. Aproveite!</string>
-    <string name="restore_not_found">Produto premium não encontrado para restaurar.</string>
-    <string name="internet_required">Internet necessária para continuar com esta ação.</string>
 
     // Units
     <string name="kilometer">Quilômetro</string>

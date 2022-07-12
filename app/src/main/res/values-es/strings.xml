@@ -18,19 +18,8 @@
     <string name="dark_mode">Modo Oscuro</string>
     <string name="dynamic_color">Color Dinámico</string>
     <string name="dynamic_color_subtext">Lo App se ajustará a la paleta de colores de su teléfono.</string>
-    <string name="premium">Premium</string>
-    <string name="premium_subtext">Eliminar anuncios.</string>
-    <string name="restore_premium_action">Restaurar Premium</string>
     <string name="privacy_policy">Política de privacidad</string>
     <string name="version">Versión %s</string>
-
-    // Purchase
-    <string name="purchase_success">Gracias, ahora eres un usuario premium!</string>
-    <string name="purchase_error">¡Algo salió mal! Pruébalo más tarde</string>
-    <string name="purchased">Comprado</string>
-    <string name="restore_restored">Producto premium restaurado. Divertirse!</string>
-    <string name="restore_not_found">Producto premium no encontrado para restaurar.</string>
-    <string name="internet_required">Se requiere Internet para continuar con esta acción.</string>
 
     // Units
     <string name="kilometer">Kilómetro</string>

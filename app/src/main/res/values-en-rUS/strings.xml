@@ -18,19 +18,8 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="dynamic_color">Dynamic Color</string>
     <string name="dynamic_color_subtext">The App will fit your phone\'s colors palette.</string>
-    <string name="premium">Premium</string>
-    <string name="premium_subtext">Remove ads.</string>
-    <string name="restore_premium_action">Restore Premium</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="version">Version %s</string>
-
-    // Purchase
-    <string name="purchase_success">Thank you, You are now a premium user!</string>
-    <string name="purchase_error">Something went wrong! Try it later</string>
-    <string name="purchased">Purchased</string>
-    <string name="restore_restored">Premium product restored. Enjoy!</string>
-    <string name="restore_not_found">Premium product not found to restore.</string>
-    <string name="internet_required">Internet required to continue with this action.</string>
 
     // Units
     <string name="kilometer">Kilometer</string>
