@@ -17,7 +17,7 @@
     <string name="settings_title">Settings</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="dynamic_color">Dynamic Color</string>
-    <string name="dynamic_color_subtext">ConvertMe will fit your phone\'s colors palette.</string>
+    <string name="dynamic_color_subtext">The App will fit your phone\'s colors palette.</string>
     <string name="premium">Premium</string>
     <string name="premium_subtext">Remove ads.</string>
     <string name="restore_premium_action">Restore Premium</string>

@@ -12,7 +12,7 @@ android {
         applicationId "uk.fernando.convert"
         minSdk 25
         targetSdk 32
-        versionCode 1
+        versionCode 3
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -26,10 +26,6 @@ android {
     }
 
     buildTypes {
-        all {
-            buildConfigField "String", "BILLING_PUBLIC_KEY", '"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnnujx8sbnCDAzJSQ9VyzGMI+WYn6xBFBFczQHR93sFvX8uEOjlDOVGRz9e9gGOnM9o/fjdvZ9J7qRHnwqKP3V9OPBRlGrcCKfuveWtx2EhvH9RQR5PlHrJDefOwiyySp21MRNuDd7SyHhYm+8InXVGqhM7pNjphtux/r1MJWTExBZFWoYWYoIRoxcJONP7LGo09yfAOpWwpe8xNBDapeNORY4Zhjit4HygXsf24K34mm937hQqGtqbdBuq+JDT5+ODHwq+n8Qng5xSSvuQ/KFgvozBd/WYBvawvpGjSMkMdNWUOO8XZCiuTTH85Jub6XjwhSjGAVyh6BowXw4JLoUQIDAQAB"'
-        }
-
         debug {
             manifestPlaceholders["enableCrashReporting"] = false
             firebaseCrashlytics {
@@ -69,14 +65,12 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.8.0'
 
     implementation 'com.github.fernando-rauber.mylibrary:advertising:1.3'
-    implementation 'com.github.fernando-rauber.mylibrary:billing:1.3'
+//    implementation 'com.github.fernando-rauber.mylibrary:billing:1.3'
     implementation 'com.github.fernando-rauber.mylibrary:logger:1.3'
-    implementation 'com.github.fernando-rauber.mylibrary:snackbar:1.3'
+//    implementation 'com.github.fernando-rauber.mylibrary:snackbar:1.3'
 
     // Firebase
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.11'
-
-    implementation "com.android.billingclient:billing-ktx:5.0.0"
 
     // Data Store
     implementation "androidx.datastore:datastore:1.0.0"
@@ -113,7 +107,6 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation "androidx.test.ext:truth:1.4.0"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2"
-
 }
 
 apply plugin: 'com.google.gms.google-services'

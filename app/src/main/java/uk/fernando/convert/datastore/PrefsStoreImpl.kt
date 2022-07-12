@@ -17,20 +17,12 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         return dataStore.data.map { prefs -> prefs[PreferencesKeys.VERSION] ?: 1 }.first()
     }
 
-    override fun isPremium(): Flow<Boolean> {
-        return dataStore.data.map { prefs -> prefs[PreferencesKeys.PREMIUM] ?: false }
-    }
-
     override fun isDarkMode(): Flow<Boolean> {
         return dataStore.data.map { prefs -> prefs[PreferencesKeys.DARK_MODE] ?: false }
     }
 
     override fun isDynamicColor(): Flow<Boolean> {
         return dataStore.data.map { prefs -> prefs[PreferencesKeys.DYNAMIC_COLOR] ?: false }
-    }
-
-    override fun counterVideoAd(): Flow<Int> {
-        return dataStore.data.map { prefs -> prefs[PreferencesKeys.SHOW_VIDEO_AD] ?: 0 }
     }
 
     override suspend fun getLength(): Double {
@@ -53,21 +45,12 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
         dataStore.edit { prefs -> prefs[PreferencesKeys.VERSION] = value }
     }
 
-    override suspend fun storePremium(value: Boolean) {
-        dataStore.edit { prefs -> prefs[PreferencesKeys.PREMIUM] = value }
-    }
-
     override suspend fun storeDarkMode(value: Boolean) {
         dataStore.edit { prefs -> prefs[PreferencesKeys.DARK_MODE] = value }
     }
 
     override suspend fun storeDynamicColor(value: Boolean) {
         dataStore.edit { prefs -> prefs[PreferencesKeys.DYNAMIC_COLOR] = value }
-    }
-
-    override suspend fun addCounterVideoAd(value: Int) {
-        val currentAmount = dataStore.data.map { prefs -> prefs[PreferencesKeys.SHOW_VIDEO_AD] ?: 0 }.first()
-        dataStore.edit { prefs -> prefs[PreferencesKeys.SHOW_VIDEO_AD] = currentAmount + value }
     }
 
     override suspend fun storeLength(value: Double) {
@@ -88,10 +71,8 @@ class PrefsStoreImpl(context: Context) : PrefsStore {
 
     private object PreferencesKeys {
         val VERSION = intPreferencesKey("version")
-        val PREMIUM = booleanPreferencesKey("premium")
         val DARK_MODE = booleanPreferencesKey("dark_mode")
         val DYNAMIC_COLOR = booleanPreferencesKey("dynamic_color")
-        val SHOW_VIDEO_AD = intPreferencesKey("show_video_ad")
 
         val LENGTH = doublePreferencesKey("length")
         val WEIGHT = doublePreferencesKey("weight")

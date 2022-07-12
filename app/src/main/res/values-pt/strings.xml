@@ -17,7 +17,7 @@
     <string name="settings_title">Configuração</string>
     <string name="dark_mode">Modo Escuro</string>
     <string name="dynamic_color">Cor Dinâmica</string>
-    <string name="dynamic_color_subtext">ConvertMe irá combinar com paleta de cores do seu telefone.</string>
+    <string name="dynamic_color_subtext">O App irá combinar com paleta de cores do seu telefone.</string>
     <string name="premium">Premium</string>
     <string name="premium_subtext">Remover anúncios.</string>
     <string name="restore_premium_action">Restaurar Premium</string>

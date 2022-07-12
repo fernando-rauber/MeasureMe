@@ -17,7 +17,7 @@
     <string name="settings_title">Ajustes</string>
     <string name="dark_mode">Modo Oscuro</string>
     <string name="dynamic_color">Color Dinámico</string>
-    <string name="dynamic_color_subtext">ConvertMe se ajustará a la paleta de colores de su teléfono.</string>
+    <string name="dynamic_color_subtext">Lo App se ajustará a la paleta de colores de su teléfono.</string>
     <string name="premium">Premium</string>
     <string name="premium_subtext">Eliminar anuncios.</string>
     <string name="restore_premium_action">Restaurar Premium</string>

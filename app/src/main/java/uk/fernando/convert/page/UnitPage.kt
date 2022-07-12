@@ -23,6 +23,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
+import uk.fernando.advertising.component.AdBanner
+import uk.fernando.convert.R
 import uk.fernando.convert.component.*
 import uk.fernando.convert.component.unit.UnitCard
 import uk.fernando.convert.enum.UnitType
@@ -31,7 +33,6 @@ import uk.fernando.convert.ext.safeNav
 import uk.fernando.convert.navigation.Directions
 import uk.fernando.convert.theme.red
 import uk.fernando.convert.viewmodel.UnitViewModel
-import uk.fernando.convert.R
 
 @Composable
 fun UnitPage(
@@ -100,7 +101,12 @@ fun MeasureList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
             UnitList(viewModel, addUnitClick)
         }
 
-        MyAdBanner(Modifier.align(Alignment.BottomCenter), unitId = R.string.ad_banner_unit)
+        AdBanner(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 8.dp),
+            unitId = stringResource(R.string.ad_banner_unit)
+        )
     }
 }
 

@@ -26,10 +26,8 @@ import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
 import uk.fernando.convert.BuildConfig
 import uk.fernando.convert.R
-import uk.fernando.convert.activity.MainActivity
 import uk.fernando.convert.component.NavigationBarTop
 import uk.fernando.convert.viewmodel.SettingsViewModel
-import uk.fernando.snackbar.CustomSnackBar
 
 @Composable
 fun SettingsPage(
@@ -38,97 +36,65 @@ fun SettingsPage(
 ) {
     val context = LocalContext.current
     val isDarkMode = viewModel.prefs.isDarkMode().collectAsState(initial = false)
-    val isPremium = viewModel.prefs.isPremium().collectAsState(initial = false)
     val isDynamicColor = viewModel.prefs.isDynamicColor().collectAsState(initial = false)
 
-    Box {
-        Column(Modifier.fillMaxSize()) {
+    Column(Modifier.fillMaxSize()) {
 
-            NavigationBarTop(title = R.string.settings_title,
-                leftIcon = R.drawable.ic_arrow_back,
-                onLeftIconClick = {
-                    viewModel.snackBar.value = null
-                    navController.popBackStack()
-                }
+        NavigationBarTop(title = R.string.settings_title,
+            leftIcon = R.drawable.ic_arrow_back,
+            onLeftIconClick = { navController.popBackStack() }
+        )
+
+        Column(
+            Modifier
+                .padding(horizontal = 20.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
+
+            CustomSettingsResourcesCard(
+                text = R.string.dark_mode,
+                isChecked = isDarkMode.value,
+                onCheckedChange = viewModel::updateDarkMode
             )
 
-            Column(
-                Modifier
-                    .padding(horizontal = 20.dp)
-                    .verticalScroll(rememberScrollState())
-            ) {
-
-                CustomSettingsResourcesCard(
-                    text = R.string.dark_mode,
-                    isChecked = isDarkMode.value,
-                    onCheckedChange = viewModel::updateDarkMode
-                )
-
-                // Only available on Android 12+
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    CustomSettingsResourcesCard(
-                        modifier = Modifier.padding(vertical = 10.dp),
-                        text = R.string.dynamic_color,
-                        subText = R.string.dynamic_color_subtext,
-                        isChecked = isDynamicColor.value,
-                        onCheckedChange = viewModel::updateDynamicColor
-                    )
-                } else
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                CustomSettingsPremiumCard(
-                    text = R.string.premium,
-                    subText = R.string.premium_subtext,
-                    isPremium = isPremium.value,
-                ) {
-                    viewModel.requestPayment(context as MainActivity)
-                }
-
+            // Only available on Android 12+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 CustomSettingsResourcesCard(
                     modifier = Modifier.padding(vertical = 10.dp),
-                    modifierRow = Modifier.clickable {
-                        viewModel.restorePremium()
+                    text = R.string.dynamic_color,
+                    subText = R.string.dynamic_color_subtext,
+                    isChecked = isDynamicColor.value,
+                    onCheckedChange = viewModel::updateDynamicColor
+                )
+            } else
+                Spacer(modifier = Modifier.height(10.dp))
+
+            CustomSettingsResourcesCard(
+                modifier = Modifier.padding(bottom = 10.dp),
+                modifierRow = Modifier
+                    .clickable {
+                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://app.websitepolicies.com/policies/view/7u94tia2"))
+                        context.startActivity(browserIntent)
                     },
-                    text = R.string.restore_premium_action,
-                    isChecked = false,
-                    onCheckedChange = {},
-                    showArrow = false
-                )
+                text = R.string.privacy_policy,
+                isChecked = false,
+                onCheckedChange = {},
+                showArrow = true
+            )
 
-                CustomSettingsResourcesCard(
-                    modifier = Modifier.padding(bottom = 10.dp),
-                    modifierRow = Modifier
-                        .clickable {
-                            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://app.websitepolicies.com/policies/view/7u94tia2"))
-                            context.startActivity(browserIntent)
-                        },
-                    text = R.string.privacy_policy,
-                    isChecked = false,
-                    onCheckedChange = {},
-                    showArrow = true
-                )
+            Spacer(Modifier.weight(0.9f))
 
-                Spacer(Modifier.weight(0.9f))
-
-                Text(
-                    text = stringResource(id = R.string.version, BuildConfig.VERSION_NAME),
-                    fontSize = 14.sp,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 15.dp),
-                    textAlign = TextAlign.Center
-                )
-            }
+            Text(
+                text = stringResource(id = R.string.version, BuildConfig.VERSION_NAME),
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 15.dp),
+                textAlign = TextAlign.Center
+            )
         }
-
-        SnackBarDisplay(viewModel)
     }
-}
-
-@Composable
-private fun BoxScope.SnackBarDisplay(viewModel: SettingsViewModel) {
-    CustomSnackBar(snackBarSealed = viewModel.snackBar.value)
 }
 
 @Composable
@@ -197,66 +163,6 @@ private fun CustomSettingsResourcesCard(
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary
                 )
-        }
-    }
-}
-
-
-@Composable
-private fun CustomSettingsPremiumCard(
-    @StringRes text: Int,
-    @StringRes subText: Int? = null,
-    isPremium: Boolean,
-    onClick: () -> Unit
-) {
-    Surface(
-        shape = MaterialTheme.shapes.small,
-        tonalElevation = 2.dp,
-        shadowElevation = 4.dp
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .clickable {
-                    if (!isPremium)
-                        onClick()
-                }
-                .padding(16.dp)
-        ) {
-
-            Column(
-                Modifier
-                    .padding(end = 20.dp)
-                    .weight(1f),
-            ) {
-
-                Row {
-
-                    Text(
-                        text = stringResource(id = text),
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Medium,
-                        modifier = Modifier.padding(end = 5.dp)
-                    )
-
-                    Image(painter = painterResource(id = R.drawable.ic_crown), contentDescription = null)
-                }
-
-                subText?.let {
-                    Text(
-                        text = stringResource(id = subText),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-
-            Text(
-                modifier = Modifier.padding(horizontal = 10.dp),
-                text = if (isPremium) stringResource(id = R.string.purchased) else "£4.99",
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium
-            )
         }
     }
 }

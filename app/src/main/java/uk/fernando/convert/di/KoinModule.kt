@@ -8,6 +8,7 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
+import uk.fernando.convert.BuildConfig
 import uk.fernando.convert.database.MyDatabase
 import uk.fernando.convert.datastore.PrefsStore
 import uk.fernando.convert.datastore.PrefsStoreImpl
@@ -16,14 +17,11 @@ import uk.fernando.convert.repository.FirstTimeRepository
 import uk.fernando.convert.repository.UnitRepository
 import uk.fernando.convert.usecase.AddUnitUseCase
 import uk.fernando.convert.usecase.GetUnitsUseCase
-import uk.fernando.convert.usecase.PurchaseUseCase
 import uk.fernando.convert.viewmodel.AddUnitViewModel
 import uk.fernando.convert.viewmodel.SettingsViewModel
 import uk.fernando.convert.viewmodel.SplashViewModel
 import uk.fernando.convert.viewmodel.UnitViewModel
 import uk.fernando.logger.AndroidLogger
-import uk.fernando.convert.BuildConfig
-import uk.fernando.convert.usecase.AddVideoAdCounterUseCase
 import uk.fernando.logger.MyLogger
 
 object KoinModule {
@@ -66,8 +64,6 @@ object KoinModule {
         get() = module {
             single { GetUnitsUseCase(get(), get(), get()) }
             single { AddUnitUseCase(get(), get(), get()) }
-            single { PurchaseUseCase(get(), get(), get()) }
-            single { AddVideoAdCounterUseCase(get()) }
         }
 
     private val viewModelModule: Module
@@ -75,13 +71,13 @@ object KoinModule {
 
             viewModel { UnitViewModel(get()) }
             viewModel { AddUnitViewModel(get()) }
-            viewModel { SettingsViewModel(get(), get()) }
+            viewModel { SettingsViewModel(get()) }
             viewModel { SplashViewModel(get(), get()) }
         }
 
     private const val DB_NAME = "measure_me_fun.db"
 
-    private fun getAndroidLogger(): MyLogger {
+    fun getAndroidLogger(): MyLogger {
         return if (BuildConfig.BUILD_TYPE == "debug")
             AndroidLogger(MyLogger.LogLevel.DEBUG)
         else

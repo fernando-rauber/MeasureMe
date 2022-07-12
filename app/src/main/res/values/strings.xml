@@ -3,7 +3,7 @@
 
     <string name="ad_banner_unit" translatable="false">ca-app-pub-5791754615168338/3726499506</string>
     <string name="ad_banner_add_unit" translatable="false">ca-app-pub-5791754615168338/4273294417</string>
-    <string name="ad_full_page" translatable="false">ca-app-pub-5791754615168338/3507007657</string>
+<!--    <string name="ad_full_page" translatable="false">ca-app-pub-5791754615168338/3507007657</string>-->
 
     <string name="length_title">Length</string>
     <string name="weight_title">Weight</string>
@@ -22,7 +22,7 @@
     <string name="settings_title">Settings</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="dynamic_color">Dynamic Color</string>
-    <string name="dynamic_color_subtext">ConvertMe will fit your phone\'s colours palette.</string>
+    <string name="dynamic_color_subtext">The App will fit your phone\'s colours palette.</string>
     <string name="premium">Premium</string>
     <string name="premium_subtext">Remove ads.</string>
     <string name="restore_premium_action">Restore Premium</string>
