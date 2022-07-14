@@ -1,19 +1,10 @@
 package uk.fernando.convert.repository
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import uk.fernando.convert.database.dao.UnitDao
 import uk.fernando.convert.database.entity.UnitEntity
 
-class AddUnitRepository(private val dao: UnitDao) {
+interface AddUnitRepository {
 
-    suspend fun getUnitIDListByType(type: Int) = withContext(Dispatchers.IO) {
-        dao.getUnitIDListByType(type)
-    }
+    suspend fun getUnitIDListByType(type: Int): List<Int>
 
-    suspend fun insertUnit(unit: UnitEntity) {
-        withContext(Dispatchers.IO) {
-            dao.insertUnit(unit)
-        }
-    }
+    suspend fun insertUnit(unit: UnitEntity)
 }

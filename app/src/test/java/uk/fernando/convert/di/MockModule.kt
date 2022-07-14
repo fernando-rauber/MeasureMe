@@ -6,13 +6,14 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import io.mockk.mockk
 import org.koin.core.qualifier.StringQualifier
-import org.koin.dsl.bind
 import org.koin.dsl.module
 import uk.fernando.convert.database.MyDatabase
-import uk.fernando.convert.database.dao.UnitDao
 import uk.fernando.convert.datastore.PrefsStore
-import uk.fernando.convert.di.KoinModule.allModules
 import uk.fernando.convert.datastore.PrefsStoreMock
+import uk.fernando.convert.di.KoinModule.allModules
+import uk.fernando.convert.repository.AddUnitRepository
+import uk.fernando.convert.repository.AddUnitRepositoryMock
+import uk.fernando.convert.repository.UnitRepository
 import uk.fernando.convert.repository.UnitRepositoryMock
 
 val mockModule = module {
@@ -25,7 +26,8 @@ val mockModule = module {
 }
 
 val mockedDAOModule = module {
-    factory<UnitDao> { UnitRepositoryMock() } bind UnitDao::class
+    factory<UnitRepository> { UnitRepositoryMock() }
+    factory<AddUnitRepository> { AddUnitRepositoryMock() }
 }
 
 

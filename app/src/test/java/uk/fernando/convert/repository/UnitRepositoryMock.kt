@@ -5,7 +5,7 @@ import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.enum.UnitMeasure
 import uk.fernando.convert.enum.UnitType
 
-open class UnitRepositoryMock : UnitDao {
+open class UnitRepositoryMock : UnitRepository {
 
     companion object {
         private val lengthUnits by lazy {
@@ -24,27 +24,20 @@ open class UnitRepositoryMock : UnitDao {
         }
     }
 
-    override fun getUnitList(type: Int): List<UnitEntity> {
-        return lengthUnits.filter { it.type == type }
+
+//    override fun getUnitIDListByType(type: Int): List<Int> {
+//        return lengthUnits.filter { it.type == type }.map { it.id }
+//    }
+
+    override suspend fun getUnitList(unit: UnitType): List<UnitEntity> {
+        return lengthUnits.filter { it.type == unit.value }
     }
 
-    override fun getUnitIDListByType(type: Int): List<Int> {
-        return lengthUnits.filter { it.type == type }.map { it.id }
-    }
-
-    override fun updateAll(list: List<UnitEntity>) {
-
-    }
-
-    override fun insertAll(list: List<UnitEntity>) {
+    override suspend fun updateAll(list: List<UnitEntity>) {
 
     }
 
-    override fun insertUnit(unit: UnitEntity) {
-
-    }
-
-    override fun deleteUnit(unit: UnitEntity) {
+    override suspend fun deleteUnit(unit: UnitEntity) {
 
     }
 }

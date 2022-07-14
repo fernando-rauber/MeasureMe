@@ -1,26 +1,13 @@
 package uk.fernando.convert.repository
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import uk.fernando.convert.database.dao.UnitDao
 import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.enum.UnitType
 
-class UnitRepository(private val dao: UnitDao) {
+interface UnitRepository {
 
-    suspend fun getUnitList(unit: UnitType) = withContext(Dispatchers.IO) {
-        dao.getUnitList(unit.value)
-    }
+    suspend fun getUnitList(unit: UnitType): List<UnitEntity>
 
-    suspend fun updateAll(list: List<UnitEntity>) {
-        withContext(Dispatchers.IO) {
-            dao.updateAll(list)
-        }
-    }
+    suspend fun updateAll(list: List<UnitEntity>)
 
-    suspend fun deleteUnit(unit: UnitEntity) {
-        withContext(Dispatchers.IO) {
-            dao.deleteUnit(unit)
-        }
-    }
+    suspend fun deleteUnit(unit: UnitEntity)
 }
