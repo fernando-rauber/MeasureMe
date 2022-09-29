@@ -1,7 +1,6 @@
 package uk.fernando.convert.component.unit
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -16,10 +15,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import uk.fernando.convert.R
 import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.ext.getUnitName
 import uk.fernando.convert.ext.getUnitTypeIcon
-import uk.fernando.convert.R
+import uk.fernando.util.ext.clickableSingle
 
 @Composable
 fun AddUnitCard(unit: UnitEntity, onClick: () -> Unit) {
@@ -60,7 +60,7 @@ fun AddUnitCard(unit: UnitEntity, onClick: () -> Unit) {
             Box(modifier = Modifier
                 .fillMaxHeight()
                 .background(MaterialTheme.colorScheme.primary.copy(0.8f))
-                .clickable { onClick() }) {
+                .clickableSingle { onClick() }) {
 
                 Icon(
                     modifier = Modifier

@@ -9,7 +9,6 @@ import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
 
-
 fun Double.roundOffDecimal(pattern: String): Double {
     val df = DecimalFormat(pattern, DecimalFormatSymbols(Locale.ENGLISH))
     df.roundingMode = RoundingMode.CEILING

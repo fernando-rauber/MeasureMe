@@ -8,12 +8,12 @@ import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.datastore.PrefsStore
 import uk.fernando.convert.enum.UnitMeasure
 import uk.fernando.convert.enum.UnitType
-import uk.fernando.convert.ext.TAG
 import uk.fernando.convert.ext.getPatterDecimalFormat
 import uk.fernando.convert.ext.roundOffDecimal
 import uk.fernando.convert.repository.AddUnitRepository
 import uk.fernando.convert.util.Resource
 import uk.fernando.logger.MyLogger
+import uk.fernando.util.ext.TAG
 
 class AddUnitUseCase(
     private val repository: AddUnitRepository,

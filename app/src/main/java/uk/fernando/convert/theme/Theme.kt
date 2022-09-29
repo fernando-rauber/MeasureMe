@@ -18,8 +18,6 @@ private val DarkColorScheme = darkColorScheme(
     background = dark,
     secondary = blue,
     surface = lightDark,
-//    onBackground = Color.White,
-//    primaryContainer = Color.White
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -28,18 +26,6 @@ private val LightColorScheme = lightColorScheme(
     secondary = blueDark,
     surface = Color.White,
     background = whiteBackGround,
-//    onBackground = Color.Black,
-//    onSurfaceVariant = grey
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
 )
 
 @Composable
@@ -49,7 +35,8 @@ fun MeasureMeTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> if (darkTheme) dynamicDarkColorScheme(LocalContext.current) else dynamicLightColorScheme(LocalContext.current)
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
+            if (darkTheme) dynamicDarkColorScheme(LocalContext.current) else dynamicLightColorScheme(LocalContext.current)
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }

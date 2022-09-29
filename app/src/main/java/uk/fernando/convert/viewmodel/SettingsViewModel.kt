@@ -3,7 +3,7 @@ package uk.fernando.convert.viewmodel
 import uk.fernando.convert.datastore.PrefsStore
 
 
-class SettingsViewModel(val prefs: PrefsStore) : BaseViewModel() {
+class SettingsViewModel(private val prefs: PrefsStore) : BaseViewModel() {
 
 //    val snackBar: MutableState<SnackBarSealed?> = mutableStateOf(null)
 //    private val scope = CoroutineScope(Job() + Dispatchers.Main)
