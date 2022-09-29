@@ -17,11 +17,11 @@ import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
 import uk.fernando.advertising.component.AdBanner
 import uk.fernando.convert.R
-import uk.fernando.convert.component.MyAnimation
 import uk.fernando.convert.component.MyLoadingSpinner
 import uk.fernando.convert.component.NavigationBarTop
 import uk.fernando.convert.component.unit.AddUnitCard
 import uk.fernando.convert.viewmodel.AddUnitViewModel
+import uk.fernando.util.component.MyAnimatedVisibility
 
 @Composable
 fun AddUnitPage(
@@ -52,12 +52,12 @@ private fun UnitList(viewModel: AddUnitViewModel) {
     ) {
 
         // Loading
-        MyAnimation(viewModel.loading.value) {
+        MyAnimatedVisibility(viewModel.loading.value) {
             MyLoadingSpinner()
         }
 
         // Content
-        MyAnimation(!viewModel.loading.value) {
+        MyAnimatedVisibility(!viewModel.loading.value) {
             if (viewModel.unitList.isEmpty())
                 EmptyUnitListMessage()
             else

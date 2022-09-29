@@ -6,8 +6,8 @@ import uk.fernando.convert.database.dao.UnitDao
 import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.enum.UnitMeasure
 import uk.fernando.convert.enum.UnitType
-import uk.fernando.convert.ext.TAG
 import uk.fernando.logger.MyLogger
+import uk.fernando.util.ext.TAG
 
 class FirstTimeRepositoryImpl(private val dao: UnitDao, private val logger: MyLogger) : FirstTimeRepository {
 

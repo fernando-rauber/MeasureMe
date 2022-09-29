@@ -29,12 +29,12 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import uk.fernando.convert.R
-import uk.fernando.convert.component.MyAnimation
 import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.ext.getUnitName
 import uk.fernando.convert.ext.getUnitTypeIcon
 import uk.fernando.convert.ext.isInteger
-import uk.fernando.convert.ext.noRippleClickable
+import uk.fernando.util.component.MyAnimatedVisibility
+import uk.fernando.util.ext.noRippleClickable
 
 @Composable
 fun UnitCard(unit: UnitEntity, onDone: (Double) -> Unit) {
@@ -84,7 +84,7 @@ fun UnitCard(unit: UnitEntity, onDone: (Double) -> Unit) {
                 contentAlignment = Alignment.CenterEnd
             ) {
 
-                MyAnimation(!isEditMode) {
+                MyAnimatedVisibility(!isEditMode) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             modifier = Modifier.weight(1f),
@@ -109,7 +109,7 @@ fun UnitCard(unit: UnitEntity, onDone: (Double) -> Unit) {
                     }
                 }
 
-                MyAnimation(isEditMode) {
+                MyAnimatedVisibility(isEditMode) {
                     MyTextField(
                         value = amount,
                         onDone = {

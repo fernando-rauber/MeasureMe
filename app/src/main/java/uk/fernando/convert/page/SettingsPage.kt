@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Build
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -30,6 +29,7 @@ import uk.fernando.convert.R
 import uk.fernando.convert.component.NavigationBarTop
 import uk.fernando.convert.datastore.PrefsStore
 import uk.fernando.convert.viewmodel.SettingsViewModel
+import uk.fernando.util.ext.clickableSingle
 
 @Composable
 fun SettingsPage(
@@ -75,7 +75,7 @@ fun SettingsPage(
             CustomSettingsResourcesCard(
                 modifier = Modifier.padding(bottom = 10.dp),
                 modifierRow = Modifier
-                    .clickable {
+                    .clickableSingle {
                         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://app.websitepolicies.com/policies/view/7u94tia2"))
                         context.startActivity(browserIntent)
                     },

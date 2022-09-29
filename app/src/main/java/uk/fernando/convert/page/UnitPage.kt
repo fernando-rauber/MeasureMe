@@ -25,14 +25,18 @@ import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
 import uk.fernando.advertising.component.AdBanner
 import uk.fernando.convert.R
-import uk.fernando.convert.component.*
+import uk.fernando.convert.component.MyButton
+import uk.fernando.convert.component.MyLoadingSpinner
+import uk.fernando.convert.component.MySwipeDelete
+import uk.fernando.convert.component.NavigationBarTop
 import uk.fernando.convert.component.unit.UnitCard
 import uk.fernando.convert.enum.UnitType
 import uk.fernando.convert.ext.getTitle
-import uk.fernando.convert.ext.safeNav
 import uk.fernando.convert.navigation.Directions
 import uk.fernando.convert.theme.red
 import uk.fernando.convert.viewmodel.UnitViewModel
+import uk.fernando.util.component.MyAnimatedVisibility
+import uk.fernando.util.ext.safeNav
 
 @Composable
 fun UnitPage(
@@ -87,17 +91,17 @@ fun MeasureList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
     ) {
 
         // Loading
-        MyAnimation(viewModel.loading.value) {
+        MyAnimatedVisibility(viewModel.loading.value) {
             MyLoadingSpinner()
         }
 
         // Empty List Message
-        MyAnimation(!viewModel.loading.value && viewModel.unitList.value.isEmpty()) {
+        MyAnimatedVisibility(!viewModel.loading.value && viewModel.unitList.value.isEmpty()) {
             EmptyUnitListMessage(addUnitClick)
         }
 
         // List
-        MyAnimation(!viewModel.loading.value && viewModel.unitList.value.isNotEmpty()) {
+        MyAnimatedVisibility(!viewModel.loading.value && viewModel.unitList.value.isNotEmpty()) {
             UnitList(viewModel, addUnitClick)
         }
 

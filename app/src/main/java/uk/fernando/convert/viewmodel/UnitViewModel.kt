@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.enum.UnitType
-import uk.fernando.convert.ext.TAG
 import uk.fernando.convert.usecase.GetUnitsUseCase
 import uk.fernando.convert.util.Resource
+import uk.fernando.util.ext.TAG
 
 
 class UnitViewModel(private val useCase: GetUnitsUseCase) : BaseViewModel() {
