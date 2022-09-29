@@ -65,7 +65,7 @@ fun SplashPage(navController: NavController = NavController(LocalContext.current
     LaunchedEffect(Unit) {
         viewModel.firstSetUp(isDarkMode = isDarkMode)
 
-        delay(1500L)
+        delay(1000L)
 
         currentOnTimeout()
     }

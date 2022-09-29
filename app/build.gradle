@@ -12,8 +12,8 @@ android {
         applicationId "uk.fernando.convert"
         minSdk 25
         targetSdk 33
-        versionCode 5
-        versionName "1.1"
+        versionCode 6
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -62,12 +62,11 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.9.0'
 
-    implementation 'com.github.fernando-rauber.mylibrary:advertising:1.4.1'
-    implementation 'com.github.fernando-rauber.mylibrary:logger:1.4.1'
-    implementation 'com.github.fernando-rauber.mylibrary:util:1.4.1'
+    implementation 'com.github.fernando-rauber.mylibrary:advertising:1.4.3'
+    implementation 'com.github.fernando-rauber.mylibrary:logger:1.4.3'
+    implementation 'com.github.fernando-rauber.mylibrary:util:1.4.3'
 
     // Firebase
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.13'
