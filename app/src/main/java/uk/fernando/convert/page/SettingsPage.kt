@@ -24,9 +24,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.inject
 import uk.fernando.convert.BuildConfig
 import uk.fernando.convert.R
 import uk.fernando.convert.component.NavigationBarTop
+import uk.fernando.convert.datastore.PrefsStore
 import uk.fernando.convert.viewmodel.SettingsViewModel
 
 @Composable
@@ -35,8 +37,9 @@ fun SettingsPage(
     viewModel: SettingsViewModel = getViewModel()
 ) {
     val context = LocalContext.current
-    val isDarkMode = viewModel.prefs.isDarkMode().collectAsState(initial = false)
-    val isDynamicColor = viewModel.prefs.isDynamicColor().collectAsState(initial = false)
+    val prefs: PrefsStore by inject()
+    val isDarkMode = prefs.isDarkMode().collectAsState(initial = false)
+    val isDynamicColor = prefs.isDynamicColor().collectAsState(initial = false)
 
     Column(Modifier.fillMaxSize()) {
 
