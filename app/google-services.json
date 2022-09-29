@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "188328629042",
+    "project_id": "convertme-58566",
+    "storage_bucket": "convertme-58566.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:188328629042:android:b474ce2be0468cfe6d3d2b",
+        "android_client_info": {
+          "package_name": "uk.fernando.convert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "188328629042-78vt99sbsvn2f17jbhajjkitp5nhm1pb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrHX8c4X-dZVdCWDHV-E6Ds7_4jldIHpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "188328629042-78vt99sbsvn2f17jbhajjkitp5nhm1pb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
