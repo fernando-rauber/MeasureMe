@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,9 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
-import uk.fernando.advertising.component.AdBanner
 import uk.fernando.convert.R
-import uk.fernando.convert.component.MyButton
 import uk.fernando.convert.component.MyLoadingSpinner
 import uk.fernando.convert.component.MySwipeDelete
 import uk.fernando.convert.component.NavigationBarTop
@@ -36,6 +33,8 @@ import uk.fernando.convert.navigation.Directions
 import uk.fernando.convert.theme.red
 import uk.fernando.convert.viewmodel.UnitViewModel
 import uk.fernando.util.component.MyAnimatedVisibility
+import uk.fernando.util.component.MyButton
+import uk.fernando.util.component.MyIconButton
 import uk.fernando.util.ext.safeNav
 
 @Composable
@@ -64,21 +63,17 @@ private fun NavigationBar(navController: NavController, unitType: UnitType) {
         rightIcon = {
             Row {
                 // add more measures units
-                IconButton(onClick = { navController.safeNav(Directions.addUnit.name.plus("/${unitType.value}")) }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_add),
-                        contentDescription = null,
-                        tint = Color.White
-                    )
-                }
+                MyIconButton(
+                    icon = R.drawable.ic_add,
+                    onClick = { navController.safeNav(Directions.addUnit.name.plus("/${unitType.value}")) },
+                    tint = Color.White
+                )
                 // Settings
-                IconButton(onClick = { navController.safeNav(Directions.settings.name) }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_settings),
-                        contentDescription = null,
-                        tint = Color.White
-                    )
-                }
+                MyIconButton(
+                    icon = R.drawable.ic_settings,
+                    onClick = { navController.safeNav(Directions.settings.name) },
+                    tint = Color.White
+                )
             }
         })
 }
@@ -104,13 +99,6 @@ fun MeasureList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
         MyAnimatedVisibility(!viewModel.loading.value && viewModel.unitList.value.isNotEmpty()) {
             UnitList(viewModel, addUnitClick)
         }
-
-        AdBanner(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 8.dp),
-            unitId = stringResource(R.string.ad_banner_unit)
-        )
     }
 }
 
@@ -118,7 +106,7 @@ fun MeasureList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
 @Composable
 private fun UnitList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
     LazyColumn(
-        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 32.dp),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 48.dp),
         modifier = Modifier.fillMaxSize()
     ) {
         items(viewModel.unitList.value) { unit ->
