@@ -22,7 +22,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
-import uk.fernando.advertising.component.AdBanner
 import uk.fernando.convert.R
 import uk.fernando.convert.component.MyLoadingSpinner
 import uk.fernando.convert.component.MySwipeDelete
@@ -100,13 +99,6 @@ fun MeasureList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
         MyAnimatedVisibility(!viewModel.loading.value && viewModel.unitList.value.isNotEmpty()) {
             UnitList(viewModel, addUnitClick)
         }
-
-        AdBanner(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 8.dp),
-            unitId = stringResource(R.string.ad_banner_unit)
-        )
     }
 }
 
@@ -114,7 +106,7 @@ fun MeasureList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
 @Composable
 private fun UnitList(viewModel: UnitViewModel, addUnitClick: () -> Unit) {
     LazyColumn(
-        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 32.dp),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 48.dp),
         modifier = Modifier.fillMaxSize()
     ) {
         items(viewModel.unitList.value) { unit ->

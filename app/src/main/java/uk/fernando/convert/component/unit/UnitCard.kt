@@ -34,7 +34,7 @@ import uk.fernando.convert.ext.getUnitName
 import uk.fernando.convert.ext.getUnitTypeIcon
 import uk.fernando.convert.ext.isInteger
 import uk.fernando.util.component.MyAnimatedVisibility
-import uk.fernando.util.ext.noRippleClickable
+import uk.fernando.util.ext.clickableSingle
 
 @Composable
 fun UnitCard(unit: UnitEntity, onDone: (Double) -> Unit) {
@@ -80,7 +80,7 @@ fun UnitCard(unit: UnitEntity, onDone: (Double) -> Unit) {
             Box(
                 modifier = Modifier
                     .weight(0.5f)
-                    .noRippleClickable { if (!isEditMode) isEditMode = true },
+                    .clickableSingle(ripple = false) { if (!isEditMode) isEditMode = true },
                 contentAlignment = Alignment.CenterEnd
             ) {
 

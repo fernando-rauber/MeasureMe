@@ -15,7 +15,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import org.koin.androidx.compose.getViewModel
-import uk.fernando.advertising.component.AdBanner
 import uk.fernando.convert.R
 import uk.fernando.convert.component.MyLoadingSpinner
 import uk.fernando.convert.component.NavigationBarTop
@@ -73,13 +72,6 @@ private fun UnitList(viewModel: AddUnitViewModel) {
                     }
                 }
         }
-
-        AdBanner(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 8.dp),
-            unitId = stringResource(R.string.ad_banner_add_unit)
-        )
     }
 }
 
