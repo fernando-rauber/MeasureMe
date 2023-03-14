@@ -18,6 +18,7 @@
   <li>Datastore</li>
   <li>Room</li>
   <li>Material 3</li>
+  <li>Navigation Animated</li>
   <li>Jetpack Navigation</li>
   <li>Koin</li>
   <li>Admob/Facebook Advertising</li>
