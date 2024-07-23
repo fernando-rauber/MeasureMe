@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.usecase.AddUnitUseCase
 import uk.fernando.convert.util.Resource
-import uk.fernando.util.ext.TAG
+import uk.fernando.uikit.ext.TAG
 
 
 class AddUnitViewModel(private val useCase: AddUnitUseCase) : BaseViewModel() {

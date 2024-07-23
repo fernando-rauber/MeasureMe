@@ -6,7 +6,7 @@ import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.enum.UnitType
 import uk.fernando.convert.usecase.GetUnitsUseCase
 import uk.fernando.convert.util.Resource
-import uk.fernando.util.ext.TAG
+import uk.fernando.uikit.ext.TAG
 
 
 class UnitViewModel(private val useCase: GetUnitsUseCase) : BaseViewModel() {

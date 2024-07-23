@@ -1,12 +1,12 @@
 package uk.fernando.convert.navigation
 
-import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import com.google.accompanist.navigation.animation.composable
+import androidx.navigation.compose.composable
 import uk.fernando.convert.enum.UnitType
 import uk.fernando.convert.navigation.Directions.UNIT_TYPE
 import uk.fernando.convert.page.AddUnitPage
@@ -53,15 +53,15 @@ fun NavGraphBuilder.buildGraph(navController: NavController) {
     }
 
     composable(Directions.settings.name,
-        enterTransition = { slideIntoContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(700)) },
-        exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(700)) }
+        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(700)) },
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(700)) }
     ) {
         SettingsPage(navController)
     }
 
     composable(Directions.addUnit.name.plus("/{$UNIT_TYPE}"),
-        enterTransition = { slideIntoContainer(AnimatedContentScope.SlideDirection.Down, animationSpec = tween(700)) },
-        exitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Up, animationSpec = tween(700)) }
+        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Down, animationSpec = tween(700)) },
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Up, animationSpec = tween(700)) }
     ) {
 
         val unitType = it.arguments?.getString(UNIT_TYPE)
@@ -72,20 +72,19 @@ fun NavGraphBuilder.buildGraph(navController: NavController) {
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 private fun NavGraphBuilder.composableSlideAnim(leftDirection: String?, direction: String, rightDirection: String?, content: @Composable () -> Unit) {
     composable(direction,
         enterTransition = {
             when (initialState.destination.route) {
-                rightDirection -> slideIntoContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(700))
-                leftDirection -> slideIntoContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(700))
+                rightDirection -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
+                leftDirection -> slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
                 else -> null
             }
         },
         exitTransition = {
             when (targetState.destination.route) {
-                rightDirection -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(700))
-                leftDirection -> slideOutOfContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(700))
+                rightDirection -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700))
+                leftDirection -> slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700))
                 else -> null
             }
         }) {

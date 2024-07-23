@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import uk.fernando.util.component.MyIconButton
+import uk.fernando.uikit.component.MyIconButton
 
 @Composable
 fun NavigationBarTop(

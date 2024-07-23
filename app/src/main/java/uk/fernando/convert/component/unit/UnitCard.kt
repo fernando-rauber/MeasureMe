@@ -33,8 +33,8 @@ import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.ext.getUnitName
 import uk.fernando.convert.ext.getUnitTypeIcon
 import uk.fernando.convert.ext.isInteger
-import uk.fernando.util.component.MyAnimatedVisibility
-import uk.fernando.util.ext.clickableSingle
+import uk.fernando.uikit.component.MyAnimatedVisibility
+import uk.fernando.uikit.ext.clickableSingle
 
 @Composable
 fun UnitCard(unit: UnitEntity, onDone: (Double) -> Unit) {

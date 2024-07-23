@@ -29,7 +29,7 @@ import uk.fernando.convert.R
 import uk.fernando.convert.component.NavigationBarTop
 import uk.fernando.convert.datastore.PrefsStore
 import uk.fernando.convert.viewmodel.SettingsViewModel
-import uk.fernando.util.ext.clickableSingle
+import uk.fernando.uikit.ext.clickableSingle
 
 @Composable
 fun SettingsPage(

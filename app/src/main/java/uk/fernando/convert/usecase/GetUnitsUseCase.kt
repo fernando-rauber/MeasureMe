@@ -11,7 +11,7 @@ import uk.fernando.convert.ext.roundOffDecimal
 import uk.fernando.convert.repository.UnitRepository
 import uk.fernando.convert.util.Resource
 import uk.fernando.logger.MyLogger
-import uk.fernando.util.ext.TAG
+import uk.fernando.uikit.ext.TAG
 
 class GetUnitsUseCase(
     private val repository: UnitRepository,

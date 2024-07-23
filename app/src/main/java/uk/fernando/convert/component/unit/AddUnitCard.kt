@@ -19,7 +19,7 @@ import uk.fernando.convert.R
 import uk.fernando.convert.database.entity.UnitEntity
 import uk.fernando.convert.ext.getUnitName
 import uk.fernando.convert.ext.getUnitTypeIcon
-import uk.fernando.util.ext.clickableSingle
+import uk.fernando.uikit.ext.clickableSingle
 
 @Composable
 fun AddUnitCard(unit: UnitEntity, onClick: () -> Unit) {

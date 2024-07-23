@@ -20,7 +20,7 @@ import uk.fernando.convert.component.MyLoadingSpinner
 import uk.fernando.convert.component.NavigationBarTop
 import uk.fernando.convert.component.unit.AddUnitCard
 import uk.fernando.convert.viewmodel.AddUnitViewModel
-import uk.fernando.util.component.MyAnimatedVisibility
+import uk.fernando.uikit.component.MyAnimatedVisibility
 
 @Composable
 fun AddUnitPage(

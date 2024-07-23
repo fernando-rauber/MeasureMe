@@ -32,10 +32,10 @@ import uk.fernando.convert.ext.getTitle
 import uk.fernando.convert.navigation.Directions
 import uk.fernando.convert.theme.red
 import uk.fernando.convert.viewmodel.UnitViewModel
-import uk.fernando.util.component.MyAnimatedVisibility
-import uk.fernando.util.component.MyButton
-import uk.fernando.util.component.MyIconButton
-import uk.fernando.util.ext.safeNav
+import uk.fernando.uikit.component.MyAnimatedVisibility
+import uk.fernando.uikit.component.MyButton
+import uk.fernando.uikit.component.MyIconButton
+import uk.fernando.uikit.ext.safeNav
 
 @Composable
 fun UnitPage(
